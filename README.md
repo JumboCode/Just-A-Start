@@ -34,7 +34,6 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 ## Things to Install First
 1. Python
 2. Django
-3. Node.js
 
 ## How to Run Project on Local Machine
 ### To get the server running
@@ -50,7 +49,7 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 3. `npm start`
 
 ## Essential Git Commands
-For all commands below, cd <local directly in which you want to keep this directory>
+For all commands below, make sure to `cd <local directly in which you want to keep this directory>` first
 ### Making a branch
 1. `git branch <name>`
 
@@ -64,8 +63,9 @@ For all commands below, cd <local directly in which you want to keep this direct
 4. `git push origin <name>`
 5. Make a pull request once you are done!
 
-### Updataing a branch
-1. git pull
+### Updating a branch
+1. `git checkout <branch you want to update>`
+2. `git pull` --> There may be conflicts so when that happens, please respond accordingly.
 
 ## Some Rules
 1. NEVER push to master
