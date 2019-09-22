@@ -32,34 +32,36 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 3. git branch <name of branch> --> Make sure you make your own branch before you start editing the source code
 
 ## Things to Install First
-1. 
+1. Python
+2. Django
+3. Node.js
 
 ## How to Run Project on Local Machine
 ### To get the server running
-1. cd <local directry in which you keep this directory>
-2. cd backend
-3. source env/bin/activate
-4. cd src
-5. python manage.py runserver
+1. `cd <local directry in which you keep this directory>`
+2. `cd backend`
+3. `source env/bin/activate`
+4. `cd src`
+5. `python manage.py runserver`
 
 ### To get the frontend running
-1. cd <local directry in which you keep this directory>
-2. cd frontend
-3. npm start
+1. `cd <local directry in which you keep this directory>`
+2. `cd frontend`
+3. `npm start`
 
 ## Essential Git Commands
 For all commands below, cd <local directly in which you want to keep this directory>
 ### Making a branch
-1. git branch <name>
+1. `git branch <name>`
 
 ### Moving to a branch
-1. git checkout <name>
+1. `git checkout <name>`
 
 ### How to commit changes
-1. git status --> Check if you have made any changes first
-2. git add . or git add <filename> --> add . will commit changes made to all files in that directory
-3. git commit -m "Commit message"
-4. git push origin <name of branch>
+1. `git status` --> Check if you have made any changes first
+2. `git add .` or `git add <filename>` --> `add .` will commit changes made to all files in that directory
+3. `git commit -m "Commit message"`
+4. `git push origin <name>`
 5. Make a pull request once you are done!
 
 ### Updataing a branch
