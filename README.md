@@ -1,68 +1,70 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Just-A-Start YouthBuild
 
-## Available Scripts
+## Welcome 
+This is the repository for Tufts JumboCode's Just-A-Start YouthBuild Project.
 
-In the project directory, you can run:
+## Overview
+Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who have withdrawn from traditional high school. Enrolled students receive education services toward earning a high school equivalency (HiSET) credential and vocational training in retail industry fundamentals and construction to receive a pre-apprenticeship certification. The JAS YouthBuild team (hereinafter referred to as the “client”) is tasked with describing the impact their education and workforce training program has on the post-program placement of young people who complete their program. The system the client has in place as of now to achieve this task is suboptimal and takes too much manual labor. To resolve this issue, the JumboCode JASYB team will develop a web application that would allow the client to send out individual or group text messages to the program’s participants. After they get a notification, they would log in to the website and update their profile and/or fill out surveys the client has sent. The administrative account of the app would also include analytics on the use of the app.
 
-### `npm start`
+## Team
+- Naoki Okada (Project Manager)
+- Emilio Encarnacion
+- Crystal Kwan
+- Jason Xu
+- Lucy Fan
+- Lulu Zheng
+- Matthew Harrison
+- Meguna Okawa
+- Keisha Mukasa
+- Kevin Li
+- Raga Sudha Chilakamarri
+- Sam Chung
+- Theogene Micomyiza
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Architecture Overview
+- Frontend: React
+- Backend: Django
+- Database: PostgresSQL
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## How to Clone This Repo on Local Machine
+1. cd <local directry in which you want to keep this directory>
+2. git clone https://github.com/JumboCode/Just-A-Start.git  --> Clones this repo
+3. git branch <name of branch> --> Make sure you make your own branch before you start editing the source code
 
-### `npm test`
+## Things to Install First
+1. 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Run Project on Local Machine
+### To get the server running
+1. cd <local directry in which you keep this directory>
+2. cd backend
+3. source env/bin/activate
+4. cd src
+5. python manage.py runserver
 
-### `npm run build`
+### To get the frontend running
+1. cd <local directry in which you keep this directory>
+2. cd frontend
+3. npm start
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Essential Git Commands
+For all commands below, cd <local directly in which you want to keep this directory>
+### Making a branch
+1. git branch <name>
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Moving to a branch
+1. git checkout <name>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### How to commit changes
+1. git status --> Check if you have made any changes first
+2. git add . or git add <filename> --> add . will commit changes made to all files in that directory
+3. git commit -m "Commit message"
+4. git push origin <name of branch>
+5. Make a pull request once you are done!
 
-### `npm run eject`
+### Updataing a branch
+1. git pull
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Some Rules
+1. NEVER push to master
+2. Google is your best friend! You can always ask me for guidance, but my answer will most likely be from Google as well!
