@@ -27,9 +27,9 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 - Database: PostgresSQL
 
 ## How to Clone This Repo on Local Machine
-1. cd <local directry in which you want to keep this directory>
-2. git clone https://github.com/JumboCode/Just-A-Start.git  --> Clones this repo
-3. git branch <name of branch> --> Make sure you make your own branch before you start editing the source code
+1. `cd <local directry in which you want to keep this directory>`
+2. `git clone https://github.com/JumboCode/Just-A-Start.git` --> Clones this repo
+3. `git branch <name of branch>` --> Make sure you make your own branch before you start editing the source code
 
 ## Things to Install First
 1. Python
