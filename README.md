@@ -38,10 +38,9 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 ## How to Run Project on Local Machine
 ### To get the server running
 1. `cd <local directry in which you keep this directory>`
-2. `cd backend`
-3. `source env/bin/activate`
-4. `cd src`
-5. `python3 manage.py runserver`
+2. `source env/bin/activate`
+3. `cd src`
+4. `python3 manage.py runserver`
 
 ### To get the frontend running
 1. `cd <local directry in which you keep this directory>`
