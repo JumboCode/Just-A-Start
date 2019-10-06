@@ -45,6 +45,7 @@ If this doesn't work please run `python -m pip install django`
 
 ### To get the frontend running
 1. `cd <local directry in which you keep this directory>`
+2. `cd src`
 2. `cd client`
 3. `npm start`
 
