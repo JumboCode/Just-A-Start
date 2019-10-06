@@ -4,12 +4,12 @@ from twilio.rest import Client
 # Your Account SID from twilio.com/console
 account_sid = "AC171349952d22bd1b91d1637d4586abbe"
 # Your Auth Token from twilio.com/console
-auth_token  = "7b78a4e5cca11ecfbf1ceb2eb780f650"
+auth_token  = ""
 
 client = Client(account_sid, auth_token)
 
 #list of subscribers/people
-Users= ["+17818279263", "+18572968300"]
+Users= ["user1", "user2"]
 
 #get's input from user
 content = input("Enter the message you want to send: ")
