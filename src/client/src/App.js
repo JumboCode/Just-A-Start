@@ -1,40 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
 import { 
-  BrowserRouter as Router, 
+  BrowserRouter, 
   Route, 
   Switch, 
-  Link, 
-  Redirect 
 } from "react-router-dom";
-
-// Pages
-import MainPage from "./pages";
+import LoginPage from "./pages/LoginPage";
+import LoginForm from "./pages/LoginForm";
 import NotFoundPage from "./pages/404";
 
 class App extends Component {
   render() {
-    return <Router>
-      <Switch>
-      <Route exact path="/" component={MainPage}></Route>
-      <Route component={NotFoundPage}></Route>
-      </Switch>
-    </Router>
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/admin-login"
+            render={props => (
+              <LoginForm submitEndpoint="/xxx" {...props}/>
+          )}/>
+          <Route
+            exact
+            path="/alumni-login"
+            render={props => (
+              <LoginForm submitEndpoint="/xxx" {...props}/>
+          )}/>
+          <Route exact path="/" component={LoginPage} />
+          <Route component={NotFoundPage}></Route>
+        </Switch>
+      </BrowserRouter>
+    )
   }
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className=" App-header">
-//         <p>
-//           Hello Jumbocode
-//         </p>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;
