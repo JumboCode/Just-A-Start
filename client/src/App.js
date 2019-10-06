@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import login from './pages/login.jsx';
 
 import { 
   BrowserRouter as Router, 
@@ -15,13 +16,14 @@ import MainPage from "./pages";
 import NotFoundPage from "./pages/404";
 
 class App extends Component {
+
   render() {
-    return <Router>
+    return (<Router>
       <Switch>
       <Route exact path="/" component={MainPage}></Route>
       <Route component={NotFoundPage}></Route>
       </Switch>
-    </Router>
+    </Router>);
   }
 }
 
