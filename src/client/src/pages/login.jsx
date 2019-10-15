@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import LoginButton from './loginButton.jsx';
 import Form from './form.jsx';
+import CheckBox from './checkbox.jsx';
 import './login.css';
 
 class Login extends Component {
@@ -9,7 +10,8 @@ class Login extends Component {
       username: "",
       password: "",
       isClicked: false,
-      forgotPassword: false
+      forgotPassword: false,
+      keepLoggedIn: false
     };
 
 
@@ -26,18 +28,28 @@ class Login extends Component {
             </div>
             <div>
               <LoginButton loginClick={this.handleClick} isClicked={this.state.isClicked}/>
+              <CheckBox checked={this.didCheckBox}/>
             </div>
           </div>
         );
     }
+
 
     componentDidUpdate = (prevProps, prevState) => {
       if (prevState.username != this.state.username) {
         this.printFields();
       }
       if (prevState.forgotPassword != this.state.forgotPassword) {
-        console.log(this.state.forgotPassword)
+        console.log(this.state.forgotPassword);
       }
+      if (prevState.keepLoggedIn != this.state.keepLoggedIn) {
+        console.log(this.state.keepLoggedIn);
+      }
+    }
+
+    didCheckBox = () => {
+      this.setState((prevState, props) =>
+        ({keepLoggedIn: (prevState.keepLoggedIn == true) ? false : true}));
     }
 
     didForgetPassword = () => {
