@@ -31,10 +31,6 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 2. `git clone https://github.com/JumboCode/Just-A-Start.git` --> Clones this repo
 3. `git branch <name of branch>` --> Make sure you make your own branch before you start editing the source code
 
-## Things to Install First
-1. Python
-2. Django
-
 ## How to Run Project on Local Machine
 ### To get the server running
 1. `cd <local directry in which you keep this directory>`
@@ -46,7 +42,7 @@ If this doesn't work please run `python -m pip install django`
 ### To get the frontend running
 1. `cd <local directry in which you keep this directory>`
 2. `cd src`
-3. `cd client`
+3. `cd frontend`
 4. `npm start`
 
 ## Essential Git Commands
@@ -66,7 +62,7 @@ For all commands below, make sure to `cd <local directly in which you want to ke
 
 ### Updating a branch
 1. `git checkout <branch you want to update>`
-2. `git pull` --> There may be conflicts so when that happens, please respond accordingly.
+2. `git pull` --> There may be conflicts so when that happens, please handle them accordingly.
 
 ## Some Rules
 1. NEVER push to master
