@@ -8,11 +8,13 @@ import {
 import LoginPage from "./pages/LoginPage";
 import LoginForm from "./pages/LoginForm";
 import NotFoundPage from "./pages/404";
+import Navbar from './pages/Navbar';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <Navbar />
         <Switch>
           <Route
             exact
