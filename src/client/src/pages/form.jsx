@@ -5,7 +5,7 @@ import './form.css';
 class Form extends Component {
     state = {
       username: "",
-      password: "",
+      password: ""
 
     };
 
@@ -13,8 +13,15 @@ class Form extends Component {
       if (prevProps.isClicked != this.props.isClicked) {
         console.log(this.state.username);
         console.log(this.state.password);
-        this.props.getUserInfo(this.state.username, this.state.password);
+        //this.props.getUserInfo(this.state.username, this.state.password);
+        this.sendLoginRequest(this.state.username, this.state.password);
       }
+
+
+    }
+
+    sendLoginRequest = (u, p) => {
+
     }
 
     setFields = () => {
@@ -39,12 +46,12 @@ class Form extends Component {
             </div>
 
             <div>
-              <input ref={(el) => this._ps = el} type="text" value={this.state.password}
-              onChange={this.changePasswordHandler} placeholder="Password">
+              <input ref={(el) => this._ps = el} type="password" value={this.state.password}
+              onChange={this.changePasswordHandler} placeholder="Password" >
               </input>
             </div>
             <div>
-              <span id="forgotPass" onClick={() => this.props.forgotPassword()}> 
+              <span id="forgotPass" onClick={() => this.props.forgotPassword()}>
               Forgot Password? </span>
             </div>
           </div>

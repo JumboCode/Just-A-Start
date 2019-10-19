@@ -3,12 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import login from './pages/login.jsx';
 
-import { 
-  BrowserRouter as Router, 
-  Route, 
-  Switch, 
-  Link, 
-  Redirect 
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  Redirect
 } from "react-router-dom";
 
 // Pages

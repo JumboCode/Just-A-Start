@@ -1,5 +1,43 @@
-.button {
+* {
   position: relative;
-  /* left: 50%;
-  top: 50%; */
+}
+
+#loginButton, #checkbox {
+  left: 30%;
+  top: 33%;
+}
+
+#checkbox {
+  left: 30%;
+}
+
+#loginText {
+  font-family: arial;
+  font-size: 27px;
+  font-weight: bold;
+  top: 15%;
+  left: 37%;
+}
+
+#form {
+  left: 14%;
+  top: 24%;
+}
+
+#background {
+  background-color: #16629f;
+  width: 100%;
+
+
+}
+
+#wrapper {
+
+  height: 400px;
+  width: 350px;
+  background-color: white;
+  left: 39%;
+  top: 100px;
+
+
 }

@@ -21,14 +21,21 @@ class Login extends Component {
 
     render() {
         return (
-          <div id="wrapper">
-            <div className="button">
-              <Form getUserInfo={this.retrieveUserInfo} forgotPassword={this.didForgetPassword}
-              isClicked={this.state.isClicked}/>
-            </div>
-            <div>
-              <LoginButton loginClick={this.handleClick} isClicked={this.state.isClicked}/>
-              <CheckBox checked={this.didCheckBox}/>
+          <div id="background">
+            <div id="wrapper">
+              <div id="loginText">
+                Log in
+              </div>
+              <div id="form">
+                <Form getUserInfo={this.retrieveUserInfo} forgotPassword={this.didForgetPassword}
+                isClicked={this.state.isClicked}/>
+              </div>
+              <div id="loginButton">
+                <LoginButton loginClick={this.handleClick} isClicked={this.state.isClicked}/>
+              </div>
+              <div id="checkbox">
+                <CheckBox checked={this.didCheckBox}/>
+              </div>
             </div>
           </div>
         );
@@ -65,8 +72,8 @@ class Login extends Component {
       console.log("Clicked");
       this.setState((prevState, props) =>
         ({isClicked: prevState.isClicked == false ? true : false}));
-      // setTimeout(10, this.printFields);
-      //this.printFields();
+      setTimeout(10, this.printFields);
+      this.printFields();
     }
 
     printFields = () => {
