@@ -19,6 +19,8 @@ def index(request):
     my_dict = {'insert_me': "Hello I am from view.py!"}
     return render(request,'index.html', context=my_dict)
 
+
+#Note: account_sid, auth_token, from_  :  you get these values form twilio when you create account
 def send_text(list_users, text):
     # Your Account SID from twilio.com/console
     account_sid = ""
@@ -30,6 +32,8 @@ def send_text(list_users, text):
     #iterate through list of people
     for user in list_users:
         message = client.messages.create(
-            from_="+12034429209", 
+            #you phone number associated to your account from twilio
+            #Twilio generates this number
+            from_="", 
             body= text,
             to = user)
