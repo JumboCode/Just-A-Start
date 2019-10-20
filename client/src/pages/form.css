@@ -1,0 +1,18 @@
+input {
+  width: 200px;
+  height: 25px;
+  border: 1px solid white;
+  border-bottom-color: gray;
+  padding: 10px;
+}
+
+#forgotPass {
+  font-family: Arial;
+  font-size: 10px;
+  color: #bfbfbf;
+  cursor: grab;
+}
+
+#forgotPass:hover {
+  color: #e6e6e6;
+}
