@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Login from './pages/login.jsx';
-import CheckBox from './pages/checkbox.jsx';
+// import CheckBox from './pages/checkbox.jsx';
 
 ReactDOM.render(<Login />, document.getElementById('root'));
 
