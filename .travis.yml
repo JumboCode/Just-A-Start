@@ -12,4 +12,3 @@ matrix:
       before_install: cd src/frontend
       script:
         - npm run eslint
-        - npm run build
