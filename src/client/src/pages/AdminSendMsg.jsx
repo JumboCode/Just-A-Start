@@ -52,31 +52,44 @@ class AdminSendMsg extends Component {
   render() {
     const { message, users } = this.state;
     return (
-      <div>
-        <h1>Notifications</h1>
+      <div className="admin-dash-container">
         <form>
-          <label>
+          <label className="message-input-label">
             Message
+            <br/>
             <textarea
-              type='text'
+              className="message-input-box"
+              type="text"
               value={message}
               onChange={this.onMessageChange}
             />
           </label>
+            <div className="asm-user-row-heading">
+              <input
+                type="checkbox"
+                className="asm-user-row-check hidden"
+              />
+              <p className='admin-dash-row-cell'>Username</p>
+              <p className='admin-dash-row-cell'>First</p>
+              <p className='admin-dash-row-cell'>Last</p>
+              <p className='admin-dash-row-cell'>Phone</p>
+              <p className='admin-dash-row-cell'>Action</p>
+            </div>
         {users.map(user => {
           return (
             <div key={user.id} className="asm-user-row">
               <input
+                className="asm-user-row-check"
                 type="checkbox"
                 checked={user.checked}
                 onChange={this.onUserToggle}
                 name={user.id}
               />
-              <p>{user.username}</p>
-              <p>{user.first}</p>
-              <p>{user.last}</p>
-              <p>{user.phone}</p>
-              <p>{user.status}</p>
+              <p className='admin-dash-row-cell'>{user.username}</p>
+              <p className='admin-dash-row-cell'>{user.first}</p>
+              <p className='admin-dash-row-cell'>{user.last}</p>
+              <p className='admin-dash-row-cell'>{user.phone}</p>
+              <p className='admin-dash-row-cell'>{user.status}</p>
             </div>
           )
         })}
