@@ -1,19 +1,20 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
+import './navstyles.css';
 
 const Navbar = () => {
     return (
-        <div>
-        	<img src={logo} alt="logo" />
-        	<div>
-	            <h3>Help</h3>
-	            <h3>|</h3>
-	            <Link to="/admin-login">Admin</Link>
-	            <Link to="/alumni-login">Alumni</Link>
+        <div className = "container">
+        	<img className= "logo-size" src={logo} alt="logo" />
+        	<div className = "top-right">
+	            <h3 className = "space-between-headers">Help</h3>
+	            <h3 className = "space-between-headers">|</h3>
+	            <Link to="/admin-login" className = "space-between-headers">Admin</Link>
+	            <Link to="/alumni-login" className = "space-between-headers">Alumni</Link>
             </div>
         </div>
     );
 }
 
-export default Navbar;
+export default Navbar
