@@ -19,14 +19,12 @@ class App extends Component {
         <Navbar />
         <Switch>
           <Route
-            exact
-            path="/admin-login"
+            exact path="/admin-login"
             render={props => (
               <LoginForm submitEndpoint="/xxx" {...props}/>
           )}/>
           <Route
-            exact
-            path="/alumni-login"
+            exact path="/alumni-login"
             render={props => (
               <LoginForm submitEndpoint="/xxx" {...props}/>
           )}/>
