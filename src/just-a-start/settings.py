@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import psycopg2
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -87,17 +88,35 @@ STATICFILES_DIRS = [
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'justastart',
-#         'USER': 'jas',
-#         'PASSWORD': 'justastart',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'template1',
+        'USER': 'sam',
+        'PASSWORD': 'wchung01',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
+# INITIALIZE DB
+db = "default"
+connection = psycopg2.connect(
+    database = DATABASES[db]['NAMb'], 
+    user = DATABASES[db]['USER'], 
+    password = DATABASES[db]['PASSWORD'], 
+    host = DATABASES[db]['HOST'], 
+    port = DATABASES[db]['PORT']
+)
+
+connection.cursor().execute(
+    '''CREATE TABLE ALUMNI
+      (NAME  CHAR(100) PRIMARY KEY NOT NULL,
+      EMAIL  CHAR(100)             NOT NULL,
+      PHONE  CHAR(100)             NOT NULL,
+      DOB    CHAR(50)              NOT NULL,
+      JOB                          REAL);'''
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
