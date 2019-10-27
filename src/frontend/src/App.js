@@ -19,6 +19,7 @@ class App extends Component {
         <Navbar />
         <Switch>
           <Route component={Login} exact path="/admin-login" />
+          <Route component={Login} exact path="/alumni-login" />
           <Route exact path="/admin-dash" component={AdminSendMsg} />
           <Route
             exact
