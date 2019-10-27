@@ -6,7 +6,7 @@ import {
   Switch, 
 } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import LoginForm from "./pages/LoginForm";
+import Login from "./pages/Login";
 import NavbarPage from "./pages/user_navbar";
 import NotFoundPage from "./pages/404";
 import Navbar from './pages/Navbar';
@@ -18,16 +18,8 @@ class App extends Component {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route
-            exact path="/admin-login"
-            render={props => (
-              <LoginForm submitEndpoint="/xxx" {...props}/>
-          )}/>
-          <Route
-            exact path="/alumni-login"
-            render={props => (
-              <LoginForm submitEndpoint="/xxx" {...props}/>
-          )}/>
+          <Route component={Login} exact path="/admin-login" />
+          <Route component={Login} exact path="/alumni-login" />
           <Route exact path="/admin-dash" component={AdminSendMsg} />
           <Route
             exact
