@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 
 // Pages
-import MainPage from "./pages";
+import { MainPage } from "./pages/index";
 import NotFoundPage from "./pages/404";
 
 class App extends Component {

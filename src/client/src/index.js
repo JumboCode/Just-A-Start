@@ -5,8 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Login from './pages/login.jsx';
 import CheckBox from './pages/checkbox.jsx';
+import DashBoard from './pages/dashboard.jsx';
 
-ReactDOM.render(<Login />, document.getElementById('root'));
+ReactDOM.render(<DashBoard />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

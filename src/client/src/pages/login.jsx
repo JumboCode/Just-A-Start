@@ -22,7 +22,7 @@ class Login extends Component {
     render() {
         return (
           <div id="background">
-            <div id="wrapper">
+            <div className="wrapper">
               <div id="loginText">
                 Log in
               </div>
