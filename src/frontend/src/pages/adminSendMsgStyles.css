@@ -1,0 +1,38 @@
+.message-input-label {
+
+}
+.admin-dash-container {
+	margin: 20px;
+}
+.asm-user-row {
+	display: flex;
+	flex-direction: row;
+}
+.admin-dash-row-cell {
+	padding: 20px 20px;
+	border-bottom: 1px solid #D0EDF1;
+	width: 15vw;
+	height: auto;
+	box-sizing: border-box;
+	margin: 0
+}
+.asm-user-row-heading {
+	display: flex;
+	flex-direction: row;
+	font-weight: bold;
+	font-size: 1.1rem;
+}
+.asm-user-row-check {
+	margin: 25px;
+}
+.hidden {
+	visibility: hidden;
+}
+.message-input-box {
+	font-size: 1.2rem;
+	border: none;
+	border-bottom: 1px solid #B5EAF1;
+}
+.message-input-box:focus {
+	outline: none;
+}
