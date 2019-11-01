@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import { 
-  BrowserRouter, 
-  Route, 
-  Switch, 
+import {
+  BrowserRouter,
+  Route,
+  Switch,
 } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import Login from "./pages/Login";
