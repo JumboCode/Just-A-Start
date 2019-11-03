@@ -1,17 +1,22 @@
-* {
-  position: relative;
+:root {
+  --bg: #16629f;
 }
 
-#loginButton, #checkbox {
+
+
+#loginButton-login, #checkbox-login {
+  position: relative;
   left: 30%;
   top: 33%;
 }
 
-#checkbox {
+#checkbox-login {
+  position: relative;
   left: 30%;
 }
 
 #loginText {
+  position: relative;
   font-family: arial;
   font-size: 27px;
   font-weight: bold;
@@ -19,25 +24,34 @@
   left: 37%;
 }
 
-#form {
+#form-login {
+  position: relative;
   left: 14%;
   top: 24%;
 }
 
-#background {
-  background-color: #16629f;
+#background-login{
+  position: absolute;
+  background-color: var(--bg);
   width: 100%;
-
-
+  height: 86vh;
+  top: 14vh;
 }
 
-#wrapper {
+@media screen and (max-width: 600px) {
+  #background-login {
+    position: relative;
 
+  }
+}
+
+#wrapper-login {
+  position: relative;
   height: 400px;
-  width: 350px;
+  max-width: 350px;
   background-color: white;
-  left: 39%;
-  top: 100px;
+  left: 38%;
+  top: 65px;
 
 
 }

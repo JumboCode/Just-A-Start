@@ -1,0 +1,58 @@
+.wrapper-dashboard {
+  box-sizing: border-box;
+  position: absolute;
+  background-color: #16629f;
+  width: 15%;
+  height: 100vh;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+#align-justify-sdb {
+  position: relative;
+  color: white;
+  float: right;
+}
+
+#top-sdb {
+  position: relative;
+  top: 15px;
+}
+
+#x-mark-sdb {
+  position: relative;
+  color: white;
+}
+
+#buttons-sdb {
+  position: relative;
+  height: auto;
+  top: 12%;
+}
+
+#dropdown-sdb {
+  position: absolute;
+}
+
+.redOutline-sdb {
+  color: red;
+}
+
+.notVisible-sdb {
+  visibility: collapse;
+}
+
+.visible-sdb {
+  visibility: visible;
+}
+
+.dashboard-button {
+  text-align: center;
+  position: relative;
+  margin-bottom: 50px;
+  color: white;
+}
+.button-sdb:hover {
+  color: gray;
+  cursor: grab;
+}
