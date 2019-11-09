@@ -6,7 +6,7 @@ import {
   Switch, 
 } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import Login from "./pages/Login";
+import Login from "./pages/login";
 import NavbarPage from "./pages/user_navbar";
 import NotFoundPage from "./pages/404";
 import Navbar from './pages/Navbar';
