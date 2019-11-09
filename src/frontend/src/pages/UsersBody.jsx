@@ -1,24 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import UserActivityEntry from './UserActivityEntry.jsx';
+import './UsersBody.css';
+import UsersEntry from './UsersEntry.jsx';
 import AdminDashboardDropdown from './AdminDashboardDropdown.jsx'
 
-import './AdminDashboardBody.css';
-
-
-class AdminDashboardBody extends React.Component {
+class UsersBody extends React.Component {
   render(){
     return(
       <body>
         <div class = "dashboard">
           <div class = "top_content">
-            <h1>Activity Log</h1>
-            <input type="text" class = "big_search" />
+            <h1>Users</h1>
+            <input type="text" class = "big_search" placholder = "Search"/>
             <div class = "container">
               <div id = "flex_container_two">
-                <AdminDashboardDropdown name = "All Dates"/>
-                <AdminDashboardDropdown name = "All Authors"/>
+                <AdminDashboardDropdown name = "All Users"/>
                 <button id = "filter" type="button">Filter</button>
+                <button id = "filter" type="button">Add User</button>
               </div>
               <div id = "flex_container_three">
                 <button class = "arrow" id = "left" type="button"> ></button>
@@ -29,21 +27,21 @@ class AdminDashboardBody extends React.Component {
             </div>
           </div>
           <ul class = "flex_container">
-            <li>Date</li>
-            <li>Author</li>
-            <li>Action</li>
-            <li>Description</li>
+            <li>Username</li>
+            <li>First</li>
+            <li>Last</li>
+            <li>Email/Phone</li>
+            <li id = "last_item">Last Login</li>
           </ul>
-          <UserActivityEntry />
-          <UserActivityEntry />
-          <UserActivityEntry />
-          <UserActivityEntry />
-          <UserActivityEntry />
-          <UserActivityEntry />
+          <UsersEntry />
+          <UsersEntry />
+          <UsersEntry />
+          <UsersEntry />
+          <UsersEntry />
         </div>
       </body>
     )
   }
 }
 
-export default AdminDashboardBody;
+export default UsersBody;
