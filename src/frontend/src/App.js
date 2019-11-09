@@ -5,11 +5,7 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-<<<<<<< HEAD
-import LoginPage from "./pages/LoginPage";
-=======
-import HomePage from "./pages/Homepage";
->>>>>>> 2d9f47491ce26d137445c98d8ec429ae34c66df2
+import LoginPage from "./pages/Homepage";
 import Login from "./pages/login";
 import NavbarPage from "./pages/user_navbar";
 import Navbar from './components/Navbar';
@@ -25,7 +21,7 @@ class App extends Component {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/admin-login" component={Login} />
           <Route exact path="/alumni-login" component={Login}/>
           <Route exact path="/admin-dashboard" component={AdminDashboard} />
