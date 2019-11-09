@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
-import { 
-  BrowserRouter, 
-  Route, 
-  Switch, 
+import {
+  BrowserRouter,
+  Route,
+  Switch,
 } from "react-router-dom";
+<<<<<<< HEAD
 import LoginPage from "./pages/LoginPage";
+=======
+import HomePage from "./pages/Homepage";
+>>>>>>> 2d9f47491ce26d137445c98d8ec429ae34c66df2
 import Login from "./pages/login";
 import NavbarPage from "./pages/user_navbar";
+import Navbar from './components/Navbar';
+import AdminNotification from './pages/AdminSendMsg';
+import AdminDashboard from './pages/AdminDashboardBody';
+import UserDashboard from './pages/UserDashboard.jsx';
+import UserActivity from './pages/UserActivityEntry.jsx';
 import NotFoundPage from "./pages/404";
-import Navbar from './pages/Navbar';
-import AdminSendMsg from './pages/AdminSendMsg';
 
 class App extends Component {
   render() {
@@ -18,16 +25,18 @@ class App extends Component {
       <BrowserRouter>
         <Navbar />
         <Switch>
-          <Route component={Login} exact path="/admin-login" />
-          <Route component={Login} exact path="/alumni-login" />
-          <Route exact path="/admin-dash" component={AdminSendMsg} />
-          <Route
-            exact
-            path="/user-navbar"
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/admin-login" component={Login} />
+          <Route exact path="/alumni-login" component={Login}/>
+          <Route exact path="/admin-dashboard" component={AdminDashboard} />
+          <Route exact path="/admin-notification" component={AdminNotification} />
+          <Route exact path="/user-dashboard" component={UserDashboard} />
+          <Route exact path="/user-activity" component={UserActivity} />
+          <Route exact path="/user-navbar"
             render={props => (
               <NavbarPage submitEndpoint="/xxx" {...props}/>
           )}/>
-          <Route exact path="/" component={LoginPage} />
+          
           <Route component={NotFoundPage}></Route>
         </Switch>
       </BrowserRouter>
