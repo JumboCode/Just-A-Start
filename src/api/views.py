@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from twilio.rest import Client
 import psycopg2
+from django.http import Http404
 
 # Create your functions here.
 
@@ -39,6 +40,11 @@ def send_text(list_users, text):
             body= text,
             to = user)
 
+
+
+
+
+
 '''this function accepts two parameters:
     a request and key for the query in order to provide 
     list of sorted elements.
@@ -55,7 +61,8 @@ def get_sorted(request, query):
                     password = ""  #password for the database
         )
     except:
-        print("cannot connect")
+        raise HTTp404("incorrect request")
+
 
     #generate cursor
     cur = conn.cursor()
@@ -85,7 +92,7 @@ def get_sorted(request, query):
     if query == "lastname":  #third column
         index = 2
     else:
-        return
+        raise  HTTP404("incorrect query")
 
     #sorts the list of tuples depending on the query passed it
     rows.sort(key=lambda tup: tup[index])
@@ -95,8 +102,8 @@ def get_sorted(request, query):
     #close the connection
     conn.close()
 
-    #you should put your html file in charge of this view instead of index.html
-    return render(request,'index.html', context=rows)
+    #you should put your html file in charge of this view instead of sorted.html
+    return render(request,'sorted.html', context=rows)
 
 
 
