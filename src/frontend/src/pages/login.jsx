@@ -21,19 +21,19 @@ class Login extends Component {
 
     render() {
         return (
-          <div id="background">
-            <div id="wrapper">
+          <div id="background-login">
+            <div id="wrapper-login">
               <div id="loginText">
                 Log in
               </div>
-              <div id="form">
+              <div id="form-login">
                 <Form getUserInfo={this.retrieveUserInfo} forgotPassword={this.didForgetPassword}
                 isClicked={this.state.isClicked}/>
               </div>
-              <div id="loginButton">
+              <div id="loginButton-login">
                 <LoginButton loginClick={this.handleClick} isClicked={this.state.isClicked}/>
               </div>
-              <div id="checkbox">
+              <div id="checkbox-login">
                 <CheckBox checked={this.didCheckBox}/>
               </div>
             </div>

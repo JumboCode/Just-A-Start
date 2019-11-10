@@ -1,0 +1,51 @@
+.flex_container{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  width: 85%;
+  margin-right: 2%;
+  flex-flow: row wrap;
+}
+
+.item{
+  width: 20%;
+  font-size: 12px;
+  height: 100%;
+  margin: auto 0;
+}
+
+
+#small_margin{
+  margin:0px;
+  word-wrap: break-word;
+}
+
+#medium{
+  font-size:15px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+hr{
+  align: center;
+  size: 10px;
+  color: #16629f;
+  border-width:1px;
+  border-style:solid;
+  margin-left: 2%;
+  width: 96%;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+img{
+  border-radius: 50%;
+  height:35px;
+  width: 35px;
+  margin-left: 5%;
+  margin-right: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
