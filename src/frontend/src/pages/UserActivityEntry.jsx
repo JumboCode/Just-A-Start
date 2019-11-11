@@ -9,7 +9,7 @@ class UserActivityEntry extends React.Component {
     return(
       <body>
         <hr noshade></hr>
-        <div class = "flex_container">
+        <div class = "flex_container_user_activit">
           <div class = "item">
             <p id = "small_margin">{data.time}</p>
           </div>
