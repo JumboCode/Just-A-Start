@@ -11,15 +11,18 @@ import NavbarPage from "./pages/user_navbar";
 import NotFoundPage from "./pages/404";
 import Navbar from './pages/Navbar';
 import AdminSendMsg from './pages/AdminSendMsg';
+import SideDashBoard from './pages/SideDashBoard';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <Navbar />
+        <SideDashBoard />
         <Switch>
           <Route component={Login} exact path="/admin-login" />
           <Route component={Login} exact path="/alumni-login" />
+
           <Route exact path="/admin-dash" component={AdminSendMsg} />
           <Route
             exact
