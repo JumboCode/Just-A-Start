@@ -5,6 +5,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom';
 import $ from 'jquery'
 import './SideDashBoard.css';
 
@@ -12,7 +13,8 @@ import './SideDashBoard.css';
 
 class DashBoard extends Component {
     state = {
-      dropdownVisible: false
+      dropdownVisible: false,
+      isClicked: 1
     };
 
     constructor() {
@@ -20,12 +22,12 @@ class DashBoard extends Component {
     }
 
     toggleDropdown = () => this.setState(state => ({
-      dropdownVisible: !state.dropdownVisible,
+      dropdownVisible: !state.dropdownVisible
     }));
 
-    outlineRed = () => {
-      
-    }
+    handleButtonClick = (button) => this.setState(state => ({
+      isClicked: button
+    }));
 
     render() {
         return (
@@ -53,17 +55,27 @@ class DashBoard extends Component {
               </div>
 
               <div id="buttons-sdb">
+
                 <div className="dashboard-button button-sdb">
-                  <span> <FontAwesomeIcon icon={faHome} size="1x" /> </span>
-                  <span> Dashboard </span>
+                <Link to='/admin-dash' className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"} >
+                  <div className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                    <span> <FontAwesomeIcon icon={faHome} size="1x" /> </span>
+                    <span onClick={() => this.handleButtonClick(1)}> Dashboard </span>
+                  </div>
+                  </Link>
+                </div>
+
+                <div className="dashboard-button button-sdb">
+                  <div className={this.state.isClicked == 2 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                    <span> <FontAwesomeIcon icon={faUsers} size="1x" /> </span>
+                    <span onClick={() => this.handleButtonClick(2)} > Users </span>
+                  </div>
                 </div>
                 <div className="dashboard-button button-sdb">
-                  <span> <FontAwesomeIcon icon={faUsers} size="1x" /> </span>
-                  <span> Users </span>
-                </div>
-                <div className="dashboard-button button-sdb">
-                  <span> <FontAwesomeIcon icon={faBell} size="1x" /> </span>
-                  <span> Notification </span>
+                  <div className={this.state.isClicked == 3 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                    <span> <FontAwesomeIcon icon={faBell} size="1x" /> </span>
+                    <span onClick={() => this.handleButtonClick(3)}> Notification </span>
+                  </div>
                 </div>
               </div>
 

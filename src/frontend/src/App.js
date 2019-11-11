@@ -14,12 +14,14 @@ import AdminNotification from './pages/AdminSendMsg';
 import AdminUserList from './pages/UsersBody.jsx';
 import UserDashboard from './pages/UserDashboard.jsx';
 import NotFoundPage from "./pages/404";
+import SideDashBoard from './pages/SideDashBoard';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <Navbar />
+        <SideDashBoard />
         <Switch>
           <Route exact path="/" component={Login} />
           <Route exact path="/admin-login" component={Login} />
