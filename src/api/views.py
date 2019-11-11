@@ -1,12 +1,20 @@
 from django.shortcuts import render
 from twilio.rest import Client
+from settings.py import connection
+import psycopg2
 
 # Create your functions here.
 
 def test_connection(request):
     return HttpResponse('Connection successful')
 
-def add(request):
+def put(request):
+    # Create Alumni object from request
+
+    #Start db cursor for command
+    cur = connection.cursor()
+    
+
     # do something
 
 def delete(request):
