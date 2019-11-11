@@ -5,7 +5,6 @@ import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx'
 
 import './AdminDashboardBody.css';
 
-
 class AdminDashboardBody extends React.Component {
   render(){
     return(
