@@ -6,7 +6,6 @@ import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
-import $ from 'jquery'
 import './SideDashBoard.css';
 
 
@@ -57,25 +56,32 @@ class DashBoard extends Component {
               <div id="buttons-sdb">
 
                 <div className="dashboard-button button-sdb">
-                <Link to='/admin-dash' className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"} >
-                  <div className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}>
-                    <span> <FontAwesomeIcon icon={faHome} size="1x" /> </span>
-                    <span onClick={() => this.handleButtonClick(1)}> Dashboard </span>
-                  </div>
+                  <Link to='/admin-dashboard' className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                    <div className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}
+                    onClick={() => this.handleButtonClick(1)}>
+                      <span> <FontAwesomeIcon icon={faHome} size="1x" /> </span>
+                      <span> Dashboard </span>
+                    </div>
                   </Link>
                 </div>
 
                 <div className="dashboard-button button-sdb">
-                  <div className={this.state.isClicked == 2 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                <Link to='/admin-notification' className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                  <div className={this.state.isClicked == 2 ? "redOutline-sdb" : "normalOutline-sdb"}
+                  onClick={() => this.handleButtonClick(2)}>
                     <span> <FontAwesomeIcon icon={faUsers} size="1x" /> </span>
-                    <span onClick={() => this.handleButtonClick(2)} > Users </span>
+                    <span> Users </span>
                   </div>
+                </Link>
                 </div>
                 <div className="dashboard-button button-sdb">
-                  <div className={this.state.isClicked == 3 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                <Link to='/admin-userlist' className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                  <div className={this.state.isClicked == 3 ? "redOutline-sdb" : "normalOutline-sdb"}
+                  onClick={() => this.handleButtonClick(3)}>
                     <span> <FontAwesomeIcon icon={faBell} size="1x" /> </span>
-                    <span onClick={() => this.handleButtonClick(3)}> Notification </span>
+                    <span> Notification </span>
                   </div>
+                </Link>
                 </div>
               </div>
 

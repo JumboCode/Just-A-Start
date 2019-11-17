@@ -34,7 +34,7 @@ class App extends Component {
             render={props => (
               <NavbarPage submitEndpoint="/xxx" {...props}/>
           )}/>
-          
+
           <Route component={NotFoundPage}></Route>
         </Switch>
       </BrowserRouter>
