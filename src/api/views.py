@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from twilio.rest import Client
+from .models import Alumni
 
 # Create your functions here.
 
@@ -18,6 +19,11 @@ def edit(request):
 def index(request):
     my_dict = {'insert_me': "Hello I am from view.py!"}
     return render(request,'index.html', context=my_dict)
+
+def get_all_users(request):
+    # get objects of users in the database
+    all_users = Alumni.objects.order_by('-last_update')[:]
+    return HttpResponse("You're looking at all the user data")
 
 
 #Note: account_sid, auth_token, from_  :  you get these values form twilio when you create account
