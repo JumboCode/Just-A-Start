@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import LoginButton from './loginButton.jsx';
+import LoginButton from './LoginButton.jsx';
 import Form from './form.jsx';
 import CheckBox from './checkbox.jsx';
 import './login.css';
