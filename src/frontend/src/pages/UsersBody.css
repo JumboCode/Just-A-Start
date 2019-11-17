@@ -3,8 +3,10 @@
 }
 
 .top_content{
-  width:80%;
-  margin-left:10%;
+  width:90%;
+  margin-left:5%;
+  margin-top: 25px;
+  margin-bottom: 20px;
 }
 .flex_container{
   padding: 0;
@@ -53,9 +55,10 @@ li{
   border-radius: 8px;
   font-size: 12px;
   width: 28%;
-  margin-bottom: 10px;
-  height: 25px;
+  margin-bottom: 15px;
+  height: 15px;
   padding: 3px 1%;
+  margin-top: 3px;
 }
 
 #filter{
@@ -66,9 +69,10 @@ li{
   border-radius: 8px;
   font-size: 15px;
   color: white;
-  width: 20%;
+  width: 30%;
   height: 25px;
 }
+
 
 .arrow{
   background-color: transparent;

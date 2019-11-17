@@ -5,12 +5,15 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import Login from "./pages/Login";
+import LoginPage from "./pages/Homepage";
+import Login from "./pages/login";
 import NavbarPage from "./pages/user_navbar";
+import Navbar from './components/Navbar';
+import AdminDashboard from './pages/AdminDashboardBody';
+import AdminNotification from './pages/AdminSendMsg';
+import AdminUserList from './pages/UsersBody.jsx';
+import UserDashboard from './pages/UserDashboard.jsx';
 import NotFoundPage from "./pages/404";
-import Navbar from './pages/Navbar';
-import AdminSendMsg from './pages/AdminSendMsg';
 import SideDashBoard from './pages/SideDashBoard';
 
 class App extends Component {
@@ -20,17 +23,18 @@ class App extends Component {
         <Navbar />
         <SideDashBoard />
         <Switch>
-          <Route component={Login} exact path="/admin-login" />
-          <Route component={Login} exact path="/alumni-login" />
-
-          <Route exact path="/admin-dash" component={AdminSendMsg} />
-          <Route
-            exact
-            path="/user-navbar"
+          <Route exact path="/" component={Login} />
+          <Route exact path="/admin-login" component={Login} />
+          <Route exact path="/user-login" component={Login}/>
+          <Route exact path="/admin-dashboard" component={AdminDashboard} />
+          <Route exact path="/admin-notification" component={AdminNotification} />
+          <Route exact path="/admin-userlist" component={AdminUserList} />
+          <Route exact path="/user-dashboard" component={UserDashboard} />
+          <Route exact path="/user-navbar"
             render={props => (
               <NavbarPage submitEndpoint="/xxx" {...props}/>
           )}/>
-          <Route exact path="/" component={LoginPage} />
+          
           <Route component={NotFoundPage}></Route>
         </Switch>
       </BrowserRouter>
