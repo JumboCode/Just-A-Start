@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import LoginButton from './LoginButton.jsx';
-import Form from './form.jsx';
-import CheckBox from './checkbox.jsx';
+import LoginButton from '../components/LoginButton.jsx';
+import Form from '../components/Form.jsx';
+import CheckBox from '../components/Checkbox.jsx';
 import './Login.css';
 
 class Login extends Component {

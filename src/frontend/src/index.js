@@ -5,14 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import CheckBox from './pages/checkbox.jsx';
 
-import JobEntry from './pages/JobEntry.jsx';
-import UserDashboard from './pages/UserDashboard.jsx';
-import Homepage from './pages/Homepage.jsx';
+// import JobEntry from './pages/JobEntry.jsx';
+// import UserDashboard from './pages/UserDashboard.jsx';
+// import Homepage from './pages/Homepage.jsx';
 
-import AdminDashboardBody from './pages/AdminDashboardBody';
-import UsersBody from './pages/UsersBody';
+// import AdminDashboardBody from './pages/AdminDashboardBody';
+// import UsersBody from './pages/UsersBody';
 
-import ProfileEdit from './pages/ProfileEdit'
+// import ProfileEdit from './pages/ProfileEdit'
 
 
 

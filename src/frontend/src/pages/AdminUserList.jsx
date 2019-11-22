@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './UsersBody.css';
-import UsersEntry from './UsersEntry.jsx';
+import './AdminUserList.css';
+import UsersEntry from '../components/UsersEntry.jsx';
 import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx'
 
 class UsersBody extends React.Component {

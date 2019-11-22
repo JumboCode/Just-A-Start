@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './adminSendMsgStyles.css';
+import './AdminSendMsg.css';
 
 class AdminSendMsg extends Component {
   constructor(props) {
