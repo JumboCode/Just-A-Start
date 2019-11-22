@@ -20,9 +20,16 @@ def index(request):
     my_dict = {'insert_me': "Hello I am from view.py!"}
     return render(request,'index.html', context=my_dict)
 
+#
+def get_user(request):
+    #do something
+
+# Returns a list of users in order of when their information
+#       was last updated
 def get_all_users(request):
     # get objects of users in the database
     all_users = Alumni.objects.order_by('-last_update')[:]
+    print(all_users)
     return HttpResponse(all_users)
 
 
