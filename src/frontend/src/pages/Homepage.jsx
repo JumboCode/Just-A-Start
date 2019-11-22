@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-class LoginPage extends Component {
+class HomePage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,4 +18,4 @@ class LoginPage extends Component {
 	}
 }
 
-export default LoginPage;
+export default HomePage;
