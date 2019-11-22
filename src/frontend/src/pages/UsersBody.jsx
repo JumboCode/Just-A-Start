@@ -5,7 +5,36 @@ import UsersEntry from './UsersEntry.jsx';
 import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx'
 
 class UsersBody extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [
+        {
+          img_url: "../assets/profilepic.png",
+          username: "kbrown01",
+          name_first: 'Kate',
+          name_last: 'Brown',
+          email: "katebrown@gmail.com",
+          phone: "+1(617)-283-1837",
+          last_login: "1 hour ago",
+          id: 1
+        },
+        {
+          img_url: "../assets/profilepic.png",
+          username: "kbrown01",
+          name_first: 'Kate',
+          name_last: 'Brown',
+          email: "katebrown@gmail.com",
+          phone: "+1(617)-283-1837",
+          last_login: "1 hour ago",
+          id: 2
+        }
+      ]
+    }
+  }
+
   render(){
+    const { data } = this.state;
     return(
       <body>
         <div class = "dashboard">
@@ -33,11 +62,7 @@ class UsersBody extends React.Component {
             <li>Email/Phone</li>
             <li id = "last_item">Last Login</li>
           </ul>
-          <UsersEntry />
-          <UsersEntry />
-          <UsersEntry />
-          <UsersEntry />
-          <UsersEntry />
+          {data.map(item => (<UsersEntry data={item} key={item.id}/>))}
         </div>
       </body>
     )
