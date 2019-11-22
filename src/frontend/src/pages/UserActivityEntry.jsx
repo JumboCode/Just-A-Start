@@ -28,5 +28,4 @@ class UserActivityEntry extends React.Component {
     )
   }
 }
-
 export default UserActivityEntry;
