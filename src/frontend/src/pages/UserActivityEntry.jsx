@@ -14,7 +14,7 @@ class UserActivityEntry extends React.Component {
             <p id = "small_margin">{data.time}</p>
           </div>
           <div class = "item">
-            <p id = "small_margin" id = "medium">{data.name}</p>
+            <p id = "small_margin" id = "medium_user_activity">{data.name}</p>
             <p id = "small_margin">{data.user_type}</p>
           </div>
           <div class = "item">

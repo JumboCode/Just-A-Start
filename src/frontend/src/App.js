@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 import HomePage from "./pages/Homepage";
-import Login from "./pages/Login";
+import Login from "./pages/login";
 import NavbarPage from "./pages/user_navbar";
 import Navbar from './components/Navbar';
 import AdminDashboard from './pages/AdminDashboardBody';
@@ -34,7 +34,7 @@ class App extends Component {
             render={props => (
               <NavbarPage submitEndpoint="/xxx" {...props}/>
           )}/>
-          
+
           <Route component={NotFoundPage}></Route>
         </Switch>
       </BrowserRouter>
