@@ -30,6 +30,7 @@ def add(request):
         cur = connection.cursor()
         cur.execute(insert_query, record)
         connection.commit()
+        
     except:
         print("Exception raised during insert!")
 
