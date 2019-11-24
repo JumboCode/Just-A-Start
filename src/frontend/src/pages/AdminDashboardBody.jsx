@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import UserActivityEntry from '../components/UserActivityEntry.jsx';
-import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx'
+import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx';
+import AdminNavBar from '../components/AdminNavbar.jsx';
 import SideDashBoard from '../components/SideDashBoard';
 
 import './AdminDashboardBody.css';
@@ -35,6 +36,7 @@ class AdminDashboardBody extends React.Component {
     const { data } = this.state;
     return(
       <body>
+        <AdminNavBar />
         <SideDashBoard />
         <div class = "dashboard">
           <div class = "top_content">

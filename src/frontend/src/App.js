@@ -7,11 +7,11 @@ import {
 } from "react-router-dom";
 
 import HomePage from "./pages/Homepage";
-import Login from "./pages/Login";
 import AdminDashboard from './pages/AdminDashboardBody';
 import AdminNotification from './pages/AdminSendMsg';
 import AdminUserList from './pages/AdminUserList';
 import UserDashboard from './pages/UserDashboard';
+import Login from "./pages/Login";
 
 import NavbarPage from "./components/UserNavbar";
 import Navbar from './components/Navbar';
@@ -22,7 +22,6 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Navbar />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/admin-login" component={Login} />
