@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import psycopg2
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -98,6 +99,26 @@ DATABASES = {
     }
 }
 
+# INITIALIZE DB
+
+db = "default"
+connection = psycopg2.connect(
+    database = DATABASES[db]['NAME'], 
+    user = DATABASES[db]['USER'], 
+    password = DATABASES[db]['PASSWORD'], 
+    host = DATABASES[db]['HOST'], 
+    port = DATABASES[db]['PORT']
+)
+
+connection.cursor().execute(
+    '''CREATE TABLE ALUMNI
+    ( NAME   text PRIMARY KEY NOT NULL,
+        EMAIL  text  NOT NULL,
+        PHONE  text  NOT NULL,
+        DOB    text  NOT NULL,
+        JOB    text  NOT NULL,
+        UPDATE text  NOT NULL);'''
+)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

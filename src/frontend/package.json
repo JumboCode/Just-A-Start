@@ -3,16 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
+    "@fortawesome/free-regular-svg-icons": "^5.11.2",
+    "@fortawesome/free-solid-svg-icons": "^5.11.2",
+    "@fortawesome/react-fontawesome": "^0.1.7",
+    "lint": "^0.7.0",
+    "mdbreact": "^4.21.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-router-dom": "^5.1.1",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "test": "^0.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint": "eslint src"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -30,6 +38,9 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^6.5.1",
+    "eslint-plugin-json": "^2.0.1",
+    "eslint-plugin-markdown": "^1.0.1",
     "webpack-bundle-tracker": "^0.4.3"
   }
 }

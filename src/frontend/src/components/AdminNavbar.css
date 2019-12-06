@@ -1,0 +1,48 @@
+.container_a {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 58px;
+    margin-left: 3%;
+	  margin-top: 35px;
+	  width: 97%
+
+}
+
+.magnifying-glass-size{
+	height: 30px;
+	width: auto;
+}
+
+.profile-picture-size{
+	height: 48px;
+	width: auto;
+}
+
+.arrow-size{
+	height: 23px;
+	width: auto;
+	margin-top: 17px;
+	/*margin-right: 21px;*/
+  margin-right: 40px;
+}
+
+.top-right {
+  display: flex;
+  flex: 50%;
+	justify-content: flex-end;
+
+}
+
+.space-between-headers {
+	margin-right: 13px;
+	margin-left: 13px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.vertically-align {
+	display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+
+}
