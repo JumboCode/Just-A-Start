@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 
-import HomePage from "./pages/Homepage";
+// import HomePage from "./pages/Homepage";
 import Login from "./pages/Login";
 import AdminDashboard from './pages/AdminDashboardBody';
 import AdminNotification from './pages/AdminSendMsg';
@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/admin-login" component={Login} />
           <Route exact path="/user-login" component={Login}/>
           <Route exact path="/admin-dashboard" component={AdminDashboard} />
