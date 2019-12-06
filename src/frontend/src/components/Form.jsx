@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './form.css';
+import './Form.css';
 
 class Form extends Component {
     state = {
