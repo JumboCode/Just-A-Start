@@ -25,7 +25,7 @@ MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggle
 MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
 import { BrowserRouter as Router } from 'react-router-dom';
-import './user_navbar.css';
+import './UserNavbar.css';
 
 class NavbarPage extends Component {
 state = {
