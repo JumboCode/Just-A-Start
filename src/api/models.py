@@ -32,6 +32,7 @@ class Alumni(models.Model):
     phone_num  = models.CharField('phone', max_length=100)
     dob        = models.CharField('dob', max_length=100)
     jobs  = models.ManyToManyField(Job)
+    last_update = models.DateTimeField('update')
 
     def __str__(self):
         alumni = {
@@ -40,6 +41,7 @@ class Alumni(models.Model):
             "phone_num"   :self.phone_num,
             "dob"         :self.dob,
             "jobs"        :self.jobs,
+            "update"      :self.last_update,
         }
         return alumni
 

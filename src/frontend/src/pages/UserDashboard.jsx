@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './UserDashboard.css';
-import JobEntry from './JobEntry.jsx';
+import JobEntry from '../components/JobEntry.jsx';
 
 class UserDashboard extends React.Component {
   render(){
