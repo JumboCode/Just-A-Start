@@ -1,3 +1,7 @@
+
+
+
+
 .wrapper-dashboard {
   box-sizing: border-box;
   position: absolute;
@@ -35,7 +39,14 @@
 }
 
 .redOutline-sdb {
+  text-decoration: none;
   color: red;
+}
+
+.normalOutline-sdb {
+  text-decoration: none;
+  color: white;
+
 }
 
 .notVisible-sdb {
@@ -51,7 +62,9 @@
   position: relative;
   margin-bottom: 50px;
   color: white;
+
 }
+
 .button-sdb:hover {
   color: gray;
   cursor: grab;

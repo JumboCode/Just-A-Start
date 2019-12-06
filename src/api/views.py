@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from twilio.rest import Client
+from settings.py import connection
 import psycopg2
 from django.http import Http404
 from settings import connection
@@ -33,6 +34,12 @@ def add(request):
         
     except:
         print("Exception raised during insert!")
+
+def put(request):
+    # Create Alumni object from request
+
+    #Start db cursor for command
+    cur = connection.cursor()
 
 
 def delete(request):

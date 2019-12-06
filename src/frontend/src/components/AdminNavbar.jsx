@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import magnifying_glass from '../assets/magnifying_glass.png';
 import profile_picture from '../assets/profile_picture.png'
 import arrow from '../assets/arrow.png'
-import './adminNavbar.css';
+import './AdminNavbar.css';
 
 const Navbar = () => {
     return (
