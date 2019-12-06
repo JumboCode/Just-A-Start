@@ -1,13 +1,46 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import './UsersBody.css';
-import UsersEntry from './UsersEntry.jsx';
+import './AdminUserList.css';
+import UsersEntry from '../components/UsersEntry.jsx';
 import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx'
+import AdminNavBar from '../components/AdminNavbar.jsx';
+import SideDashBoard from '../components/SideDashBoard';
 
 class UsersBody extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [
+        {
+          img_url: "../assets/profilepic.png",
+          username: "kbrown01",
+          name_first: 'Kate',
+          name_last: 'Brown',
+          email: "katebrown@gmail.com",
+          phone: "+1(617)-283-1837",
+          last_login: "1 hour ago",
+          id: 1
+        },
+        {
+          img_url: "../assets/profilepic.png",
+          username: "kbrown01",
+          name_first: 'Kate',
+          name_last: 'Brown',
+          email: "katebrown@gmail.com",
+          phone: "+1(617)-283-1837",
+          last_login: "1 hour ago",
+          id: 2
+        }
+      ]
+    }
+  }
+
   render(){
+    const { data } = this.state;
     return(
       <body>
+        <AdminNavBar />
+        <SideDashBoard />
         <div class = "dashboard">
           <div class = "top_content">
             <h1>Users</h1>
@@ -33,11 +66,7 @@ class UsersBody extends React.Component {
             <li>Email/Phone</li>
             <li id = "last_item">Last Login</li>
           </ul>
-          <UsersEntry />
-          <UsersEntry />
-          <UsersEntry />
-          <UsersEntry />
-          <UsersEntry />
+          {data.map(item => (<UsersEntry data={item} key={item.id}/>))}
         </div>
       </body>
     )
