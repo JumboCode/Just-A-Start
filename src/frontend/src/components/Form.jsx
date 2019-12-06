@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './form.css';
+import './Form.css';
 
 class Form extends Component {
     state = {
@@ -40,13 +40,13 @@ class Form extends Component {
         return (
           <div>
             <div>
-              <input ref={(el) => this._un = el} type="text" value={this.state.username}
+              <input className="loginInput" ref={(el) => this._un = el} type="text" value={this.state.username}
               onChange={this.changeUsernameHandler} placeholder="Username/Email address">
               </input>
             </div>
 
             <div>
-              <input ref={(el) => this._ps = el} type="password" value={this.state.password}
+              <input className="loginInput" ref={(el) => this._ps = el} type="password" value={this.state.password}
               onChange={this.changePasswordHandler} placeholder="Password" >
               </input>
             </div>

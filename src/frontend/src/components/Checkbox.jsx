@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import './form.css';
-import './checkbox.css';
+import './Form.css';
+import './Checkbox.css';
 
 class CheckBox extends Component {
     state = {
@@ -16,9 +16,10 @@ class CheckBox extends Component {
     }
     render() {
         return (
-          <label>
-            <input type="checkbox" defaultChecked={this.state.isChecked} onChange={this.handleCheck}/>
-            <span id="checkbox-text"> Keep me logged in </span>
+
+          <label id="check">
+            <input id="box1" type="checkbox" defaultChecked={this.state.isChecked} onChange={this.handleCheck}/>
+            <span id="check-text"> Keep me logged in </span>
           </label>
         );
     }

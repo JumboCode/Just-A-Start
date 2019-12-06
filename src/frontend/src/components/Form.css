@@ -1,11 +1,9 @@
-input {
+.loginInput {
   width: 225px;
   height: 25px;
   border: 1px solid white;
   border-bottom-color: gray;
   padding: 10px;
-  
-
 }
 
 #forgotPass {
