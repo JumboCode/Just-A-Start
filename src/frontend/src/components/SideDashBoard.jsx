@@ -66,7 +66,7 @@ class DashBoard extends Component {
                 </div>
 
                 <div className="dashboard-button button-sdb">
-                <Link to='/admin-notification' className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                <Link to='/admin-userlist' className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}>
                   <div className={this.state.isClicked == 2 ? "redOutline-sdb" : "normalOutline-sdb"}
                   onClick={() => this.handleButtonClick(2)}>
                     <span> <FontAwesomeIcon icon={faUsers} size="1x" /> </span>
@@ -75,7 +75,7 @@ class DashBoard extends Component {
                 </Link>
                 </div>
                 <div className="dashboard-button button-sdb">
-                <Link to='/admin-userlist' className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}>
+                <Link to='/admin-notification' className={this.state.isClicked == 1 ? "redOutline-sdb" : "normalOutline-sdb"}>
                   <div className={this.state.isClicked == 3 ? "redOutline-sdb" : "normalOutline-sdb"}
                   onClick={() => this.handleButtonClick(3)}>
                     <span> <FontAwesomeIcon icon={faBell} size="1x" /> </span>

@@ -39,8 +39,11 @@ class UsersBody extends React.Component {
     const { data } = this.state;
     return(
       <body>
-        <AdminNavBar />
-        <SideDashBoard />
+        <div class="bars">
+          <SideDashBoard />
+          <AdminNavBar />
+        </div>
+        
         <div class = "dashboard">
           <div class = "top_content">
             <h1>Users</h1>
