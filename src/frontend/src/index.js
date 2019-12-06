@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import CheckBox from './pages/checkbox.jsx';
+import NavbarPage from './pages/user_navbar.jsx'
 
 // import JobEntry from './pages/JobEntry.jsx';
 // import UserDashboard from './pages/UserDashboard.jsx';
