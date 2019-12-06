@@ -3,20 +3,44 @@ from twilio.rest import Client
 from settings.py import connection
 import psycopg2
 from django.http import Http404
+from settings import connection
 
 # Create your functions here.
 
 def test_connection(request):
     return HttpResponse('Connection successful')
 
+# Request contains dict
+# dict represents alumni
+# value of jobs is list of dicts
+def add(request):
+    try:
+        # Extract data from request
+        info = request.GET['alumni']
+        # Create new Alumni Model instance
+        alumni = Alumni(name=info["name"], email=info["email"], phone=info["phone"], 
+                        dob=info["dob"], jobs=info["jobs"], last_update=info["update"])
+        # Save alumni object
+        alumni.save()
+        # Save to DB
+        insert_query = """ INSERT INTO ALUMNI (NAME, EMAIL, PHONE, DOB, JOB, UPDATE) 
+                                    VALUES (%s,%s,%s,%s,%s,%s)"""
+        record = (alumni.name, alumni.email, alumni.phone, alumni.dob, 
+                    alumni.jobs, alumni.last_update)
+        
+        cur = connection.cursor()
+        cur.execute(insert_query, record)
+        connection.commit()
+        
+    except:
+        print("Exception raised during insert!")
+
 def put(request):
     # Create Alumni object from request
 
     #Start db cursor for command
     cur = connection.cursor()
-    
 
-    # do something
 
 def delete(request):
     # do something
@@ -46,10 +70,6 @@ def send_text(list_users, text):
             from_="", 
             body= text,
             to = user)
-
-
-
-
 
 
 '''this function accepts two parameters:

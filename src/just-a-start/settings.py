@@ -100,9 +100,10 @@ DATABASES = {
 }
 
 # INITIALIZE DB
+
 db = "default"
 connection = psycopg2.connect(
-    database = DATABASES[db]['NAMb'], 
+    database = DATABASES[db]['NAME'], 
     user = DATABASES[db]['USER'], 
     password = DATABASES[db]['PASSWORD'], 
     host = DATABASES[db]['HOST'], 
@@ -111,11 +112,12 @@ connection = psycopg2.connect(
 
 connection.cursor().execute(
     '''CREATE TABLE ALUMNI
-      (NAME  CHAR(100) PRIMARY KEY NOT NULL,
-      EMAIL  CHAR(100)             NOT NULL,
-      PHONE  CHAR(100)             NOT NULL,
-      DOB    CHAR(50)              NOT NULL,
-      JOB                          REAL);'''
+    ( NAME   text PRIMARY KEY NOT NULL,
+        EMAIL  text  NOT NULL,
+        PHONE  text  NOT NULL,
+        DOB    text  NOT NULL,
+        JOB    text  NOT NULL,
+        UPDATE text  NOT NULL);'''
 )
 
 # Password validation
