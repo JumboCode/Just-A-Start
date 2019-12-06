@@ -19,8 +19,6 @@ class BaseViewTest(APITestCase):
         self.add_alumni("a3")
         self.add_alumni("a4")
         self.add_alumni("a5")
-
-        
     
 class RetrieveData(BaseViewTest){
 

@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 
@@ -44,6 +45,13 @@ class Alumni(models.Model):
             "update"      :self.last_update,
         }
         return alumni
+    
+    def create_new_alumni(self, alumni):
+        new_alumni = self.create(name = alumni.name, email = alumni.email,
+                                 phone_num = alumni.phone_num,  dob = alumni.dob, 
+                                 jobs = add_jobs(alumni.jobs), last_update =  datetime.now())
+        return new_alumni
+
 
     def save(self, *args, **kwargs):
         super(Model, self).save(*args, **kwargs)  # Call the "real" save() method.
