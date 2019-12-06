@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import './adminSendMsgStyles.css';
+import './AdminSendMsg.css';
+import AdminNavBar from '../components/AdminNavbar.jsx';
+import SideDashBoard from '../components/SideDashBoard';
 
 class AdminSendMsg extends Component {
   constructor(props) {
@@ -53,6 +55,8 @@ class AdminSendMsg extends Component {
     const { message, users } = this.state;
     return (
       <div className="admin-dash-container">
+        <AdminNavBar />
+        <SideDashBoard />
         <form>
           <label className="message-input-label">
             Message

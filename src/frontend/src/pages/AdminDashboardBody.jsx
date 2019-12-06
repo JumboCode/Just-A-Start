@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import UserActivityEntry from './UserActivityEntry.jsx';
-import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx'
+import UserActivityEntry from '../components/UserActivityEntry.jsx';
+import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx';
+import AdminNavBar from '../components/AdminNavbar.jsx';
+import SideDashBoard from '../components/SideDashBoard';
 
 import './AdminDashboardBody.css';
 
@@ -141,6 +143,8 @@ class AdminDashboardBody extends React.Component {
 
     return(
       <body>
+        <AdminNavBar />
+        <SideDashBoard />
         <div class = "dashboard">
           <div class = "top_content">
             <h1>Activity Log</h1>
