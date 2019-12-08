@@ -91,9 +91,9 @@ STATICFILES_DIRS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'just',
-        'USER': 'sam',
-        'PASSWORD': 'wchung01',
+        'NAME': 'postgresql',
+        'USER': 'jas',
+        'PASSWORD': 'justastart',
         'HOST': 'localhost',
         'PORT': '5432',
     }

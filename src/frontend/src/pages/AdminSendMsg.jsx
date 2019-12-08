@@ -54,9 +54,13 @@ class AdminSendMsg extends Component {
   render() {
     const { message, users } = this.state;
     return (
-      <div className="admin-dash-container">
-        <AdminNavBar />
-        <SideDashBoard />
+      <body>
+        <div class="bars">
+          <SideDashBoard />
+          <AdminNavBar />
+        </div>
+        
+        <div className="admin-dash-container">
         <form>
           <label className="message-input-label">
             Message
@@ -79,26 +83,27 @@ class AdminSendMsg extends Component {
               <p className='admin-dash-row-cell'>Phone</p>
               <p className='admin-dash-row-cell'>Action</p>
             </div>
-        {users.map(user => {
-          return (
-            <div key={user.id} className="asm-user-row">
-              <input
-                className="asm-user-row-check"
-                type="checkbox"
-                checked={user.checked}
-                onChange={this.onUserToggle}
-                name={user.id}
-              />
-              <p className='admin-dash-row-cell'>{user.username}</p>
-              <p className='admin-dash-row-cell'>{user.first}</p>
-              <p className='admin-dash-row-cell'>{user.last}</p>
-              <p className='admin-dash-row-cell'>{user.phone}</p>
-              <p className='admin-dash-row-cell'>{user.status}</p>
-            </div>
-          )
-        })}
-        </form>
-      </div>
+          {users.map(user => {
+            return (
+              <div key={user.id} className="asm-user-row">
+                <input
+                  className="asm-user-row-check"
+                  type="checkbox"
+                  checked={user.checked}
+                  onChange={this.onUserToggle}
+                  name={user.id}
+                />
+                <p className='admin-dash-row-cell'>{user.username}</p>
+                <p className='admin-dash-row-cell'>{user.first}</p>
+                <p className='admin-dash-row-cell'>{user.last}</p>
+                <p className='admin-dash-row-cell'>{user.phone}</p>
+                <p className='admin-dash-row-cell'>{user.status}</p>
+              </div>
+            )
+          })}
+          </form>
+        </div>
+      </body>
     );
   }
 }

@@ -18,7 +18,9 @@ const Navbar = () => {
                 </div>
 
 	            <img className= "arrow-size" src={arrow} alt="arrow" />
-          
+              <div class="dropdown-content">
+                <a id = "logout" href="">Logout</a>
+              </div>
             </div>
         </div>
     );

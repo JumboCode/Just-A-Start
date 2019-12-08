@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './JobEntry.css';
-import UserDashboard from './UserDashboard.jsx';
 import PropTypes from 'prop-types';
 
 class JobEntry extends React.Component {

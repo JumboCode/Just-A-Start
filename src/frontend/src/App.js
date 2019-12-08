@@ -6,27 +6,20 @@ import {
   Switch,
 } from "react-router-dom";
 
-import HomePage from "./pages/Homepage";
-import Login from "./pages/login";
+// import HomePage from "./pages/Homepage";
+import Login from "./pages/Login";
 import AdminDashboard from './pages/AdminDashboardBody';
 import AdminNotification from './pages/AdminSendMsg';
 import AdminUserList from './pages/AdminUserList';
 import UserDashboard from './pages/UserDashboard';
-import Login from "./pages/Login";
-
-import NavbarPage from "./components/UserNavbar";
-import Navbar from './components/Navbar';
-import SideDashBoard from './components/SideDashBoard';
 import NotFoundPage from "./pages/404";
-
-
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route exact path="/" component={Login} />
           <Route exact path="/admin-login" component={Login} />
           <Route exact path="/user-login" component={Login}/>
           <Route exact path="/admin-dashboard" component={AdminDashboard} />

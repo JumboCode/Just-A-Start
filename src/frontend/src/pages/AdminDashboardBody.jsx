@@ -143,8 +143,11 @@ class AdminDashboardBody extends React.Component {
 
     return(
       <body>
-        <AdminNavBar />
-        <SideDashBoard />
+        <div class="bars">
+          <SideDashBoard />
+          <AdminNavBar />
+        </div>
+
         <div class = "dashboard">
           <div class = "top_content">
             <h1>Activity Log</h1>
