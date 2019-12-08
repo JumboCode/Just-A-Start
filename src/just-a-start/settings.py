@@ -89,31 +89,19 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-<<<<<<< HEAD
-     'default': {
-         'ENGINE': 'django.db.backends.postgresql',
-         'NAME': 'justastart',
-         'USER': 'jas',
-         'PASSWORD': 'justastart',
-         'HOST': 'localhost',
-         'PORT': '5432',
-        }
-=======
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'template1',
+        'NAME': 'just',
         'USER': 'sam',
         'PASSWORD': 'wchung01',
         'HOST': 'localhost',
         'PORT': '5432',
     }
->>>>>>> de27c411c19cb729a194533c6dc13a359afc1998
 }
-
 # INITIALIZE DB
 db = "default"
 connection = psycopg2.connect(
-    database = DATABASES[db]['NAMb'], 
+    database = DATABASES[db]['NAME'], 
     user = DATABASES[db]['USER'], 
     password = DATABASES[db]['PASSWORD'], 
     host = DATABASES[db]['HOST'], 
