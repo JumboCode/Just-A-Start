@@ -1,24 +1,3 @@
-// import React, { pages } from 'react';
-
-// class NavBar extends pages {
-//     render() {
-//       return (
-//         <React.Fragment>
-//           <nav className="navbar navbar-dark bg-dark mb-3">
-//             <a className="navbar-brand" href="#">
-//               <h1>Jobs </h1>
-//               <h2>Event </h2>
-//               <h3>Alumni </h3>
-//               <h4> USER </h4>
-//             </a>
-//           </nav>
-//         </React.Fragment>
-//       );
-//     }
-//   }
-   
-//   export default NavBar;
-
 import React, { Component } from "react";
 import {
 MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBFormInline,
