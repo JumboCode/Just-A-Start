@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Alumni
+from api.models import Alumni, Job
 
 admin.site.register(Alumni)
-
-# Register your models here.
+admin.site.register(Job)

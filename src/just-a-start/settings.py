@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import psycopg2
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'django.webpack.loader',
+    'api',
+    'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'just-a-start.urls'
@@ -78,6 +80,10 @@ STATICFILES_DIRS = [
     os.path.join(REACT_APP_DIR, 'build', 'static'),
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000'
+]
+
 # WEBPACK_LOADER = {
 #     'DEFAULT': {
 #             'BUNDLE_DIR_NAME': 'bundles/',
@@ -91,7 +97,7 @@ STATICFILES_DIRS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgresql',
+        'NAME': 'jasybapp',
         'USER': 'jas',
         'PASSWORD': 'justastart',
         'HOST': 'localhost',
@@ -101,24 +107,24 @@ DATABASES = {
 
 # INITIALIZE DB
 
-db = "default"
-connection = psycopg2.connect(
-    database = DATABASES[db]['NAME'], 
-    user = DATABASES[db]['USER'], 
-    password = DATABASES[db]['PASSWORD'], 
-    host = DATABASES[db]['HOST'], 
-    port = DATABASES[db]['PORT']
-)
+# db = "default"
+# connection = psycopg2.connect(
+#     database = DATABASES[db]['NAME'], 
+#     user = DATABASES[db]['USER'], 
+#     password = DATABASES[db]['PASSWORD'], 
+#     host = DATABASES[db]['HOST'], 
+#     port = DATABASES[db]['PORT']
+# )
 
-connection.cursor().execute(
-    '''CREATE TABLE ALUMNI
-    ( NAME   text PRIMARY KEY NOT NULL,
-        EMAIL  text  NOT NULL,
-        PHONE  text  NOT NULL,
-        DOB    text  NOT NULL,
-        JOB    text  NOT NULL,
-        UPDATE text  NOT NULL);'''
-)
+# connection.cursor().execute(
+#     '''CREATE TABLE ALUMNI
+#     ( NAME   text PRIMARY KEY NOT NULL,
+#         EMAIL  text  NOT NULL,
+#         PHONE  text  NOT NULL,
+#         DOB    text  NOT NULL,
+#         JOB    text  NOT NULL,
+#         UPDATE text  NOT NULL);'''
+# )
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
