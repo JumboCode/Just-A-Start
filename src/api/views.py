@@ -54,7 +54,6 @@ class JobViewSet(viewsets.ModelViewSet):
 #         cur = connection.cursor()
 #         cur.execute(insert_query, record)
 #         connection.commit()
-        
 #     except:
 #         print("Exception raised during insert!")
 
@@ -74,20 +73,52 @@ class JobViewSet(viewsets.ModelViewSet):
 #     # alumni_list = Alumni.objects.all()
 #     # alumni_to_delete = alumni_list.filter(name = user_name, dob = user_dob, email = user_email)
 #     # alumni_to_delete.delete()
-#     pass
 
-# def edit(request):
-#     pass
-#     # do something
+# #save changes on database
+# '''receives in three parameters:
+#     1. primary key for the database
+#     2. field to be updated
+#     3. the updates
+    
+#     Note all parameters are string values'''
+# def edit(request_key, request_field, request_update):
+#     #establish connection
+#     try:
+#         conn = psycopg2.connect(
+
+#                     host = "",     #host name of the server
+#                     database = "", #database name that you want to querry from
+#                     port = "",     #port number 
+#                     user = "",     #username to access databae
+#                     password = ""  #password for the database
+#         )
+#     except:
+#         raise HTTp404("incorrect request")
+
+#     try:
+#         #generate cursor
+#         cur = conn.cursor()
+
+#         sql = "UPDATE {table_name} SET " + request_field + "= %s" + "WHERE email = %s"
+#         cur.execute(sql, (request_update, request_key))
+
+#         #commit the changes
+#         conn.commit()
+
+#         #close connection
+#         cur.close()
+#     except (Exception, psycopg2.DatabaseError) as error:
+#         print(error)
+    
+#     conn.close()
+
 
 # def index(request):
-#     pass
 #     # my_dict = {'insert_me': "Hello I am from view.py!"}
 #     # return render(request,'index.html', context=my_dict)
 
 # # Deletes
 # def get_user(request):
-#     pass
 #     # user_name = request.name
 
 #     # alumni_list = Alumni.objects.all()
@@ -98,7 +129,6 @@ class JobViewSet(viewsets.ModelViewSet):
 # # Returns a list of users in order of when their information
 # #       was last updated
 # def get_all_users(request):
-#     pass
 #     # get objects of users in the database
 #     # all_users = Alumni.objects.order_by('-last_update')[:]
 #     # print(all_users)
@@ -158,8 +188,8 @@ class JobViewSet(viewsets.ModelViewSet):
 #     ''' the data is retrieved in the following form
 #         [(username, firstname, lastname, phone, action)]
         
-#         each tuple in the list represent a row in the database
-#     '''
+# #         each tuple in the list represent a row in the database
+# #     '''
 #     rows = cur.fetchall()
 
 
