@@ -20,6 +20,11 @@ class AlumniViewSet(viewsets.ModelViewSet):
     def get_example(self, request):
         # response = {"message": "hi there"}
         return HttpResponse('Success!')
+    
+    @action(detail=False, methods=['GET'])
+    def get_example2(self, request):
+        # response = {"message": "hi there"}
+        return HttpResponse('Success!')
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
