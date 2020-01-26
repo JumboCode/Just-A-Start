@@ -16,6 +16,11 @@ class AlumniViewSet(viewsets.ModelViewSet):
     queryset = Alumni.objects.all()
     serializer_class = AlumniSerializer
 
+    def list(self, request):
+        # queryset = Alumni.objects.all()
+        # serializer = UserSerializer(queryset, many=True)
+        return Response(serializer_class.data)
+
     @action(detail=False, methods=['GET'])
     def get_example(self, request):
         # response = {"message": "hi there"}
@@ -24,7 +29,7 @@ class AlumniViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['GET'])
     def get_example2(self, request):
         # response = {"message": "hi there"}
-        return HttpResponse('Success!')
+        return HttpResponse(queryset)
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
