@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
+
 import './AdminUserList.css';
 import UsersEntry from '../components/UsersEntry.jsx';
 import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx'
 import AdminNavBar from '../components/AdminNavbar.jsx';
 import SideDashBoard from '../components/SideDashBoard';
 
-class UsersBody extends React.Component {
+class UsersBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,6 +35,13 @@ class UsersBody extends React.Component {
         }
       ]
     }
+  }
+
+  componentDidMount() {
+    axios.get('http://127.0.0.1:8000/api/alumni/get_example/')
+        .then(response => {
+          console.log(response)
+        });
   }
 
   render(){
