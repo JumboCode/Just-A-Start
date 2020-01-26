@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import './AdminUserList.css';
 import UsersEntry from '../components/UsersEntry.jsx';
 import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx'
+import AdminNavBar from '../components/AdminNavbar.jsx';
+import SideDashBoard from '../components/SideDashBoard';
 
 class UsersBody extends React.Component {
   constructor(props) {
@@ -37,6 +39,11 @@ class UsersBody extends React.Component {
     const { data } = this.state;
     return(
       <body>
+        <div class="bars">
+          <SideDashBoard />
+          <AdminNavBar />
+        </div>
+        
         <div class = "dashboard">
           <div class = "top_content">
             <h1>Users</h1>

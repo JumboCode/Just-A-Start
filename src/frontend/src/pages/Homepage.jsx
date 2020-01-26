@@ -12,7 +12,7 @@ class HomePage extends Component {
 		return (
 			<div>
 				<Link to="admin-login">Admin Login</Link>
-				<Link to="alumni-login">Alumni Login</Link>
+				<Link to="user-login">Alumni Login</Link>
 			</div>
 		);
 	}

@@ -1,14 +1,15 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 
 class Job(modesl.Model):
-    job_title = models.CharField('job_title', max_length=100)
-    employer_org = models.CharField('employer_org', max_length=100)
-    start_date = models.DateField('start_date', max_length=100)
-    end_date = models.DateField('end_date', max_length=)
-    pay_rate = models.DecimalField¶('pay_rate', max_digits=5, decimal_places=2)
-    hours_week = models.DecimalField¶('hours_week', max_digits=4, decimal_places=2)
+    job_title        = models.CharField('job_title', max_length=100)
+    employer_org     = models.CharField('employer_org', max_length=100)
+    start_date       = models.DateField('start_date', max_length=100)
+    end_date         = models.DateField('end_date', max_length=)
+    pay_rate         = models.DecimalField¶('pay_rate', max_digits=5, decimal_places=2)
+    hours_week       = models.DecimalField¶('hours_week', max_digits=4, decimal_places=2)
     role_description = models.TimeField('role_description')
 
     def __str__(self):
@@ -27,11 +28,11 @@ class Job(modesl.Model):
 class Alumni(models.Model):
 
     # DATABASE FIELDS
-    name       = models.CharField('name', max_length=100)
-    email      = models.CharField('email', max_length=100)
-    phone_num  = models.CharField('phone', max_length=100)
-    dob        = models.CharField('dob', max_length=100)
-    jobs  = models.ManyToManyField(Job)
+    name        = models.CharField('name', max_length=100)
+    email       = models.CharField('email', max_length=100)
+    phone       = models.CharField('phone', max_length=100)
+    dob         = models.CharField('dob', max_length=100)
+    jobs        = models.ManyToManyField(Job)
     last_update = models.DateTimeField('update')
 
     def __str__(self):
@@ -44,8 +45,13 @@ class Alumni(models.Model):
             "update"      :self.last_update,
         }
         return alumni
+    
+    def create_new_alumni(self, alumni):
+        new_alumni = self.create(name = alumni.name, email = alumni.email,
+                                 phone_num = alumni.phone_num,  dob = alumni.dob, 
+                                 jobs = add_jobs(alumni.jobs), last_update =  datetime.now())
+        return new_alumni
+
 
     def save(self, *args, **kwargs):
-        #do_something()
-        super().save(*args, **kwargs)  # Call the "real" save() method.
-        #do_something_else()
+        super(Model, self).save(*args, **kwargs)  # Call the "real" save() method.
