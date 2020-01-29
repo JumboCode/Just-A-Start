@@ -68,8 +68,15 @@ pexpect==4.6.0
 >>>>>>> 8f4ec102d2d46352d34be31e70a93c0c09343ada
 pickleshare==0.7.5
 Pillow==6.2.0
+<<<<<<< HEAD
 prompt-toolkit==3.0.2
 protobuf==3.10.0
+=======
+pipenv==2018.11.26
+pluggy==0.9.0
+praat-parselmouth==0.3.2
+prompt-toolkit==2.0.8
+>>>>>>> 6e672fd08eec1cbdd30ea2c48bb22b7ea7077b62
 psycopg2==2.8.3
 psycopg2-binary==2.8.4
 ptyprocess==0.6.0
@@ -94,20 +101,6 @@ ruamel.yaml.clib==0.2.0
 scipy==1.3.0
 six==1.12.0
 sqlparse==0.3.0
-<<<<<<< HEAD
-tensorboard==1.14.0
-tensorflow==1.14.0
-tensorflow-estimator==1.14.0
-termcolor==1.1.0
-Theano==1.0.4
-torch==1.3.1
-torchvision==0.4.2
-tqdm==4.38.0
-traitlets==4.3.3
-typed-ast==1.4.0
-urllib3==1.25.7
-virtualenv==16.7.9
-=======
 text-unidecode==1.3
 tgt==1.4.4
 traitlets==4.3.2
@@ -117,8 +110,6 @@ urllib3==1.24.2
 virtualenv==16.4.3
 virtualenv-clone==0.5.3
 w3lib==1.20.0
->>>>>>> 8f4ec102d2d46352d34be31e70a93c0c09343ada
 wcwidth==0.1.7
-Werkzeug==0.16.0
-whitenoise==4.1.4
+Werkzeug==0.15.3
 wrapt==1.11.2
