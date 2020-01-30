@@ -23,4 +23,6 @@
 .space-between-headers {
 	margin-right: 13px;
 	margin-left: 13px
+	height: 200px;
+	width: auto;
 }

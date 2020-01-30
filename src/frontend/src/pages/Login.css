@@ -50,3 +50,30 @@ background-color: white;
 left: 38%;
 top: 65px;
 }
+
+.left-shift{
+	border-radius:0px;
+	height: 305px;
+	width: auto;
+	position: absolute;
+	top:18%;
+	left: 12%;
+}
+
+.right-shift{
+	border-radius:0px;
+	height: 305px;
+	width: auto;
+	position: absolute;
+	top:18%;
+	right: 12%;
+}
+
+.bottom-shift{
+	border-radius:0px;
+	height: 37.5%;
+	width: auto;
+	position: absolute;
+	bottom: 0px;
+	margin-left: 0px;
+}
