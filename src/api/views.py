@@ -22,7 +22,7 @@ class AlumniViewSet(viewsets.ModelViewSet):
     #     return Response(serializer_class.data)
 
     @action(detail=False, methods=['GET'])
-    def get_example(self, request):
+    def get_some_text(self, request):
         # response = {"message": "hi there"}
         return HttpResponse('Success!')
     
