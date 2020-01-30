@@ -11,14 +11,10 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 - Emilio Encarnacion
 - Crystal Kwan
 - Jason Xu
-- Lucy Fan
-- Lulu Zheng
-- Matthew Harrison
 - Meguna Okawa
 - Keisha Mukasa
 - Kevin Li
 - Raga Sudha Chilakamarri
-- Sam Chung
 - Theogene Micomyiza
 
 ## Architecture Overview
@@ -36,7 +32,7 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 1. `cd <local directry in which you keep this directory>`
 2. `cd src`
 3. `python3 manage.py runserver`
-4. Go to `http://127.0.0.1:8000/admin` to access the Django admin site
+4. Go to `http://127.0.0.1:8000/admin/` to access the Django admin site
 
 - Make sure you have a virtual environment running on your machine
 
@@ -64,7 +60,7 @@ For all commands below, make sure to `cd <local directly in which you want to ke
 
 ### Updating a branch
 1. `git checkout <branch you want to update>`
-2. `git pull` --> There may be conflicts so when that happens, please handle them accordingly.
+2. `git pull origin master` --> There may be conflicts so when that happens, please handle them accordingly.
 
 ## Some Rules
 1. NEVER push to master
