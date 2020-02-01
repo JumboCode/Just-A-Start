@@ -26,26 +26,26 @@ class Job(models.Model):
         return self.job_title + " at " + self.employer_org
 
 class Alumni(models.Model):
-    name        = models.CharField('Name', max_length=100)
-    email       = models.CharField('Email', max_length=100, unique=True)
-    phone       = models.CharField('Phone', max_length=100)
-    dob         = models.CharField('Date of birth', max_length=100)
-    jobs        = models.ManyToManyField(Job)
-    last_update = models.DateTimeField('Update Time')
+    first_name      = models.CharField('First Name', max_length=100, default='Ming')
+    last_name       = models.CharField('Last Name', max_length=100, default='Chow')
+    email           = models.CharField('Email', max_length=200, unique=True)
+    phone           = models.CharField('Phone', max_length=100)
+    dob             = models.CharField('Date of birth', max_length=100)
+    jobs            = models.ManyToManyField(Job)
+    last_updated    = models.DateTimeField('Update Time')
 
     def __str__(self):
-        # alumni = {
-        #     "name"        :self.name,
-        #     "email"       :self.email,
-        #     "phone_num"   :self.phone,
-        #     "dob"         :self.dob,
-        #     "jobs"        :self.jobs,
-        #     "update"      :self.last_update,
-        # }
-        # return str(alumni)
+        alumni = {
+            "first_name"  :self.first_name,
+            "last_name"   :self.last_name,
+            "email"       :self.email,
+            "phone_num"   :self.phone,
+            "dob"         :self.dob,
+            "jobs"        :self.jobs.__str__(),
+            "update"      :self.last_update,
+        }
+        return str(alumni)
 
-        return self.name
-    
     # def create_new_alumni(self, alumni):
     #     new_alumni = self.create(name = alumni.name, email = alumni.email,
     #                              phone_num = alumni.phone_num,  dob = alumni.dob, 
