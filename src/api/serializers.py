@@ -4,7 +4,7 @@ from api.models import Alumni, Job
 class AlumniSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alumni
-        fields = ('name', 'email', 'phone', 'dob', 'jobs', 'last_update')
+        fields = ('first_name', 'last_name', 'email', 'phone', 'dob', 'jobs', 'last_updated')
 
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
