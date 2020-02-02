@@ -42,7 +42,7 @@ class Alumni(models.Model):
             "phone_num"   :self.phone,
             "dob"         :self.dob,
             "jobs"        :self.jobs.__str__(),
-            "update"      :self.last_update,
+            "update"      :self.last_updated,
         }
         return str(alumni)
 
