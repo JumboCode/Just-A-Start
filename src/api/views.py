@@ -15,16 +15,24 @@ from api.serializers import AlumniSerializer, JobSerializer
 class AlumniViewSet(viewsets.ModelViewSet):
     queryset = Alumni.objects.all()
     serializer_class = AlumniSerializer
-
-    def list(self, request):
+    @action(detail=False, methods=['GET'])
+    def get_all_users(self, request):
         # queryset = Alumni.objects.all()
         # serializer = UserSerializer(queryset, many=True)
-        return Response(serializer_class.data)
+        all_users = Alumni.objects.order_by('-last_update')[:]
+        print(all_users)
+        return HttpResponse(all_users)
 
     @action(detail=False, methods=['GET'])
-    def get_example(self, request):
+    def get_alumni(self, request):
+        user_name = request.data.name
+        alumni_list = Alumni.objects.all()
+        print(alumni_list)
+        # alumni = alumni_list.filter(name = user_name)
+        
+
         # response = {"message": "hi there"}
-        return HttpResponse('Success!')
+        return HttpResponse("Success")
     
     @action(detail=False, methods=['GET'])
     def get_example2(self, request):
