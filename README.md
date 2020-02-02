@@ -9,6 +9,7 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 ## Team
 - Naoki Okada (Project Manager)
 - Emilio Encarnacion
+- Katelyn Eustace
 - Crystal Kwan
 - Jason Xu
 - Meguna Okawa
