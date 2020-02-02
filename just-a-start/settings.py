@@ -101,18 +101,18 @@ CORS_ORIGIN_WHITELIST = [
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'jasybapp',
-#         'USER': 'jas',
-#         'PASSWORD': 'justastart',
-#         'HOST': 'https://jasyb.herokuapp.com',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'jasybapp',
+        'USER': 'jas',
+        'PASSWORD': 'justastart',
+        'HOST': 'https://jasyb.herokuapp.com',
+        'PORT': '5432',
+    }
+}
 
-DATABASES = {}
+# DATABASES = {}
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
