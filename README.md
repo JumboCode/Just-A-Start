@@ -15,7 +15,6 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 - Meguna Okawa
 - Keisha Mukasa
 - Kevin Li
-- Raga Sudha Chilakamarri
 - Theogene Micomyiza
 
 ## Architecture Overview
