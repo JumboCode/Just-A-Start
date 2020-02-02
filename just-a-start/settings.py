@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,9 @@ SECRET_KEY = 'b&34-=r&6eicsrf=vd=bbt7^k0tdm@$0trtz^h51+lc7s%di5u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'https://jasyb.herokuapp.com'
+]
 
 
 # Application definition
@@ -82,7 +85,8 @@ STATIC_ROOT = os.path.join(REACT_APP_DIR, 'build', 'static')
 # ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://jasyb.herokuapp.com'
 ]
 
 # WEBPACK_LOADER = {
@@ -101,10 +105,13 @@ DATABASES = {
         'NAME': 'jasybapp',
         'USER': 'jas',
         'PASSWORD': 'justastart',
-        'HOST': 'localhost',
+        'HOST': 'https://jasyb.herokuapp.com',
         'PORT': '5432',
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 # INITIALIZE DB
 
