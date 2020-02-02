@@ -23,7 +23,7 @@ class JobEntry extends React.Component {
   render(){
     const { data } = this.props;
     return (
-      <div className = "flex_container">
+      <div className = "flex_container_job_entry">
         <div className = "text_container">
           <div id = "left_text">
             <p id = "large" >{data.job_title}</p>
@@ -36,9 +36,9 @@ class JobEntry extends React.Component {
             <p id = "small" >{data.salary}</p>
           </div>
         </div>
-        <div className = "list">
+        <div className = "list_job_entry">
           <ul >
-            {data.description.map(item => (<li key={item.id}> {item.text} </li>))}
+            {data.description.map(item => (<li class = "full_length_job_entry" key={item.id}> {item.text} </li>))}
           </ul>
         </div>
       </div>
