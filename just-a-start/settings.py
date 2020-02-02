@@ -115,38 +115,16 @@ CORS_ORIGIN_WHITELIST = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'jasybapp',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
     }
 }
-
 
 db_from_env =dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 # DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# INITIALIZE DB
-
-# db = "default"
-# connection = psycopg2.connect(
-#     database = DATABASES[db]['NAME'], 
-#     user = DATABASES[db]['USER'], 
-#     password = DATABASES[db]['PASSWORD'], 
-#     host = DATABASES[db]['HOST'], 
-#     port = DATABASES[db]['PORT']
-# )
-
-# connection.cursor().execute(
-#     '''CREATE TABLE ALUMNI
-#     ( NAME   text PRIMARY KEY NOT NULL,
-#         EMAIL  text  NOT NULL,
-#         PHONE  text  NOT NULL,
-#         DOB    text  NOT NULL,
-#         JOB    text  NOT NULL,
-#         UPDATE text  NOT NULL);'''
-# )
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
