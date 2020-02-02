@@ -19,9 +19,9 @@ class AlumniViewSet(viewsets.ModelViewSet):
     def get_all_users(self, request):
         # queryset = Alumni.objects.all()
         # serializer = UserSerializer(queryset, many=True)
-        all_users = Alumni.objects.order_by('-last_update')[:]
-        print(all_users)
-        return HttpResponse(all_users)
+        # all_users = Alumni.objects.order_by('-last_update')[:]
+        # print(all_users)
+        return HttpResponse("all_users")
 
     @action(detail=False, methods=['GET'])
     def get_alumni(self, request):
