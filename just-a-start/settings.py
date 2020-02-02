@@ -178,3 +178,6 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning'
 }
+
+django_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
