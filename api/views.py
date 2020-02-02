@@ -21,6 +21,29 @@ class AlumniViewSet(viewsets.ModelViewSet):
         user = self.queryset.get(email=request.data['email'])
         return HttpResponse(user.__str__())
 
+
+    @action(detail=False, methods=['POST'])
+    #Note: account_sid, auth_token, from_  : 
+    # you get these values form twilio when you create account
+    def send_text(self, request):
+        # Your Account SID from twilio.com/console
+        account_sid = ""
+        # Your Auth Token from twilio.com/console
+        auth_token  = ""
+
+        client = Client(account_sid, auth_token)
+
+        #iterate through list of people
+        for user in request["numbers"]:
+            message = client.messages.create(
+                #you phone number associated to your account from twilio
+                #Twilio generates this number
+                from_="", 
+                body= request["message"],
+                to = user)
+
+
+
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
