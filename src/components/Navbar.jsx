@@ -11,7 +11,7 @@ const Navbar = () => {
 	            <h3 className = "space-between-headers">Help</h3>
 	            <h3 className = "space-between-headers">|</h3>
 	            <Link to="/admin-login" className = "space-between-headers">Admin</Link>
-	            <Link to="/alumni-login" className = "space-between-headers">Alumni</Link>
+	            <Link to="/user-login" className = "space-between-headers">Alumni</Link>
             </div>
         </div>
     );

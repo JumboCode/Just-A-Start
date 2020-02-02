@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
+import Navbar from '../components/Navbar.jsx';
 import LoginButton from '../components/LoginButton.jsx';
 import Form from '../components/Form.jsx';
 import CheckBox from '../components/Checkbox.jsx';
 import jas_man from '../assets/jas.man.png';
 import jas_woman from '../assets/jas.woman.png';
 import jas_ground from '../assets/jas.ground.png';
-import './Login.css';
+import './AdminLogin.css';
 
 class Login extends Component {
     state = {
@@ -24,24 +25,27 @@ class Login extends Component {
 
     render() {
         return (
-          <div id="background-login">
-            <img className= "left-shift" src={jas_man} alt="icon" />
-            <img className= "right-shift" src={jas_woman} alt="icon" />
-            <img className= "bottom-shift" src={jas_ground} alt="icon" />
-            <div id="wrapper-login">
-              <div id="loginText">
-              </div>
-              <div id="form-login">
-                <Form getUserInfo={this.retrieveUserInfo} forgotPassword={this.didForgetPassword}
-                isClicked={this.state.isClicked}/>
-              </div>
-              <div id="loginButton-login">
-                <LoginButton loginClick={this.handleClick} isClicked={this.state.isClicked}/>
-              </div>
-              <div id="checkbox-login">
-                <CheckBox checked={this.didCheckBox}/>
-              </div>
+          <div>
+            <Navbar/>
+            <div id="background-login">
+              <img className= "left-shift" src={jas_man} alt="icon" />
+              <img className= "right-shift" src={jas_woman} alt="icon" />
+              <img className= "bottom-shift" src={jas_ground} alt="icon" />
+              <div id="wrapper-login">
+                <div id="loginText">
+                </div>
+                <div id="form-login">
+                  <Form getUserInfo={this.retrieveUserInfo} forgotPassword={this.didForgetPassword}
+                  isClicked={this.state.isClicked}/>
+                </div>
+                <div id="loginButton-login">
+                  <LoginButton loginClick={this.handleClick} isClicked={this.state.isClicked}/>
+                </div>
+                <div id="checkbox-login">
+                  <CheckBox checked={this.didCheckBox}/>
+                </div>
 
+              </div>
             </div>
           </div>
         );

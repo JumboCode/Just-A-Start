@@ -32,7 +32,6 @@ ALLOWED_HOSTS = [
     'https://jasyb.herokuapp.com'
 ]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -79,7 +78,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'just-a-start.wsgi.application'
-REACT_APP_DIR = BASE_DIR
+# REACT_APP_DIR = BASE_DIR
+REACT_APP_DIR = os.path.join(BASE_DIR)
 STATIC_ROOT = os.path.join(REACT_APP_DIR, 'build', 'static')
 
 # REACT_APP_DIR = os.path.join(BASE_DIR, '.')
