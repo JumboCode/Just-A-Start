@@ -3,11 +3,14 @@ import { Link } from 'react-router-dom';
 import './UserDashboard.css';
 import JobEntry from '../components/JobEntry.jsx';
 import UserNavbar from '../components/UserNavbar.jsx';
+import ProfileEdit from '../components/ProfileEdit.jsx';
 
 class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
+    this.profileEditElement = React.createRef();
     this.state = {
+      profile_edit: "false",
       job_data: [
         {
           job_title: "Job Title",
@@ -44,50 +47,64 @@ class UserDashboard extends React.Component {
 
     }
   }
+  profileEditClicked = () => {
+      //this.setState({ profile_edit: "true" });
+      console.log(this.profileEditElement);
+      this.profileEditElement.current.changeVisibilityOn();
+  };
+
 
   render(){
     const background = {
       //"background-color":'EEF6FE'
-      width: "auto",
+      width: "100%",
       height: 2000,
       backgroundColor: "#eef6fe",
+      position: "absolute"
     }
-    
+
     const { profile_data } = this.state;
 
     return(
       <body>
         <UserNavbar/>
         <div style = {background}>
-          <div className = "profile">
-            <h1 className = "centered">Profile</h1>
-            <h1 className = "centered">{profile_data.name}</h1>
-            <p className = "centered" id = "small">{profile_data.class}</p>
-            <p className = "centered" id = "medium">{profile_data.location}</p>
-            <div className = "flex_container_two">
-              <p className = "left_text_profile">About</p>
-              <p className = "right_text_profile">{profile_data.about}</p>
+          <ProfileEdit ref={this.profileEditElement}/>
+          <div id="allthestuff">
+            <div className = "profile">
+              <div className = "top_text">
+                <h1 className = "title">Profile</h1>
+                <button onClick={this.profileEditClicked} className = "add" id = "edit">&#9998;</button>
+              </div>
+              <h1 className = "centered">{profile_data.name}</h1>
+              <p className = "centered" id = "small">{profile_data.class}</p>
+              <p className = "centered" id = "medium">{profile_data.location}</p>
+              <div className = "flex_container_two">
+                <p className = "left_text_profile">About</p>
+                <p className = "right_text_profile">{profile_data.about}</p>
+              </div>
+              <div className = "flex_container_two">
+                <p className = "left_text_profile">Phone</p>
+                <p className = "right_text_profile">{profile_data.phone}</p>
+              </div>
+              <div className = "flex_container_two">
+                <p className = "left_text_profile">Email</p>
+                <p className = "right_text_profile">{profile_data.email}</p>
+              </div>
+              <div className = "flex_container_two">
+                <p className = "left_text_profile">Date Of Birth</p>
+                <p className = "right_text_profile">{profile_data.birthdate}</p>
+              </div>
             </div>
-            <div className = "flex_container_two">
-              <p className = "left_text_profile">Phone</p>
-              <p className = "right_text_profile">{profile_data.phone}</p>
-            </div>
-            <div className = "flex_container_two">
-              <p className = "left_text_profile">Email</p>
-              <p className = "right_text_profile">{profile_data.email}</p>
-            </div>
-            <div className = "flex_container_two">
-              <p className = "left_text_profile">Date Of Birth</p>
-              <p className = "right_text_profile">{profile_data.birthdate}</p>
+            <div className = "job_list">
+              <div className = "top_text">
+                <h1 className = "title">Job Experience</h1>
+                <button className = "add">+</button>
+              </div>
+            {this.state.job_data.map(item => (<JobEntry data={item} key={item.id}/>))}
             </div>
           </div>
-          <div className = "job_list">
-            <div className = "top_text">
-              <h1 className = "title">Job Experience</h1>
-              <button className = "add">+</button>
-            </div>
-          {this.state.job_data.map(item => (<JobEntry data={item} key={item.id}/>))}
-          </div>
+
         </div>
       </body>
     )

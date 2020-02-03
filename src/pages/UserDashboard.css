@@ -67,6 +67,7 @@ h1{
   cursor: pointer;
   display: inline-block;
   font-size: 35px;
+  margin-right: 3%;
 
   position: absolute;
   top: 8px;
@@ -121,4 +122,25 @@ li{
 
 .centered{
   text-align: center;
+}
+
+#edit.add{
+  font-size: 30px;
+  margin-top: 5px;
+}
+
+.profile_edit_overlay{
+  position:absolute;
+  top: 0;
+  left: 0;
+}
+
+#allthestuff{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+}
+#profile_edit_overlay{
+  display: none;
 }
