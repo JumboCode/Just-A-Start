@@ -25,6 +25,8 @@ class AlumniViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['POST'])
     #Note: account_sid, auth_token, from_  : 
     # you get these values form twilio when you create account
+
+    #expects a dictionary that has two keys, numbers and message
     def send_text(self, request):
         # Your Account SID from twilio.com/console
         account_sid = ""
