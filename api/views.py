@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from twilio.rest import Client
 
 from api.models import Alumni, Job
 from api.serializers import AlumniSerializer, JobSerializer
