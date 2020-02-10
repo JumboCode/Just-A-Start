@@ -8,6 +8,7 @@ import ProfileEdit from '../components/ProfileEdit.jsx';
 class UserDashboard extends React.Component {
   constructor(props) {
     super(props);
+    this.handler = this.handler.bind(this);
     this.profileEditElement = React.createRef();
     this.state = {
       profile_edit: "false",
@@ -34,7 +35,7 @@ class UserDashboard extends React.Component {
           id: 1
         }
       ],
-
+      
       profile_data: {
         name: "Jackson Smith",
         class: "... of 2008",
@@ -49,9 +50,18 @@ class UserDashboard extends React.Component {
   }
   profileEditClicked = () => {
       //this.setState({ profile_edit: "true" });
-      console.log(this.profileEditElement);
-      this.profileEditElement.current.changeVisibilityOn();
+      this.profileEditElement.current.changeVisibilityOn(this.state.profile_data.name, this.state.profile_data.birthdate, this.state.profile_data.location, this.state.profile_data.phone, this.state.profile_data.email, this.state.profile_data.about);
   };
+  handler(name, dob, location, phone, email, about){
+    console.log(this.state.profile_data.name);
+    this.state.profile_data.name = name;
+    this.state.profile_data.location = location;
+    this.state.profile_data.about = about;
+    this.state.profile_data.phone = phone;
+    this.state.profile_data.email = email;
+    this.state.profile_data.birthdate = dob;
+    this.forceUpdate();
+  }
 
 
   render(){
@@ -69,7 +79,7 @@ class UserDashboard extends React.Component {
       <body>
         <UserNavbar/>
         <div style = {background}>
-          <ProfileEdit ref={this.profileEditElement}/>
+          <ProfileEdit handler = {this.handler} ref={this.profileEditElement}/>
           <div id="allthestuff">
             <div className = "profile">
               <div className = "top_text">

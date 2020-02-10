@@ -7,7 +7,13 @@ class ProfileEdit extends React.Component {
     super(props);
     this.state = {
       visibility: false,
-      iteration: 1
+      iteration: 1,
+      name: "a",
+      location: "",
+      about: "",
+      phone: "",
+      email: "",
+      birthdate: ""
     }
     
   }
@@ -27,17 +33,41 @@ class ProfileEdit extends React.Component {
     }
 
   }
-  changeVisibilityOn(){
-    this.setState({
-      visibility: true
-    });
-    console.log(this.state.visibility)
+  changeVisibilityOn(name, dob, location, phone, email, about){
+    console.log(name)
+    this.state.name = name;
+    this.state.location = location;
+    this.state.about = about;
+    this.state.phone = phone;
+    this.state.email = email;
+    this.state.birthdate = dob;
+    this.state.visibility = true;
+    this.forceUpdate();
   };
+  
   changeVisibilityOff = () => {
     this.setState({
       visibility: false
     });
-    console.log(this.state.visibility)
+  };
+  
+  handleNameChange = (event) => {
+    this.setState({name: event.target.value})
+  };
+  handleBirthdateChange = (event) => {
+    this.setState({birthdate: event.target.value})
+  };
+  handleEmailChange = (event) => {
+    this.setState({email: event.target.value})
+  };
+  handlePhoneChange = (event) => {
+    this.setState({phone: event.target.value})
+  };
+  handleLocationChange = (event) => {
+    this.setState({location: event.target.value})
+  };
+  handleAboutChange = (event) => {
+    this.setState({about: event.target.value})
   };
   render(){
     return(
@@ -53,14 +83,16 @@ class ProfileEdit extends React.Component {
             <p class = "left_text">About</p>
           </div>
           <div class="flex_profile_edit" id="right_profile_edit">
-            <input class="input_profile_edit"/>
-            <input class="input_profile_edit"/>
-            <input class="input_profile_edit"/>
-            <input class="input_profile_edit"/>
-            <input class="input_profile_edit"/>
-            <textarea id="textarea" onKeyPress={this.setTextAreaFormat} />
+            <input id="name_profile_edit" class="input_profile_edit" value ={this.state.name} onChange={this.handleNameChange}/>
+            <input id="dob_profile_edit" class="input_profile_edit" value ={this.state.birthdate} onChange={this.handleBirthdateChange}/>
+            <input id="location_profile_edit" class="input_profile_edit" value ={this.state.location} onChange={this.handleLocationChange}/>
+            <input id="phone_profile_edit" class="input_profile_edit" value ={this.state.phone} onChange={this.handlePhoneChange}/>
+            <input id="email_profile_edit" class="input_profile_edit" value ={this.state.email} onChange={this.handleEmailChange}/>
+            <textarea id="textarea" onKeyPress={this.setTextAreaFormat} value={this.state.about} onChange={this.handleAboutChange}/>
           </div>
-          <button onClick={this.changeVisibilityOff} class="confirm">Confirm</button>
+          <button onClick = {() => {
+                  this.changeVisibilityOff();
+                  this.props.handler(document.getElementById("name_profile_edit").value, document.getElementById("dob_profile_edit").value, document.getElementById("location_profile_edit").value, document.getElementById("phone_profile_edit").value, document.getElementById("email_profile_edit").value, document.getElementById("textarea").value)}} class="confirm">Confirm</button>
         </div>
         }
       </div>
