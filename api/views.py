@@ -15,6 +15,7 @@ from api.serializers import AlumniSerializer, JobSerializer
 class AlumniViewSet(viewsets.ModelViewSet):
     queryset = Alumni.objects.all()
     serializer_class = AlumniSerializer
+    heloooooo = Job.objects.all()
     
     @action(detail=False, methods=['GET'])
     def get_user(self, request):
