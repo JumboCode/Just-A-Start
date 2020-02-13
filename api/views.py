@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from copy import deepcopy
 
 from api.models import Alumni, Job
 from api.serializers import AlumniSerializer, JobSerializer
@@ -19,11 +20,32 @@ class AlumniViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['GET'])
     def get_user(self, request):
         user = self.queryset.get(email=request.data['email'])
-        return HttpResponse(user.__str__())
+        return HttpResponse(user.first_name.__str__() + " " + user.jobs.__str__())
+
+    # Returns a list of all Alumni in Database
+    @action(detail=False, methods=['GET'])
+    def get_all_users(self, request):
+        users = Alumni.objects.order_by('-last_updated')[:]
+        return HttpResponse(users.__str__())
+
+    @action(detail=False, methods=['GET'])
+    def delete_user(self, request):
+        alumni_to_delete = self.queryset.get(email=request.data['email'], first_name=request.data['first_name'])
+        user = deepcopy(alumni_to_delete)
+        alumni_to_delete.delete()
+        return HttpResponse("deleted:", user.first_name.__str__())
+
+    
+
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+
+    @action(detail=False, methods=['GET'])
+    def get_job(self, request):
+        user = self.queryset.get(job_title=request.data['job_title'], employer_org=request.data['employer_org'])
+        return HttpResponse(user.first_name.__str__() + " " + user.jobs.__str__())
 
 # Create your functions here.
 # def test_connection(request):
