@@ -8,6 +8,7 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 
 ## Team
 - Naoki Okada (Project Manager)
+- Brian Lin
 - Emilio Encarnacion
 - Katelyn Eustace
 - Crystal Kwan
@@ -30,18 +31,16 @@ Just-A-Start YouthBuild (JASYB) serves young people 16 to 24 years of age who ha
 ## How to Run Project on Local Machine
 ### To get the server running
 1. `cd <local directry in which you keep this directory>`
-2. `cd src`
-3. `python3 manage.py runserver`
+2. `python3 manage.py runserver`
 4. Go to `http://127.0.0.1:8000/admin/` to access the Django admin site
 
 - Make sure you have a virtual environment running on your machine
 
 ### To get the frontend running
 1. `cd <local directry in which you keep this directory>`
-2. `cd src`
-3. `cd frontend`
-4. `npm start`
-5. Go to `http://localhost:3000/`
+2. `npm install` if it is your first time running the application
+3. `npm start`
+4. Go to `http://localhost:3000/`
 
 ## Essential Git Commands
 For all commands below, make sure to `cd <local directly in which you want to keep this directory>` first
