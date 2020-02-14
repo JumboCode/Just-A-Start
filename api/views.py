@@ -5,8 +5,8 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 
-from api.models import Alumni, Job
-from api.serializers import AlumniSerializer, JobSerializer
+from api.models import Alumni, Job, Unemployed, Education
+from api.serializers import AlumniSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
 
 # from twilio.rest import Client
 # from settings.py import connection
@@ -15,7 +15,6 @@ from api.serializers import AlumniSerializer, JobSerializer
 class AlumniViewSet(viewsets.ModelViewSet):
     queryset = Alumni.objects.all()
     serializer_class = AlumniSerializer
-    heloooooo = Job.objects.all()
     
     @action(detail=False, methods=['GET'])
     def get_user(self, request):
@@ -25,6 +24,14 @@ class AlumniViewSet(viewsets.ModelViewSet):
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+
+class UnemployedViewSet(viewsets.ModelViewSet):
+    queryset = Unemployed.objects.all()
+    serializer_class = UnemployedSerializer
+
+class EducationViewSet(viewsets.ModelViewSet):
+    queryset = Education.objects.all()
+    serializer_class = EducationSerializer
 
 # Create your functions here.
 # def test_connection(request):
