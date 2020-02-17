@@ -147,6 +147,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Django Site Settings
+
+SITE_ID=1 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
