@@ -6,7 +6,7 @@ class Alumni(models.Model):
     last_name       = models.CharField('last_name', max_length=20)
     email           = models.EmailField('email', max_length=30, unique=True)
     phone           = models.CharField('phone', max_length=100)
-    dob             = models.DateField('date_of_birth', max_length=100)
+    date_of_birth   = models.DateField('date_of_birth', max_length=100)
     updated_time    = models.DateTimeField('updated_time',auto_now=True)
 
     def __str__(self):
