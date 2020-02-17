@@ -22,6 +22,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
-    url(r'^', views.FrontendAppView.as_view()),
     path('accounts/', include('django.contrib.auth.urls')),
+    url(r'^', views.FrontendAppView.as_view())
 ]
