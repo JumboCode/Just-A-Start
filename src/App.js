@@ -23,7 +23,6 @@ class App extends Component {
           <Route exact path="/" component={UserLogin}/>
           <Route exact path="/user-dashboard" component={UserDashboard} />
           <Route exact path="/admin-login" component={AdminLogin} />
-          <Route exact path="/admin-dashboard" component={AdminDashboard} />
           <Route exact path="/admin-notification" component={AdminNotification} />
           <Route exact path="/admin-userlist" component={AdminUserList} />
           <Route component={NotFoundPage}></Route>

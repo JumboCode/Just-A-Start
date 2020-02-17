@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from twilio.rest import Client
 
 from api.models import Alumni, Job, Unemployed, Education
 from api.serializers import AlumniSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
@@ -20,6 +21,31 @@ class AlumniViewSet(viewsets.ModelViewSet):
     def get_user(self, request):
         user = self.queryset.get(email=request.data['email'])
         return HttpResponse(user.__str__())
+
+
+    @action(detail=False, methods=['POST'])
+    #Note: account_sid, auth_token, from_  : 
+    # you get these values form twilio when you create account
+
+    #expects a dictionary that has two keys, numbers and message
+    def send_text(self, request):
+        # Your Account SID from twilio.com/console
+        account_sid = ""
+        # Your Auth Token from twilio.com/console
+        auth_token  = ""
+
+        client = Client(account_sid, auth_token)
+
+        #iterate through list of people
+        for user in request["numbers"]:
+            message = client.messages.create(
+                #you phone number associated to your account from twilio
+                #Twilio generates this number
+                from_="", 
+                body= request["message"],
+                to = user)
+
+
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
