@@ -10,9 +10,9 @@ const Navbar = () => {
         <div className = "container_a">
         	<img className= "magnifying-glass-size" src={magnifying_glass} alt="magnifying glass" />
 
-        	<div className = "top-right">
+        	<div className = "top-right-thingy">
                 <img className= "profile-picture-size" src={profile_picture} alt="profile picture" />
-                <div className = "vertically-align">
+                <div className = "vertically-align-thingy">
 	               <h2 className = "space-between-headers">Name</h2>
 	               <h3 className = "space-between-headers">Role</h3>
                 </div>

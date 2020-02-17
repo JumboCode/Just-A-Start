@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './UserDashboard.css';
 import JobEntry from '../components/JobEntry.jsx';
-import UserNavbar from '../components/UserNavbar.jsx';
+import AdminNavbar from '../components/AdminNavbar.jsx';
 import ProfileEdit from '../components/ProfileEdit.jsx';
 
 class UserDashboard extends React.Component {
@@ -77,7 +77,7 @@ class UserDashboard extends React.Component {
 
     return(
       <body>
-        <UserNavbar/>
+        <AdminNavbar/>
         <div style = {background}>
           <ProfileEdit handler = {this.handler} ref={this.profileEditElement}/>
           <div id="allthestuff">
