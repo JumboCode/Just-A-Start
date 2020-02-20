@@ -21,9 +21,9 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Alumni.objects.create(user=instance)
 
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 class Experience(models.Model):
     alumni              = models.ForeignKey(Alumni, on_delete=models.CASCADE, default=1)
