@@ -27,12 +27,13 @@ class Login extends Component {
         return (
           <div>
             <Navbar/>
-            <div id="background-login">
+            <div id="background-admin-login">
               <img className= "left-shift" src={jas_man} alt="icon" />
               <img className= "right-shift" src={jas_woman} alt="icon" />
-              <img className= "bottom-shift" src={jas_ground} alt="icon" />
-              <div id="wrapper-login">
-                <div id="loginText">
+              <img className= "bottom-admin-shift" src={jas_ground} alt="icon" />
+              <div id="wrapper-admin-login">
+                <div id="login-text-container">
+                  <p id = "admin-login-text">Log In</p>
                 </div>
                 <div id="form-login">
                   <Form getUserInfo={this.retrieveUserInfo} forgotPassword={this.didForgetPassword}
