@@ -10,12 +10,12 @@
   background-color:"lightblue";
 }
 
-.flex_container{
+.flex_container_job_entry{
   display: flex;
   flex-flow: row wrap;
-  width: 78%;
-  margin-left:16%;
-  margin-right:6%;
+  width: 80%;
+  margin-left:10%;
+  margin-right:10%;
   float:right;
 }
 
@@ -32,7 +32,7 @@
   float: right;
 }
 
-.list{
+.list_job_entry{
   align-self: stretch;
   width: 100%;
 }
@@ -58,4 +58,9 @@ li{
 #small{
   font-size: 14px;
   margin: 10px;
+}
+
+.full_length_job_entry{
+  margin: 0;
+  width: 100%;
 }

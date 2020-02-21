@@ -1,56 +1,81 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 import datetime
 
-class Job(models.Model):
-    job_title        = models.CharField('job_title', max_length=100)
-    employer_org     = models.CharField('employer_org', max_length=100)
-    start_date       = models.DateField('start_date', max_length=100)
-    end_date         = models.DateField('end_date', max_length=100, null=True)
+class Alumni(models.Model):
+    user            = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    first_name      = models.CharField('first_name', max_length=20)
+    last_name       = models.CharField('last_name', max_length=20)
+    email           = models.EmailField('email', max_length=30, unique=True)
+    phone           = models.CharField('phone', max_length=100)
+    date_of_birth   = models.DateField('date_of_birth', max_length=100, null=True, blank=True)
+    updated_time    = models.DateTimeField('updated_time',auto_now=True)
+
+    def __str__(self):
+        return self.first_name + " " + self.last_name
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Alumni.objects.create(user=instance)
+
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+#     instance.profile.save()
+
+class Experience(models.Model):
+    alumni              = models.ForeignKey(Alumni, on_delete=models.CASCADE, default=1)
+    start_date          = models.DateField('start_date', max_length=100)
+    end_date            = models.DateField('end_date', max_length=100, null=True)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.alumni.__str__()
+
+class Job(Experience):
+    employer_org     = models.CharField('employer_org', max_length=30)
+    job_title        = models.CharField('job_title', max_length=40)
     pay_rate         = models.DecimalField('pay_rate', max_digits=5, decimal_places=2)
     hours_week       = models.DecimalField('hours_week', max_digits=4, decimal_places=2)
     role_description = models.TextField('role_description')
 
     def __str__(self):
-        # job = {
-        #     "job_title"         :self.job_title,
-        #     "employer_org"      :self.employer_org,
-        #     "start_date"        :self.start_date,
-        #     "end_date"          :self.end_date,
-        #     "pay_rate"          :self.pay_rate,
-        #     "hours_week"        :self.hours_week,
-        #     "role_description"  :self.role_description,
-        # }
-        
-        # return str(job)
+        return self.alumni.__str__() + ": " + self.job_title + " at " + self.employer_org
 
-        return self.job_title + " at " + self.employer_org
+class Unemployed(Experience):
+    degree_levels = [('mids',  'Middle School Diploma'),
+                    ('highs', 'High School Diploma'),
+                    ('train', 'Training Program'),
+                    ('assoc', 'Associate Degree'),
+                    ('bach', 'Bachelors Degree'),
+                    ('ms', 'Masters Degree'),
+                    ('phd', 'Ph. D'),
+    ]
 
-class Alumni(models.Model):
-    first_name      = models.CharField('First Name', max_length=100, default='Ming')
-    last_name       = models.CharField('Last Name', max_length=100, default='Chow')
-    email           = models.CharField('Email', max_length=200, unique=True)
-    phone           = models.CharField('Phone', max_length=100)
-    dob             = models.CharField('Date of birth', max_length=100)
-    jobs            = models.ManyToManyField(Job)
-    last_updated    = models.DateTimeField('Update Time')
+    desired_job     = models.CharField('desired_job',max_length=20)
+    degree_level    = models.CharField('degree_level',choices=degree_levels,max_length=20,default='Training Program')
 
     def __str__(self):
-        alumni = {
-            "first_name"  :self.first_name,
-            "last_name"   :self.last_name,
-            "email"       :self.email,
-            "phone_num"   :self.phone,
-            "dob"         :self.dob,
-            "jobs"        :self.jobs.__str__(),
-            "update"      :self.last_updated,
-        }
-        return str(alumni)
+        return "Desired Job:" + self.desired_job
 
-    # def create_new_alumni(self, alumni):
-    #     new_alumni = self.create(name = alumni.name, email = alumni.email,
-    #                              phone_num = alumni.phone_num,  dob = alumni.dob, 
-    #                              jobs = add_jobs(alumni.jobs), last_update =  datetime.now())
-    #     return new_alumni
+class Education(Experience):
+    degree_levels = [('mids',  'Middle School Diploma'),
+                    ('highs', 'High School Diploma'),
+                    ('train', 'Training Program'),
+                    ('assoc', 'Associate Degree'),
+                    ('bach', 'Bachelors Degree'),
+                    ('ms', 'Masters Degree'),
+                    ('phd', 'Ph. D'),
+    ]
 
-    # def save(self, *args, **kwargs):
-    #     super(models.Model, self).save(*args, **kwargs)  # Call the "real" save() method.
+    name_of_institution = models.CharField('name_of_institution',max_length=30)
+    type_of_degree      = models.CharField('degree_level',choices=degree_levels,max_length=20,default='Training Program')
+    type_of_institution = models.CharField('type_of_institution',max_length=30)
+    program             = models.CharField('prog', max_length=20)
+
+    def __str__(self):
+        return self.type_of_degree + " at " + self.name_of_institution
