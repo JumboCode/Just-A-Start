@@ -29,10 +29,11 @@
   margin-right: 3%;
 }
 
-.top-right {
+.top-right-thingy {
   display: flex;
   flex: 50%;
 	justify-content: flex-end;
+  height: 100%;
 
 }
 
@@ -47,7 +48,7 @@
   z-index: 1;
 }
 
-.top-right:hover .dropdown-content {
+.top-right-thingy:hover .dropdown-content {
   display: block;
 }
 
@@ -56,11 +57,14 @@
 	margin-left: 13px;
 	margin-top: 0px;
 	margin-bottom: 0px;
+  height: 48%;
 }
 
-.vertically-align {
+.vertically-align-thingy {
 	margin: auto 0;
+  margin-top: 10px;
   color: white;
+  height: 100%;
 }
 
 #logout{

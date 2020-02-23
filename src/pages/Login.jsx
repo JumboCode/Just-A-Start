@@ -7,7 +7,7 @@ import CheckBox from '../components/Checkbox.jsx';
 import jas_man from '../assets/jas.man.png';
 import jas_woman from '../assets/jas.woman.png';
 import jas_ground from '../assets/jas.ground.png';
-import './AdminLogin.css';
+import './Login.css';
 
 class Login extends Component {
     state = {
