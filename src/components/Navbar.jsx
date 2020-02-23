@@ -5,7 +5,7 @@ import './Navbar.css';
 
 const Navbar = () => {
     return (
-        <div className = "container">
+        <div className = "container_navbar">
         	<img className= "logo-size" src={logo} alt="logo" />
         	<div className = "top-right">
 	            {/* <h3 className = "space-between-headers">Help</h3> */}
