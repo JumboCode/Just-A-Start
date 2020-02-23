@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from twilio.rest import Client
 
+import os
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+
 from api.models import Alumni, Job, Unemployed, Education
 from api.serializers import AlumniSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
 
@@ -46,6 +50,35 @@ class AlumniViewSet(viewsets.ModelViewSet):
                 to = user)
 
 
+
+
+    @action(detail=False, methods=['POST'])
+
+    # Parameters: request is a dictionary that contains 3 fields;
+    #  Field 1: email: a key corresponding to a list of email addresses
+    #  Field 2: subject: a key corresponding to a string value to be subject of the email to be send
+    #  Field 3: body:  a key correspondig to string value for the body of the email
+    def send_email(self, request):
+        # using SendGrid's Python Library
+        # you need to set up a variable environment. follow the link for more details
+        # https://github.com/sendgrid/sendgrid-python
+
+        #if you set up variable environment use the following line that is commented out
+        #sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+
+        #otherwise, use the following code and put your API Key in the paranthesis
+        sg = SendGridAPIClient('')
+
+        for user in request["email"]:
+            message = Mail(
+                from_email='fill  in your email address', 
+                to_emails= user,
+                subject= request["subject"],
+                #html_content='<strong>and easy to do anywhere, even with Python</strong>')
+                html_content = '<strong>' + request["body"] + '</strong>')
+
+            sg.send(message)
+    
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()

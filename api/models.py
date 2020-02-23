@@ -1,25 +1,29 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 import datetime
 
 class Alumni(models.Model):
+    user            = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
     first_name      = models.CharField('first_name', max_length=20)
     last_name       = models.CharField('last_name', max_length=20)
     email           = models.EmailField('email', max_length=30, unique=True)
     phone           = models.CharField('phone', max_length=100)
-    dob             = models.DateField('date_of_birth', max_length=100)
+    date_of_birth   = models.DateField('date_of_birth', max_length=100, null=True, blank=True)
     updated_time    = models.DateTimeField('updated_time',auto_now=True)
 
     def __str__(self):
         return self.first_name + " " + self.last_name
 
-    # def create_new_alumni(self, alumni):
-    #     new_alumni = self.create(name = alumni.name, email = alumni.email,
-    #                              phone_num = alumni.phone_num,  dob = alumni.dob, 
-    #                              jobs = add_jobs(alumni.jobs), last_update =  datetime.now())
-    #     return new_alumni
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Alumni.objects.create(user=instance)
 
-    # def save(self, *args, **kwargs):
-    #     super(models.Model, self).save(*args, **kwargs)  # Call the "real" save() method.
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
 
 class Experience(models.Model):
     alumni              = models.ForeignKey(Alumni, on_delete=models.CASCADE, default=1)

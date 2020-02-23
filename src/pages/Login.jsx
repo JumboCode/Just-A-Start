@@ -7,7 +7,7 @@ import CheckBox from '../components/Checkbox.jsx';
 import jas_man from '../assets/jas.man.png';
 import jas_woman from '../assets/jas.woman.png';
 import jas_ground from '../assets/jas.ground.png';
-import './AdminLogin.css';
+import './Login.css';
 
 class Login extends Component {
     state = {
@@ -27,13 +27,12 @@ class Login extends Component {
         return (
           <div>
             <Navbar/>
-            <div id="background-admin-login">
+            <div id="background-login">
               <img className= "left-shift" src={jas_man} alt="icon" />
               <img className= "right-shift" src={jas_woman} alt="icon" />
-              <img className= "bottom-admin-shift" src={jas_ground} alt="icon" />
-              <div id="wrapper-admin-login">
-                <div id="login-text-container">
-                  <p id = "admin-login-text">Log In</p>
+              <img className= "bottom-shift" src={jas_ground} alt="icon" />
+              <div id="wrapper-login">
+                <div id="loginText">
                 </div>
                 <div id="form-login">
                   <Form getUserInfo={this.retrieveUserInfo} forgotPassword={this.didForgetPassword}

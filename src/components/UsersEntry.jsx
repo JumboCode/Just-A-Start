@@ -11,23 +11,26 @@ class UserActivityEntry extends React.Component {
       <body>
         <div>
           <hr noshade></hr>
-          <img src={ProfilePic} />
-          <div class = "flex_container">
-            <div class = "item">
-              <p id = "regular" id = "medium">{data.username}</p>
+          
+          <div class = "flex_container_users_entry">
+            <div id = "special_item_users_entry" class = "item_users_entry">
+              <img id = "profilepic" src={ProfilePic} />
             </div>
-            <div class = "item">
-              <p id = "regular" id = "medium">{data.name_first}</p>
+            <div class = "item_users_entry">
+              <p id = "regular_users_entry">{data.username}</p>
             </div>
-            <div class = "item">
-              <p id = "regular" id = "medium">{data.name_last}</p>
+            <div class = "item_users_entry">
+              <p id = "regular_users_entry">{data.name_first}</p>
             </div>
-            <div class = "item">
+            <div class = "item_users_entry">
+              <p id = "regular_users_entry">{data.name_last}</p>
+            </div>
+            <div class = "item_users_entry">
               <p id = "small_margin">{data.email}</p>
               <p id = "small_margin">{data.phone}</p>
             </div>
-            <div class = "item">
-              <p id = "regular">{data.last_login}</p>
+            <div class = "item_users_entry">
+              <p id = "regular_users_entry">{data.last_login}</p>
             </div>
           </div>
         </div>
