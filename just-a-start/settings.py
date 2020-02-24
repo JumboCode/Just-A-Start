@@ -29,7 +29,8 @@ SECRET_KEY = 'b&34-=r&6eicsrf=vd=bbt7^k0tdm@$0trtz^h51+lc7s%di5u'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'https://jasyb.herokuapp.com'
+    'https://jasyb.herokuapp.com',
+    'localhost:3000'
 ]
 
 # Application definition

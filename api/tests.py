@@ -20,7 +20,7 @@ class BaseViewTest(APITestCase):
         self.add_alumni("a4")
         self.add_alumni("a5")
     
-class RetrieveData(BaseViewTest){
+class RetrieveData(BaseViewTest):
 
     def all_alumnis(self):
         entries = Alumni.objects.all()

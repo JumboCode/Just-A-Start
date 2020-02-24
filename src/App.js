@@ -13,6 +13,7 @@ import AdminNotification from './pages/AdminSendMsg';
 import AdminUserList from './pages/AdminUserList';
 import UserDashboard from './pages/UserDashboard';
 import NotFoundPage from "./pages/404";
+import SignUp from "./pages/SignUp";
 import UserNavbar from './components/UserNavbar.jsx';
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
           <Route exact path="/admin-dashboard" component={AdminDashboard} />
           <Route exact path="/admin-notification" component={AdminNotification} />
           <Route exact path="/admin-userlist" component={AdminUserList} />
+          <Route exact path="/sign-up" component={SignUp} />
           <Route component={NotFoundPage}></Route>
         </Switch>
       </BrowserRouter>
