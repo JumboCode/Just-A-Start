@@ -33,6 +33,7 @@ class Login extends Component {
               <img className= "bottom-shift" src={jas_ground} alt="icon" />
               <div id="wrapper-login">
                 <div id="loginText">
+                Login
                 </div>
                 <div id="form-login">
                   <Form getUserInfo={this.retrieveUserInfo} forgotPassword={this.didForgetPassword}
