@@ -163,16 +163,30 @@ class UserDashboard extends React.Component {
     this.state.unemployed.push(new Array(2));
     this.forceUpdate();
   }
-  handleEducationChange(educationNumber, id, e){
-      this.state.educations[educationNumber][id] = e.target.value;
+  
+  deleteEducation(num){
+    this.state.educations.splice(num,1);
+    this.forceUpdate();
+  }
+  deleteProgram(num){
+    this.state.programs.splice(num,1);
+    this.forceUpdate();
+  }
+  deleteUnemployed(num){
+    this.state.unemployed.splice(num,1);
+    this.forceUpdate();
+  }
+  
+  handleEducationChange(num, id, e){
+      this.state.educations[num][id] = e.target.value;
       this.forceUpdate();
   }
-  handleProgramChange(educationNumber, id, e){
-      this.state.programs[educationNumber][id] = e.target.value;
+  handleProgramChange(num, id, e){
+      this.state.programs[num][id] = e.target.value;
       this.forceUpdate();
   }
-  handleUnemployedChange(educationNumber, id, e){
-      this.state.unemployed[educationNumber][id] = e.target.value;
+  handleUnemployedChange(num, id, e){
+      this.state.unemployed[num][id] = e.target.value;
       this.forceUpdate();
   }
 
@@ -230,9 +244,14 @@ class UserDashboard extends React.Component {
                   <p class="experience-titles-text">Education/Training Post-Program Placement</p>
               </div>
               <div className = "flexbox-user-dashboard-big">
-                {this.state.vis[0] && this.state.educations.map((element, index) => this.state.fieldsOne.map(item => <div><p id="experience-edit-field">{item.name}</p><input value={this.state.educations[index][item.id]} onChange={(e) => this.handleEducationChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input></div>))}
+                {this.state.vis[0] && this.state.educations.map((element, index) => <div>
+                                                                                  {this.state.fieldsOne.map(item => <div>
+                                                                                                                      <p id="experience-edit-field">{item.name}</p>
+                                                                                                                      <input value={this.state.educations[index][item.id]} onChange={(e) => this.handleEducationChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input>
+                                                                                                                    </div>)}
+                                                                                  <button class="edit-experiences-button" onClick ={() => this.deleteEducation(index)}>Delete</button>
+                                                                                  </div>)}
               </div>
-              {this.state.vis[0] && <button class="edit-experiences-button">&#9998; Edit</button>}
               {this.state.vis[0] && <button onClick={this.addEducation.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
             </div>
             
@@ -242,9 +261,14 @@ class UserDashboard extends React.Component {
                   <p class="experience-titles-text">Employment Post-Program Placement</p>
                 </div>
                 <div className = "flexbox-user-dashboard-big">
-                  {this.state.vis[1] && this.state.programs.map((element, index) => this.state.fieldsTwo.map(item => <div><p id="experience-edit-field">{item.name}</p><input value={this.state.programs[index][item.id]} onChange={(e) => this.handleProgramChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input></div>))}
+                  {this.state.vis[1] && this.state.programs.map((element, index) => <div>
+                                                                                    {this.state.fieldsTwo.map(item => <div>
+                                                                                                                        <p id="experience-edit-field">{item.name}</p>
+                                                                                                                        <input value={this.state.programs[index][item.id]} onChange={(e) => this.handleProgramChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input>
+                                                                                                                      </div>)}
+                                                                                    <button class="edit-experiences-button" onClick ={() => this.deleteProgram(index)}>Delete</button>
+                                                                                    </div>)}
                 </div>
-                {this.state.vis[1] && <button class="edit-experiences-button">&#9998; Edit</button>}
                 {this.state.vis[1] && <button onClick={this.addProgram.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
               </div>
             
@@ -252,13 +276,18 @@ class UserDashboard extends React.Component {
               <div className = "experience-titles">
                   <label id="plus-button" onClick={this.changeVisiblityThree}>+</label>
                   <p class="experience-titles-text">Unemployed</p>
-                </div>
-                <div className = "flexbox-user-dashboard-big">
-                  {this.state.vis[2] && this.state.unemployed.map((element, index) => this.state.fieldsThree.map(item => <div><p id="experience-edit-field">{item.name}</p><input value={this.state.unemployed[index][item.id]} onChange={(e) => this.handleUnemployedChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input></div>))}
-                </div>
-                {this.state.vis[2] && <button class="edit-experiences-button">&#9998; Edit</button>}
-                {this.state.vis[2] && <button onClick={this.addUnemployed.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
               </div>
+              <div className = "flexbox-user-dashboard-big">
+                {this.state.vis[2] && this.state.unemployed.map((element, index) => <div>
+                                                                                  {this.state.fieldsThree.map(item => <div>
+                                                                                                                      <p id="experience-edit-field">{item.name}</p>
+                                                                                                                      <input value={this.state.unemployed[index][item.id]} onChange={(e) => this.handleUnemployedChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input>
+                                                                                                                    </div>)}
+                                                                                  <button class="edit-experiences-button" onClick ={() => this.deleteUnemployed(index)}>Delete</button>
+                                                                                  </div>)}
+              </div>
+              {this.state.vis[2] && <button onClick={this.addUnemployed.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
+            </div>
             </div>
           </div>
 
