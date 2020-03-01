@@ -9,7 +9,7 @@ class User(AbstractUser):
     phone           = models.CharField('phone', max_length=100)
     date_of_birth   = models.DateField('date_of_birth', max_length=100, null=True, blank=True)
     updated_time    = models.DateTimeField('updated_time')
-    admin           = models.IntegerField()
+    admin           = models.BooleanField(default=False)
 
     def __str__(self):
         return self.first_name + " " + self.last_name
