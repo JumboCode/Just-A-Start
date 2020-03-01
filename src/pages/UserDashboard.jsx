@@ -12,6 +12,80 @@ class UserDashboard extends React.Component {
     this.profileEditElement = React.createRef();
     this.state = {
       profile_edit: "false",
+      visibilityOne: false,
+      visibilityTwo: false,
+      visibilityThree: false,
+      vis: [false, false, false],
+      educations: [new Array(5)],
+      programs: [new Array(5)],
+      unemployed: [new Array(2)],
+      userInputData : new Array(13),
+      fieldsOne: [
+        {
+          'name': 'Name of School/Company',
+          'type': 'text',
+          'id':0
+        },
+        {
+          'name': 'Type of Degree/Certificate',
+          'type': 'text',
+          'id':1
+        },
+        {
+          'name': 'Type of Institution',
+          'type': 'text',
+          'id':2
+        },
+        {
+          'name': 'Program/Major',
+          'type': 'text',
+          'id':3
+        },
+        {
+          'name': 'Start Date',
+          'type': 'date',
+          'id':4
+        }
+      ],
+      fieldsTwo: [
+        {
+          'name': 'Name of Employer',
+          'type': 'text',
+          'id':5
+        },
+        {
+          'name': 'Job Title',
+          'type': 'text',
+          'id':6
+        },
+        {
+          'name': 'Hourly Pay',
+          'type': 'text',
+          'id':7
+        },
+        {
+          'name': '# of Hours per Week',
+          'type': 'text',
+          'id':8
+        },
+        {
+          'name': 'Start Date',
+          'type': 'date',
+          'id':9
+        }
+      ],
+      fieldsThree: [
+        {
+          'name': 'Desired Job',
+          'type': 'text',
+          'id':10
+        },
+        {
+          'name': 'Degree Level',
+          'type': 'text',
+          'id':11
+        }
+      ],
       job_data: [
         {
           job_title: "Job Title",
@@ -62,7 +136,45 @@ class UserDashboard extends React.Component {
     this.state.profile_data.birthdate = dob;
     this.forceUpdate();
   }
-
+  
+  changeVisiblityOne = () => {
+      this.state.vis[0] = ! this.state.vis[0];
+      this.forceUpdate();
+  }
+  
+  changeVisiblityTwo = () => {
+      this.state.vis[1] = ! this.state.vis[1];
+      this.forceUpdate();
+  }
+  
+  changeVisiblityThree = () => {
+      this.state.vis[2] = ! this.state.vis[2];
+      this.forceUpdate();
+  }
+  addEducation = () => {
+    this.state.educations.push(new Array(5));
+    this.forceUpdate();
+  }
+  addProgram = () => {
+    this.state.programs.push(new Array(5));
+    this.forceUpdate();
+  }
+  addUnemployed = () => {
+    this.state.unemployed.push(new Array(2));
+    this.forceUpdate();
+  }
+  handleEducationChange(educationNumber, id, e){
+      this.state.educations[educationNumber][id] = e.target.value;
+      this.forceUpdate();
+  }
+  handleProgramChange(educationNumber, id, e){
+      this.state.programs[educationNumber][id] = e.target.value;
+      this.forceUpdate();
+  }
+  handleUnemployedChange(educationNumber, id, e){
+      this.state.unemployed[educationNumber][id] = e.target.value;
+      this.forceUpdate();
+  }
 
   render(){
     const background = {
@@ -73,7 +185,7 @@ class UserDashboard extends React.Component {
       position: "absolute"
     }
 
-    const { profile_data } = this.state;
+    //const { profile_data } = this.state;
 
     return(
       <body>
@@ -86,24 +198,24 @@ class UserDashboard extends React.Component {
                 <h1 className = "title">Profile</h1>
                 <button onClick={this.profileEditClicked} className = "add" id = "edit">&#9998;</button>
               </div>
-              <h1 className = "centered">{profile_data.name}</h1>
-              <p className = "centered" id = "small">{profile_data.class}</p>
-              <p className = "centered" id = "medium">{profile_data.location}</p>
+              <h1 className = "centered">{this.state.profile_data.name}</h1>
+              <p className = "centered" id = "small">{this.state.profile_data.class}</p>
+              <p className = "centered" id = "medium">{this.state.profile_data.location}</p>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">About</p>
-                <p className = "right_text_profile">{profile_data.about}</p>
+                <p className = "right_text_profile">{this.state.profile_data.about}</p>
               </div>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">Phone</p>
-                <p className = "right_text_profile">{profile_data.phone}</p>
+                <p className = "right_text_profile">{this.state.profile_data.phone}</p>
               </div>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">Email</p>
-                <p className = "right_text_profile">{profile_data.email}</p>
+                <p className = "right_text_profile">{this.state.profile_data.email}</p>
               </div>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">Date Of Birth</p>
-                <p className = "right_text_profile">{profile_data.birthdate}</p>
+                <p className = "right_text_profile">{this.state.profile_data.birthdate}</p>
               </div>
             </div>
             <div className = "job_list">
@@ -111,7 +223,42 @@ class UserDashboard extends React.Component {
                 <h1 className = "title">Job Experience</h1>
                 <button className = "add">+</button>
               </div>
-            {this.state.job_data.map(item => (<JobEntry data={item} key={item.id}/>))}
+              
+            <div className = "edit-experiences">
+              <div className = "experience-titles">
+                  <label id="plus-button" onClick={this.changeVisiblityOne}>+</label>
+                  <p class="experience-titles-text">Education/Training Post-Program Placement</p>
+              </div>
+              <div className = "flexbox-user-dashboard-big">
+                {this.state.vis[0] && this.state.educations.map((element, index) => this.state.fieldsOne.map(item => <div><p id="experience-edit-field">{item.name}</p><input value={this.state.educations[index][item.id]} onChange={(e) => this.handleEducationChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input></div>))}
+              </div>
+              {this.state.vis[0] && <button class="edit-experiences-button">&#9998; Edit</button>}
+              {this.state.vis[0] && <button onClick={this.addEducation.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
+            </div>
+            
+            <div className = "edit-experiences">
+              <div className = "experience-titles">
+                  <label id="plus-button" onClick={this.changeVisiblityTwo}>+</label>
+                  <p class="experience-titles-text">Employment Post-Program Placement</p>
+                </div>
+                <div className = "flexbox-user-dashboard-big">
+                  {this.state.vis[1] && this.state.programs.map((element, index) => this.state.fieldsTwo.map(item => <div><p id="experience-edit-field">{item.name}</p><input value={this.state.programs[index][item.id]} onChange={(e) => this.handleProgramChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input></div>))}
+                </div>
+                {this.state.vis[1] && <button class="edit-experiences-button">&#9998; Edit</button>}
+                {this.state.vis[1] && <button onClick={this.addProgram.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
+              </div>
+            
+            <div className = "edit-experiences">
+              <div className = "experience-titles">
+                  <label id="plus-button" onClick={this.changeVisiblityThree}>+</label>
+                  <p class="experience-titles-text">Unemployed</p>
+                </div>
+                <div className = "flexbox-user-dashboard-big">
+                  {this.state.vis[2] && this.state.unemployed.map((element, index) => this.state.fieldsThree.map(item => <div><p id="experience-edit-field">{item.name}</p><input value={this.state.unemployed[index][item.id]} onChange={(e) => this.handleUnemployedChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input></div>))}
+                </div>
+                {this.state.vis[2] && <button class="edit-experiences-button">&#9998; Edit</button>}
+                {this.state.vis[2] && <button onClick={this.addUnemployed.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
+              </div>
             </div>
           </div>
 
