@@ -30,7 +30,7 @@ top: 24%;
 
 #background-login{
 position: absolute;
-background-color: var(--bg);
+/* background-color: var(--bg); */
 width: 100%;
 height: 86vh;
 top: 14vh;
