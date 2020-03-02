@@ -27,7 +27,9 @@ class UserActivityEntry extends React.Component {
             </div>
             <div class = "item_users_entry">
               <p id = "small_margin">{data.email}</p>
-              <p id = "small_margin">{data.phone}</p>
+            </div>
+            <div class = "item_users_entry">
+              <p id = "regular_users_entry">{data.phone}</p>
             </div>
             <div class = "item_users_entry">
               <p id = "regular_users_entry">{data.last_login}</p>
