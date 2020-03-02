@@ -8,7 +8,7 @@ import datetime
 class User(AbstractUser):
     phone           = models.CharField('phone', max_length=100)
     date_of_birth   = models.DateField('date_of_birth', max_length=100, null=True, blank=True)
-    updated_time    = models.DateTimeField('updated_time')
+    updated_time    = models.DateTimeField('updated_time', auto_now=True)
     admin           = models.BooleanField(default=False)
 
     def __str__(self):

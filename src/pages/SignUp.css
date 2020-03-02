@@ -28,7 +28,7 @@ left: 14%;
 top: 24%;
 }
 
-#background-login{
+#background-sign-up{
 position: absolute;
 /* background-color: var(--bg); */
 width: 100%;
@@ -42,7 +42,7 @@ top: 14vh;
     }
 }
 
-#wrapper-login {
+#wrapper-sign-up {
 position: relative;
 height: 400px;
 max-width: 350px;

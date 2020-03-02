@@ -14,7 +14,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('phone','date_of_birth','updated_time','admin')}),
+        (None, {'fields': ('phone','date_of_birth','admin')}),
     )
 
     model = User
