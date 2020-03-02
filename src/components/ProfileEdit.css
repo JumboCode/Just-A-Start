@@ -5,6 +5,9 @@
   flex-direction:row;
   flex-wrap:wrap;
   border: 4px solid #3481b8;
+  z-index:1;
+  position: absolute;
+  background-color: white;
 }
 .flex_profile_edit{
   display:flex;

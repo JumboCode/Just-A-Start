@@ -13,13 +13,18 @@ position: relative;
 left: 30%;
 }
 
-#loginText {
+#login-text-container{
 position: relative;
 font-family: arial;
-font-size: 27px;
+
 font-weight: bold;
-top: 15%;
-left: 37%;
+text-align: center;
+}
+
+#admin-login-text{
+  font-size: 35px;
+  margin: 0 auto;
+  margin-top: 80px;
 }
 
 #form-login {
@@ -28,52 +33,53 @@ left: 14%;
 top: 24%;
 }
 
-#background-login{
-position: absolute;
-background-color: var(--bg);
+#background-admin-login{
+background-color: white;
 width: 100%;
-height: 86vh;
+height: 100%;
 top: 14vh;
 }
 
 @media screen and (max-width: 600px) {
-    #background-login {
+    #background-admin-login {
         position: relative;
     }
 }
 
-#wrapper-login {
+#wrapper-admin-login {
 position: relative;
-height: 400px;
+height: 200px;
 max-width: 350px;
-background-color: white;
-left: 38%;
-top: 65px;
+top: 10px;
+z-index: 20;
+margin: 0 auto;
+background-color:white;
 }
 
 .left-shift{
-	border-radius:0px;
+  border-radius:0px;
 	height: 305px;
 	width: auto;
-	position: absolute;
-	top:18%;
+	margin-top:100px;
 	left: 12%;
+  z-index: 10;
 }
 
 .right-shift{
 	border-radius:0px;
 	height: 305px;
 	width: auto;
-	position: absolute;
-	top:18%;
+	margin-top:100px;
 	right: 12%;
+  z-index: 10;
 }
 
-.bottom-shift{
-	border-radius:0px;
-	height: 37.5%;
-	width: auto;
-	position: absolute;
-	bottom: 0px;
-	margin-left: 0px;
+.bottom-admin-shift{
+  position: absolute;
+  border-radius: 0%;
+  margin: 0;
+  bottom: 0px;
+	width:101%;
+	height: auto;
+	margin-bottom: 0px;
 }
