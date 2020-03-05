@@ -4,16 +4,18 @@ from django.http import HttpResponse
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from twilio.rest import Client
+from rest_framework.authtoken.models import Token
 
-import os
+from twilio.rest import Client
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
 from api.models import Job, Unemployed, Education
 from api.models import User
-from api.serializers import JobSerializer, UnemployedSerializer, EducationSerializer
-from api.serializers import UserSerializer
+from api.serializers import UserSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
+
+import os
+import json
 
 # from twilio.rest import Client
 # from settings.py import connection
@@ -86,6 +88,11 @@ from api.serializers import UserSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer 
+
+    @action(detail=False, methods=['GET'])
+    def get_user(self, request):
+        user = Token.objects.get(key=request.POST["key"]).user
+        return HttpResponse(json.dumps(user.get_info()))
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
