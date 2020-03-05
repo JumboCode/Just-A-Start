@@ -144,3 +144,77 @@ li{
 #profile_edit_overlay{
   display: none;
 }
+
+
+.experience-titles{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 5px 0;
+}
+
+#plus-button{
+  color: #206ba4;
+  font-size: 19px;
+  margin-right: 1%;
+  height:25px;
+  border: none;
+  background-color: inherit;
+  padding-top: 0px;
+  
+}
+
+.edit-experiences{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+}
+
+.input-experience-edit{
+  outline: none;
+  border: none;
+  border-bottom: 1px solid gray;
+  height: 23px;
+  margin: 0px;
+  margin-top: 3px;
+  font-size: 15px;
+  width: 80%;
+  margin-left: 10%;
+}
+
+#experience-edit-field{
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 4px;
+  width: 80%;
+  font-weight: bold;
+  
+}
+
+.experience-titles-text{
+  width: 80%;
+  margin: 0px;
+  margin-right: 10%;
+  align-items: baseline;
+  font-size: 20px;
+  font-weight: bold;
+  word-wrap: normal;
+  
+}
+
+.edit-experiences-button{
+  background-color: #206ba4;
+  color:white;
+  font-weight:bold;
+  font-size: 15px;
+  height: 30px;
+  width: 10%;
+  border-radius: 4px;
+  margin-left: 10%;
+  margin-top: 20px;
+  border:none;
+}
+
+.edit-experiences-button:focus{
+  outline:none;
+}

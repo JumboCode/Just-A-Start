@@ -4,81 +4,95 @@ from django.http import HttpResponse
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from twilio.rest import Client
+from rest_framework.authtoken.models import Token
 
-import os
+from twilio.rest import Client
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-from api.models import Alumni, Job, Unemployed, Education
-from api.serializers import AlumniSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
+from api.models import Job, Unemployed, Education
+from api.models import User
+from api.serializers import UserSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
+
+import os
+import json
 
 # from twilio.rest import Client
 # from settings.py import connection
 # from settings import connection
 
-class AlumniViewSet(viewsets.ModelViewSet):
-    queryset = Alumni.objects.all()
-    serializer_class = AlumniSerializer
+# class AlumniViewSet(viewsets.ModelViewSet):
+#     queryset = Alumni.objects.all()
+#     serializer_class = AlumniSerializer
     
+#     @action(detail=False, methods=['GET'])
+#     def get_user(self, request):
+#         user = self.queryset.get(email=request.data['email'])
+#         return HttpResponse(user.__str__())
+
+
+#     @action(detail=False, methods=['POST'])
+#     #Note: account_sid, auth_token, from_  : 
+#     # you get these values form twilio when you create account
+
+#     #expects a dictionary that has two keys, numbers and message
+#     def send_text(self, request):
+#         # Your Account SID from twilio.com/console
+#         account_sid = ""
+#         # Your Auth Token from twilio.com/console
+#         auth_token  = ""
+
+#         client = Client(account_sid, auth_token)
+
+#         #iterate through list of people
+#         for user in request["numbers"]:
+#             message = client.messages.create(
+#                 #you phone number associated to your account from twilio
+#                 #Twilio generates this number
+#                 from_="", 
+#                 body= request["message"],
+#                 to = user)
+
+#     # @action(detail=False, methods=['GET'])
+#     # def user_exists(self, request):
+#     #     user = self.queryset.get(email=request.data['username'])
+#     #     return HttpResponse(user.__str__())
+
+#     @action(detail=False, methods=['POST'])
+
+#     # Parameters: request is a dictionary that contains 3 fields;
+#     #  Field 1: email: a key corresponding to a list of email addresses
+#     #  Field 2: subject: a key corresponding to a string value to be subject of the email to be send
+#     #  Field 3: body:  a key correspondig to string value for the body of the email
+#     def send_email(self, request):
+#         # using SendGrid's Python Library
+#         # you need to set up a variable environment. follow the link for more details
+#         # https://github.com/sendgrid/sendgrid-python
+
+#         #if you set up variable environment use the following line that is commented out
+#         #sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+
+#         #otherwise, use the following code and put your API Key in the paranthesis
+#         sg = SendGridAPIClient('')
+
+#         for user in request["email"]:
+#             message = Mail(
+#                 from_email='fill  in your email address', 
+#                 to_emails= user,
+#                 subject= request["subject"],
+#                 #html_content='<strong>and easy to do anywhere, even with Python</strong>')
+#                 html_content = '<strong>' + request["body"] + '</strong>')
+
+#             sg.send(message)
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer 
+
     @action(detail=False, methods=['GET'])
     def get_user(self, request):
-        user = self.queryset.get(email=request.data['email'])
-        return HttpResponse(user.__str__())
-
-
-    @action(detail=False, methods=['POST'])
-    #Note: account_sid, auth_token, from_  : 
-    # you get these values form twilio when you create account
-
-    #expects a dictionary that has two keys, numbers and message
-    def send_text(self, request):
-        # Your Account SID from twilio.com/console
-        account_sid = ""
-        # Your Auth Token from twilio.com/console
-        auth_token  = ""
-
-        client = Client(account_sid, auth_token)
-
-        #iterate through list of people
-        for user in request["numbers"]:
-            message = client.messages.create(
-                #you phone number associated to your account from twilio
-                #Twilio generates this number
-                from_="", 
-                body= request["message"],
-                to = user)
-
-
-
-
-    @action(detail=False, methods=['POST'])
-
-    # Parameters: request is a dictionary that contains 3 fields;
-    #  Field 1: email: a key corresponding to a list of email addresses
-    #  Field 2: subject: a key corresponding to a string value to be subject of the email to be send
-    #  Field 3: body:  a key correspondig to string value for the body of the email
-    def send_email(self, request):
-        # using SendGrid's Python Library
-        # you need to set up a variable environment. follow the link for more details
-        # https://github.com/sendgrid/sendgrid-python
-
-        #if you set up variable environment use the following line that is commented out
-        #sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-
-        #otherwise, use the following code and put your API Key in the paranthesis
-        sg = SendGridAPIClient('')
-
-        for user in request["email"]:
-            message = Mail(
-                from_email='fill  in your email address', 
-                to_emails= user,
-                subject= request["subject"],
-                #html_content='<strong>and easy to do anywhere, even with Python</strong>')
-                html_content = '<strong>' + request["body"] + '</strong>')
-
-            sg.send(message)
-    
+        user = Token.objects.get(key=request.POST["key"]).user
+        return HttpResponse(json.dumps(user.get_info()))
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()

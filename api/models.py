@@ -1,32 +1,40 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.conf import settings
+from rest_framework.authtoken.models import Token
+
 import datetime
 
-class Alumni(models.Model):
-    user            = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    first_name      = models.CharField('first_name', max_length=20)
-    last_name       = models.CharField('last_name', max_length=20)
-    email           = models.EmailField('email', max_length=30, unique=True)
+class User(AbstractUser):
     phone           = models.CharField('phone', max_length=100)
     date_of_birth   = models.DateField('date_of_birth', max_length=100, null=True, blank=True)
     updated_time    = models.DateTimeField('updated_time',auto_now=True)
+    admin           = models.BooleanField(default=False)
 
     def __str__(self):
         return self.first_name + " " + self.last_name
+    
+    def get_info(self):
+        data = {'username' : self.username, 
+                'email' : self.email,
+                'first_name': self.first_name,
+                'last_name': self.last_name,
+                'phone': self.phone,
+                'date_of_birth': str(self.date_of_birth),
+                'updated_time': str(self.updated_time),
+                'admin': self.admin}
+        return data
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
-        Alumni.objects.create(user=instance)
-
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
+        Token.objects.create(user=instance)
 
 class Experience(models.Model):
-    alumni              = models.ForeignKey(Alumni, on_delete=models.CASCADE, default=1)
+    alumni              = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     start_date          = models.DateField('start_date', max_length=100)
     end_date            = models.DateField('end_date', max_length=100, null=True)
 
