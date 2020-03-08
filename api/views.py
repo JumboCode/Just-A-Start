@@ -1,62 +1,71 @@
 from django.shortcuts import render
-from django.http import Http404
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.authtoken.models import Token
 from twilio.rest import Client
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
+from api.models import User, Experience, Job, Unemployed, Education
+from api.serializers import UserSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
+from django.core import serializers
+from itertools import chain
 
-from api.models import Alumni, Job, Unemployed, Education
-from api.serializers import AlumniSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
-
-# from twilio.rest import Client
+import os
+import json
+from twilio.rest import Client
 # from settings.py import connection
 # from settings import connection
 
-class AlumniViewSet(viewsets.ModelViewSet):
-    queryset = Alumni.objects.all()
-    job_queryset = Job.objects.all()
-    serializer_class = AlumniSerializer
-    
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
     @action(detail=False, methods=['GET'])
     def get_user(self, request):
-        user = self.queryset.get(email=request.data['email'])
-        job = self.job_queryset.get()
-        return HttpResponse(user.__str__())
-
-        # Returns a list of all Alumni in Database
+        user = Token.objects.get(key=request.POST["key"]).user
+        serialized_user = serializers.serialize('json', [user, ])
+        return HttpResponse(serialized_user)
+    
     @action(detail=False, methods=['GET'])
-    def get_all_users(self, request):
-        users = Alumni.objects.order_by('-last_updated')[:]
-        return HttpResponse(users.__str__())
+    def get_user_information(self, request):
+        user = Token.objects.get(key=request.POST["key"]).user
+
+        job_list = user.job_set.all()
+        education_list = user.education_set.all()
+        unemployed_list = user.unemployed_set.all()
+        chained_list = chain(job_list, education_list, unemployed_list)
+
+        serialized_experiences = serializers.serialize('json', chained_list)
+
+        return HttpResponse(serialized_experiences)
+
+    @action(detail=False, methods=['PUT'])
+    def edit_user(self, request, pk):
+    
+        curr_user = get_object_or_404(queryset, pk)
+
+        data = request.data.get('user')
+        serializer = UserSerializer(instance=curr_user, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            user_saved = serializer.save()
+        return Response({"success": "User '{}' updated successfully".format(user_saved.first_name)})
+
+       
 
     @action(detail=False, methods=['GET'])
     def delete_user(self, request):
-        alumni_to_delete = self.queryset.get(email=request.data['email'], first_name=request.data['first_name'])
+        user_name = request.name
+        user_dob = request.dob
+        user_email = request.email
+ 
+        try:
+            alumni_to_delete = queryset.filter(first_name = user_name, date_of_birth = user_dob, email = user_email)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        
         alumni_to_delete.delete()
-        return HttpResponse("deleted")
-
-    @action(detail=False, methods=['POST'])
-    #Note: account_sid, auth_token, from_  : 
-    # you get these values form twilio when you create account
-
-    #expects a dictionary that has two keys, numbers and message
-    def send_text(self, request):
-        # Your Account SID from twilio.com/console
-        account_sid = ""
-        # Your Auth Token from twilio.com/console
-        auth_token  = ""
-
-        client = Client(account_sid, auth_token)
-
-        #iterate through list of people
-        for user in request["numbers"]:
-            message = client.messages.create(
-                #you phone number associated to your account from twilio
-                #Twilio generates this number
-                from_="", 
-                body= request["message"],
-                to = user)
 
 
 class JobViewSet(viewsets.ModelViewSet):
@@ -74,7 +83,6 @@ class JobViewSet(viewsets.ModelViewSet):
     def get_job(self, request):
         job = self.queryset.get(job_title = request.data['job_title'],)
         return HttpResponse(job.__str__())
-
 
 
 class UnemployedViewSet(viewsets.ModelViewSet):

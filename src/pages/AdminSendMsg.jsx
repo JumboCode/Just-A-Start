@@ -62,45 +62,15 @@ class AdminSendMsg extends Component {
         
         <div className="admin-dash-container">
         <form>
-          <label className="message-input-label">
-            Message
-            <br/>
-            <textarea
-              className="message-input-box"
-              type="text"
-              value={message}
-              onChange={this.onMessageChange}
-            />
-          </label>
-            <div className="asm-user-row-heading">
-              <input
-                type="checkbox"
-                className="asm-user-row-check hidden"
-              />
-              <p className='admin-dash-row-cell'>Username</p>
-              <p className='admin-dash-row-cell'>First</p>
-              <p className='admin-dash-row-cell'>Last</p>
-              <p className='admin-dash-row-cell'>Phone</p>
-              <p className='admin-dash-row-cell'>Action</p>
-            </div>
-          {users.map(user => {
-            return (
-              <div key={user.id} className="asm-user-row">
-                <input
-                  className="asm-user-row-check"
-                  type="checkbox"
-                  checked={user.checked}
-                  onChange={this.onUserToggle}
-                  name={user.id}
-                />
-                <p className='admin-dash-row-cell'>{user.username}</p>
-                <p className='admin-dash-row-cell'>{user.first}</p>
-                <p className='admin-dash-row-cell'>{user.last}</p>
-                <p className='admin-dash-row-cell'>{user.phone}</p>
-                <p className='admin-dash-row-cell'>{user.status}</p>
-              </div>
-            )
-          })}
+          <h1>Notification</h1>
+          <h4>Recipients</h4>
+          <div className = "side-by-side">
+            <input class="dropdown-content" type="text" className="search-bar" placeholder="Search.." name="search"></input>
+            <button type="button" className="plus-button">+</button>
+          </div>
+          <h4>Message</h4>
+          <textarea className="text-area" placeholder="Type a message"></textarea>
+          <button type="button" className="send-button">Send</button>
           </form>
         </div>
       </body>

@@ -71,12 +71,14 @@ class UsersBody extends Component {
               </div>
             </div>
           </div>
-          <ul class = "flex_container">
-            <li>Username</li>
-            <li>First</li>
-            <li>Last</li>
-            <li>Email/Phone</li>
-            <li id = "last_item">Last Login</li>
+          <ul class = "flex_container_user_entries">
+            <div id = "special_item_title" class>
+            </div>
+            <li id="item_title">Username</li>
+            <li id="item_title">First</li>
+            <li id="item_title">Last</li>
+            <li id="item_title">Email/Phone</li>
+            <li id="item_title">Last Login</li>
           </ul>
           {data.map(item => (<UsersEntry data={item} key={item.id}/>))}
         </div>
