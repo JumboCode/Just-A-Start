@@ -64,10 +64,13 @@ class AdminSendMsg extends Component {
         <form>
           <h1>Notification</h1>
           <h4>Recipients</h4>
-          <input type="text" className="search-bar" placeholder="Search.." name="search"></input>
+          <div className = "side-by-side">
+            <input class="dropdown-content" type="text" className="search-bar" placeholder="Search.." name="search"></input>
+            <button type="button" className="plus-button">+</button>
+          </div>
           <h4>Message</h4>
           <textarea className="text-area" placeholder="Type a message"></textarea>
-          <button type="button" className="button">Send</button>
+          <button type="button" className="send-button">Send</button>
           </form>
         </div>
       </body>
