@@ -24,7 +24,7 @@ class Alumni(models.Model):
 class Experience(models.Model):
     alumni              = models.ForeignKey(Alumni, on_delete=models.CASCADE, default=1)
     start_date          = models.DateField('start_date', max_length=100)
-    end_date            = models.DateField('end_date', max_length=100, null=True)
+    end_date            = models.DateField('end_date', max_length=100, null=True, blank=True)
 
     class Meta:
         abstract = True
