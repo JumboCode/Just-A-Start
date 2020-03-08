@@ -23,13 +23,13 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
     @action(detail=False, methods=['POST'])
-    def get_user(self, request):
+    def get_user_profile(self, request):
         user = Token.objects.get(key=request.POST["key"]).user
         serialized_user = serializers.serialize('json', [user, ])
         return HttpResponse(serialized_user)
     
     @action(detail=False, methods=['POST'])
-    def get_user_information(self, request):
+    def get_user_experiences(self, request):
         user = Token.objects.get(key=request.POST["key"]).user
 
         job_list = user.job_set.all()
