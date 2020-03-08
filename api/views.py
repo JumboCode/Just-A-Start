@@ -1,35 +1,45 @@
 from django.shortcuts import render
-from django.http import Http404
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.authtoken.models import Token
-
 from twilio.rest import Client
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
-
-from api.models import Job, Unemployed, Education
-from api.models import User
+from api.models import User, Experience, Job, Unemployed, Education
 from api.serializers import UserSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
+from django.core import serializers
+from itertools import chain
 
 import os
 import json
-
-# from twilio.rest import Client
+from twilio.rest import Client
 # from settings.py import connection
 # from settings import connection
 
-# class AlumniViewSet(viewsets.ModelViewSet):
-#     queryset = Alumni.objects.all()
-#     serializer_class = AlumniSerializer
-    
-#     @action(detail=False, methods=['GET'])
-#     def get_user(self, request):
-#         user = self.queryset.get(email=request.data['email'])
-#         return HttpResponse(user.__str__())
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
+    @action(detail=False, methods=['GET'])
+    def get_user(self, request):
+        user = Token.objects.get(key=request.POST["key"]).user
+        serialized_user = serializers.serialize('json', [user, ])
+        return HttpResponse(serialized_user)
+    
+    @action(detail=False, methods=['GET'])
+    def get_user_information(self, request):
+        user = Token.objects.get(key=request.POST["key"]).user
+
+        job_list = user.job_set.all()
+        education_list = user.education_set.all()
+        unemployed_list = user.unemployed_set.all()
+        chained_list = chain(job_list, education_list, unemployed_list)
+
+        serialized_experiences = serializers.serialize('json', chained_list)
+
+        return HttpResponse(serialized_experiences)
 
 #     @action(detail=False, methods=['POST'])
 #     #Note: account_sid, auth_token, from_  : 
@@ -84,15 +94,6 @@ import json
 #                 html_content = '<strong>' + request["body"] + '</strong>')
 
 #             sg.send(message)
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer 
-
-    @action(detail=False, methods=['GET'])
-    def get_user(self, request):
-        user = Token.objects.get(key=request.POST["key"]).user
-        return HttpResponse(json.dumps(user.get_info()))
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
