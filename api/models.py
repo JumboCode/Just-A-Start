@@ -16,17 +16,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.first_name + " " + self.last_name
-    
-    def get_info(self):
-        data = {'username' : self.username, 
-                'email' : self.email,
-                'first_name': self.first_name,
-                'last_name': self.last_name,
-                'phone': self.phone,
-                'date_of_birth': str(self.date_of_birth),
-                'updated_time': str(self.updated_time),
-                'admin': self.admin}
-        return data
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
