@@ -5,6 +5,7 @@ import CheckBox from '../components/Checkbox.jsx';
 import jas_man from '../assets/jas.man.png';
 import jas_woman from '../assets/jas.woman.png';
 import jas_ground from '../assets/jas.ground.png';
+import { withRouter } from 'react-router-dom';
 import './Login.css';
 
 class Login extends Component {
@@ -13,7 +14,7 @@ class Login extends Component {
       password: "",
       isClicked: false,
       forgotPassword: false,
-      keepLoggedIn: false
+      keepLoggedIn: false,
     };
 
     didCheckBox = () => {
@@ -40,7 +41,7 @@ class Login extends Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Token ${token}`
+          // 'Authorization': `Token c8177c66ed167850799a05f5fc3959aaa884ca83`
         },
         body: JSON.stringify({username, password}),
       }
@@ -48,6 +49,7 @@ class Login extends Component {
         .then(res => res.json())
         .then(res => {
           setAuthToken(res['key']);
+          this.props.history.push('/user-dashboard');
         })
         .catch(err => {
           console.error(err);
@@ -68,6 +70,7 @@ class Login extends Component {
     }
 
     render() {
+      const { isAuthenticated } = this.state;
         return (
           <div>
             <Navbar/>
@@ -124,4 +127,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);
