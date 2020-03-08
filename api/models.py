@@ -11,11 +11,7 @@ import datetime
 class User(AbstractUser):
     phone           = models.CharField('phone', max_length=100)
     date_of_birth   = models.DateField('date_of_birth', max_length=100, null=True, blank=True)
-<<<<<<< HEAD
-    updated_time    = models.DateTimeField('updated_time', auto_now=True)
-=======
     updated_time    = models.DateTimeField('updated_time',auto_now=True)
->>>>>>> 2b0a3a770d29e62c7cc145e85bf07bbf660a7195
     admin           = models.BooleanField(default=False)
 
     def __str__(self):
