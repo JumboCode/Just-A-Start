@@ -22,13 +22,13 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    @action(detail=False, methods=['GET'])
+    @action(detail=False, methods=['POST'])
     def get_user(self, request):
         user = Token.objects.get(key=request.POST["key"]).user
         serialized_user = serializers.serialize('json', [user, ])
         return HttpResponse(serialized_user)
     
-    @action(detail=False, methods=['GET'])
+    @action(detail=False, methods=['POST'])
     def get_user_information(self, request):
         user = Token.objects.get(key=request.POST["key"]).user
 
@@ -53,7 +53,6 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response({"success": "User '{}' updated successfully".format(user_saved.first_name)})
 
        
-
     @action(detail=False, methods=['GET'])
     def delete_user(self, request):
         user_name = request.name

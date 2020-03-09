@@ -1,7 +1,7 @@
 :root {
-  --bg: #16629f;
+    --bg: #16629f;
 }
-
+  
 #loginButton-login, #checkbox-login {
 position: relative;
 left: 30%;
@@ -19,6 +19,7 @@ font-family: arial;
 font-size: 27px;
 font-weight: bold;
 top: 15%;
+left: 37%;
 }
 
 #form-login {
@@ -27,21 +28,21 @@ left: 14%;
 top: 24%;
 }
 
-#background-login{
+#background-sign-up{
 position: absolute;
-background-color: white;	
+/* background-color: var(--bg); */
 width: 100%;
-height: 100%;
+height: 86vh;
 top: 14vh;
 }
 
 @media screen and (max-width: 600px) {
-  #background-login {
-      position: relative;
-  }
+    #background-login {
+        position: relative;
+    }
 }
 
-#wrapper-login {
+#wrapper-sign-up {
 position: relative;
 height: 400px;
 max-width: 350px;
@@ -51,28 +52,28 @@ top: 65px;
 }
 
 .left-shift{
-border-radius:0px;
-height: 305px;
-width: auto;
-position: absolute;
-top:18%;
-left: 12%;
+	border-radius:0px;
+	height: 305px;
+	width: auto;
+	position: absolute;
+	top:18%;
+	left: 12%;
 }
 
 .right-shift{
-border-radius:0px;
-height: 305px;
-width: auto;
-position: absolute;
-top:18%;
-right: 12%;
+	border-radius:0px;
+	height: 305px;
+	width: auto;
+	position: absolute;
+	top:18%;
+	right: 12%;
 }
 
 .bottom-shift{
-border-radius:0px;
-height: 37.5%;
-width: auto;
-position: absolute;
-bottom: 0px;
-margin-left: 0px;
+	border-radius:0px;
+	height: 37.5%;
+	width: auto;
+	position: absolute;
+	bottom: 0px;
+	margin-left: 0px;
 }
