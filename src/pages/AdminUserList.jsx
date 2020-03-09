@@ -9,6 +9,8 @@ import AdminNavBar from '../components/AdminNavbar.jsx';
 import SideDashBoard from '../components/SideDashBoard';
 
 class UsersBody extends Component {
+
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -23,18 +25,15 @@ class UsersBody extends Component {
           last_login: "1 hour ago",
           id: 1
         },
-        {
-          img_url: "../assets/profilepic.png",
-          username: "kbrown01",
-          name_first: 'Kate',
-          name_last: 'Brown',
-          email: "katebrown@gmail.com",
-          phone: "+1(617)-283-1837",
-          last_login: "1 hour ago",
-          id: 2
-        }
       ]
     }
+    
+    
+    this.state = {
+      data: [
+      ]
+    }
+    
   }
 
   componentDidMount() {
@@ -42,6 +41,25 @@ class UsersBody extends Component {
         .then(response => {
           console.log(response)
         });
+    axios.get('/api/user/?format=json')
+        .then(response => {
+          for (let i = 0;i < response.data.length;i++) {
+            this.state.data.push({
+              img_url: "../assets/profilepic.png",
+              username: response.data[i].username,
+              name_first: response.data[i].first_name,
+              name_last: response.data[i].last_name,
+              email: response.data[i].email,
+              phone: response.data[i].phone,
+              last_login: response.data[i].updated_time,
+              id: i + 1
+            })
+            console.log(response.data[i])
+          }
+          console.log(this.state.data)
+          this.forceUpdate();
+        });
+    
   }
 
   render(){
@@ -77,7 +95,8 @@ class UsersBody extends Component {
             <li id="item_title">Username</li>
             <li id="item_title">First</li>
             <li id="item_title">Last</li>
-            <li id="item_title">Email/Phone</li>
+            <li id="item_title">Email</li>
+            <li id="item_title">Phone</li>
             <li id="item_title">Last Login</li>
           </ul>
           {data.map(item => (<UsersEntry data={item} key={item.id}/>))}
