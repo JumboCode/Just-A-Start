@@ -70,7 +70,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
-    alumni_queryset = Alumni.objects.all()
+    alumni_queryset = User.objects.all()
     serializer_class = JobSerializer
 
     # To do:
