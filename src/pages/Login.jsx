@@ -41,17 +41,31 @@ class Login extends Component {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          // 'Authorization': `Token c8177c66ed167850799a05f5fc3959aaa884ca83`
         },
         body: JSON.stringify({username, password}),
       }
+
       fetch('http://localhost:8000/api/rest-auth/login/', fetchOptions)
         .then(res => {       
           if (res.status === 200) {
+            const userType = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(res['key']),
+            }
+
             setAuthToken(res['key']);
+            // Store token in cookie
+            fetch('http://localhost:8000/api/get_user_profile', userType)
+            .then(res2 => {
+              console.log(res2)
+              console.log(res2.data)
+            })
             this.props.history.push('/user-dashboard');
           } else {
-
+            // Error message
           }
         })
         .catch(err => {
