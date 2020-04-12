@@ -4,6 +4,7 @@ import {
   BrowserRouter,
   Route,
   Switch,
+  Redirect,
 } from "react-router-dom";
 
 import Login from "./pages/Login";
@@ -19,29 +20,71 @@ class App extends Component {
     this.state = {
       isAuthenticated: false,
       authToken: "",
+      profile: []
     }
     this.setAuthToken = this.setAuthToken.bind(this);
   }
 
   setAuthToken(token) {
-    console.log(`setting auth token to ${token}`);
+    window.localStorage.setItem('jaysbautht', token);
     this.setState({
       authToken: token,
       isAuthenticated: true,
     });
   }
 
+  componentDidMount() {
+    // window.localStorage.removeItem('jaysbautht');
+    const key = window.localStorage.getItem('jaysbautht');
+
+    if (key) {
+      this.setState({
+        isAuthenticated: true,
+        authToken: key
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { isAuthenticated, authToken } = this.state;
+    if ((prevState.isAuthenticated !== isAuthenticated) && 
+        isAuthenticated && authToken !== '') {
+      const fetchOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `Token ${authToken}`
+        },
+      }
+      fetch('http://127.0.0.1:8000/api/user/', fetchOptions)
+        .then(res => res.json())
+        .then(res => {
+          this.setState({
+            authToken: authToken,
+            profile: res,
+            isAuthenticated: true,
+          });
+        }).catch(err => {
+          console.error(err);
+        })
+    }
+  }        
+
+
   render() {
+    const { isAuthenticated } = this.state;
+    console.log(this.state);
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={() => <Login setAuthToken={this.setAuthToken} />} />
-          <Route exact path="/user-dashboard" component={UserDashboard} />
-          <Route exact path="/admin-notification" component={AdminNotification} />
-          <Route exact path="/admin-userlist" component={AdminUserList} />
-          <Route exact path="/sign-up" component={SignUp} />
+          <Route path="/user-dashboard" component={UserDashboard} />
+          <Route path="/admin-notification" component={AdminNotification} />
+          <Route path="/admin-userlist" component={AdminUserList} />
+          <Route path="/sign-up" component={SignUp} />
           <Route component={NotFoundPage}></Route>
         </Switch>
+        {isAuthenticated && <Redirect to="/user-dashboard" />}
       </BrowserRouter>
     )
   }

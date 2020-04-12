@@ -12,6 +12,7 @@ class Navbar extends Component {
     }
 
     onLogoutClick() {
+        window.localStorage.removeItem('jaysbautht');
         fetch('http://localhost:8000/api/rest-auth/logout/', {method: 'POST'})
             .then((res) => {
                 this.props.history.push('/');
