@@ -46,10 +46,13 @@ class Login extends Component {
         body: JSON.stringify({username, password}),
       }
       fetch('http://localhost:8000/api/rest-auth/login/', fetchOptions)
-        .then(res => res.json())
-        .then(res => {
-          setAuthToken(res['key']);
-          this.props.history.push('/user-dashboard');
+        .then(res => {       
+          if (res.status === 200) {
+            setAuthToken(res['key']);
+            this.props.history.push('/user-dashboard');
+          } else {
+
+          }
         })
         .catch(err => {
           console.error(err);

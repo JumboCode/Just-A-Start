@@ -14,7 +14,6 @@ from itertools import chain
 
 import os
 import json
-from twilio.rest import Client
 # from settings.py import connection
 # from settings import connection
 
@@ -36,40 +35,46 @@ class UserViewSet(viewsets.ModelViewSet):
         education_list = user.education_set.all()
         unemployed_list = user.unemployed_set.all()
         chained_list = chain(job_list, education_list, unemployed_list)
-
         serialized_experiences = serializers.serialize('json', chained_list)
-
         return HttpResponse(serialized_experiences)
     
+    # NEEDS WORK
     @action(detail=False, methods=['PUT'])
     def edit_user_profile(self, request):
         user = Token.objects.get(key=request.POST["key"]).user
+        
         data = request.data.get('user')
         serializer = UserSerializer(instance=user, data=data, partial=True)
         if serializer.is_valid(raise_exception=True):
             user_saved = serializer.save()
         return HttpResponse({"success": "User updated successfully"})
+    
+    # NEEDS WORK
+    @action(detail=False, methods=['delete'])
+    def delete_user_profile(self, request):
+        return HttpResponse({"success": "User profile deleted successfully"})
 
     # Note: account_sid, auth_token, from_  : 
     # you get these values form twilio when you create account
     # expects a dictionary that has two keys, numbers and message
     @action(detail=False, methods=['POST'])
     def send_text(self, request):
-        # Your Account SID from twilio.com/console
-        account_sid = ""
-        # Your Auth Token from twilio.com/console
-        auth_token  = ""
-
+        # Your Account SID and Auth Token from twilio.com/console
+        account_sid = os.environ['TWILIO_ACCOUNT_SID']
+        auth_token  = os.environ['TWILIO_AUTH_TOKEN']
         client = Client(account_sid, auth_token)
 
-        #iterate through list of people
-        for user in request["numbers"]:
+        num_users = len(request.data["numbers"])
+        # Iterate through list of people
+        for i in range(num_users):
             message = client.messages.create(
-                #you phone number associated to your account from twilio
-                #Twilio generates this number
-                from_="", 
-                body= request["message"],
-                to = user)
+                # Phone number associated to your account from twilio
+                # Twilio generates this number
+                from_="+12055370058", 
+                body= request.data["message"],
+                to = request.data["numbers"][i])
+
+        return HttpResponse({"success": "Message sent successfully"})
 
     # Parameters: request is a dictionary that contains 3 fields;
     #  Field 1: email: a key corresponding to a list of email addresses
