@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './ProfileEdit.css';
 
 class ProfileEdit extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       visibility: false,
@@ -14,7 +14,8 @@ class ProfileEdit extends React.Component {
       phone: "",
       email: "",
       birthdate: ""
-    }
+    };
+  }
   
 
   componentDidMount = () => {
@@ -28,7 +29,7 @@ class ProfileEdit extends React.Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify({"key": str(token)})
+        body: JSON.stringify({"key": token})
       })
     .then((response) => {
 
@@ -60,7 +61,7 @@ class ProfileEdit extends React.Component {
     let lh = 20;
     let fs = 20;
     let dh = Math.round((lh/fs)*100)/100;
-    if(text.rows == maxLines){
+    if (text.rows == maxLines) {
         text.style.height = Math.ceil((fs * text.rows * dh)+((fs*200)/300));
     }
 
@@ -68,13 +69,16 @@ class ProfileEdit extends React.Component {
   
   changeVisibilityOn = (name, dob, location, phone, email, about) => {
     console.log(name)
-    this.state.name = name;
-    this.state.location = location;
-    this.state.about = about;
-    this.state.phone = phone;
-    this.state.email = email;
-    this.state.birthdate = dob;
-    this.state.visibility = true;
+    this.setState({
+      name: name,
+      location: location,
+      about: about,
+      phone: phone,
+      email: email,
+      birthdate: dob,
+      visibility: true
+    });
+    
     this.forceUpdate();
   }
   
@@ -85,28 +89,36 @@ class ProfileEdit extends React.Component {
   }
   
   handleNameChange = (event) => {
-    this.setState({name: event.target.value})
+    this.setState({name: event.target.value});
   }
   handleBirthdateChange = (event) => {
-    this.setState({birthdate: event.target.value})
+    this.setState({birthdate: event.target.value});
   }
   handleEmailChange = (event) => {
-    this.setState({email: event.target.value})
+    this.setState({email: event.target.value});
   }
   handlePhoneChange = (event) => {
-    this.setState({phone: event.target.value})
+    this.setState({phone: event.target.value});
   }
   handleLocationChange = (event) => {
-    this.setState({location: event.target.value})
+    this.setState({location: event.target.value});
   }
   handleAboutChange = (event) => {
-    this.setState({about: event.target.value})
+    this.setState({about: event.target.value});
   }
   render() {
-    return(
+
+    const visible = {
+      display: 'flex'
+    };
+
+    const hidden = {
+      display: 'none'
+    };
+
+    return (
       <div>
-        {this.state.visibility && 
-        <div class="box_profile_edit">
+        <div class="box_profile_edit" style={this.state.visibility ? visible : hidden}>
           <div class="flex_profile_edit" id="left_profile_edit">
             <p class = "left_text">Name</p>
             <p class = "left_text">Date of Birth</p>
@@ -125,9 +137,13 @@ class ProfileEdit extends React.Component {
           </div>
           <button onClick = {() => {
                   this.changeVisibilityOff();
-                  this.props.handler(document.getElementById("name_profile_edit").value, document.getElementById("dob_profile_edit").value, document.getElementById("location_profile_edit").value, document.getElementById("phone_profile_edit").value, document.getElementById("email_profile_edit").value, document.getElementById("textarea").value)}} class="confirm">Confirm</button> 
+                  this.props.handler(document.getElementById("name_profile_edit").value, document.getElementById("dob_profile_edit").value, document.getElementById("location_profile_edit").value, document.getElementById("phone_profile_edit").value, document.getElementById("email_profile_edit").value, document.getElementById("textarea").value);
+                }
+            } 
+            class="confirm">Confirm
+          </button> 
         </div>
-        }
+  
       </div>
     );
   }

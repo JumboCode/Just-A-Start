@@ -129,6 +129,31 @@ class UserDashboard extends React.Component {
 
     }
   }
+
+
+  componentDidMount = () => {
+
+    const data = {
+      "detail": '62ec07ce8da1070b4dbca50c5fef45a085945c2e'
+    };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    fetch('http://127.0.0.1:8000/api/user/get_user_profile/', options)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
+  }
+
   profileEditClicked = () => {
       //this.setState({ profile_edit: "true" });
       this.profileEditElement.current.changeVisibilityOn(this.state.profile_data.name, this.state.profile_data.birthdate, this.state.profile_data.location, this.state.profile_data.phone, this.state.profile_data.email, this.state.profile_data.about);
