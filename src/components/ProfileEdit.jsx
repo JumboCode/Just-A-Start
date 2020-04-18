@@ -21,13 +21,14 @@ class ProfileEdit extends React.Component {
   componentDidMount = () => {
     // key will be in props, not hardcoded.
     let url = "http://127.0.0.1:8000/api/user/get_user_profile/";
-    let token = "62ec07ce8da1070b4dbca50c5fef45a085945c2e";
+    let token = "8715c5ea3e67cbd63957c78ee053f71255a05e30";
     fetch(url, 
       {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Token 8715c5ea3e67cbd63957c78ee053f71255a05e30'
         }, 
         body: JSON.stringify({"key": token})
       })

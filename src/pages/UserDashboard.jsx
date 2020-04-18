@@ -133,21 +133,33 @@ class UserDashboard extends React.Component {
 
   componentDidMount = () => {
 
-    const data = {
-      "detail": '62ec07ce8da1070b4dbca50c5fef45a085945c2e'
-    };
+    // const data = {
+    //   "detail": '62ec07ce8da1070b4dbca50c5fef45a085945c2e'
+    // };
 
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 8715c5ea3e67cbd63957c78ee053f71255a05e30'
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({'key': '8715c5ea3e67cbd63957c78ee053f71255a05e30'})
     };
 
     fetch('http://127.0.0.1:8000/api/user/get_user_profile/', options)
       .then(res => {
-        console.log(res);
+        this.setState({
+          profile_data: {
+            name: "Jackson Smith",
+            class: "... of 2008",
+            location: "Boston, MA",
+            about: "I am a software engineer",
+            phone: "+(617)-565-1234",
+            email: "Jacksonsmith@gmail.com",
+            birthdate: "01/12/1991"
+          }
+        });
       })
       .catch(err => {
         console.log("FAIL " + err);
