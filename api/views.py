@@ -26,6 +26,12 @@ class UserViewSet(viewsets.ModelViewSet):
         user = Token.objects.get(key=request.POST.get('key')).user
         serialized_user = serializers.serialize('json', [user, ])
         return HttpResponse(serialized_user)
+
+    @action(detail=False, methods=['GET'])
+    def get_user_by_email(self, request):
+        user = User.objects.get(email=request.GET.get('email'))
+        serialized_user = serializers.serialize('json', [user, ])
+        return HttpResponse(serialized_user)
     
     @action(detail=False, methods=['POST'])
     def get_user_experiences(self, request):
@@ -38,16 +44,22 @@ class UserViewSet(viewsets.ModelViewSet):
         serialized_experiences = serializers.serialize('json', chained_list)
         return HttpResponse(serialized_experiences)
     
-    # NEEDS WORK
     @action(detail=False, methods=['PUT'])
     def edit_user_profile(self, request):
         user = Token.objects.get(key=request.POST["key"]).user
-        
-        data = request.data.get('user')
-        serializer = UserSerializer(instance=user, data=data, partial=True)
+        serializer = UserSerializer(instance=user, data=request.data, partial=True)
         if serializer.is_valid(raise_exception=True):
             user_saved = serializer.save()
-        return HttpResponse({"success": "User updated successfully"})
+            return HttpResponse({"Success": "User information updated successfully"})
+        return HttpResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, methods=['PUT'])
+    def edit_user_experiences(self, request):
+        user = Token.objects.get(key=request.POST["key"]).user
+        serializer = UserSerializer(instance=user, data=request.data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            user_saved = serializer.save()
+        return HttpResponse({"success": "User experience information updated successfully"})
     
     # NEEDS WORK
     @action(detail=False, methods=['delete'])
@@ -86,25 +98,34 @@ class UserViewSet(viewsets.ModelViewSet):
         # you need to set up a variable environment. follow the link for more details
         # https://github.com/sendgrid/sendgrid-python
 
-        # if you set up variable environment use the following line that is commented out
-        # sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-
-        # otherwise, use the following code and put your API Key in the paranthesis
-        sg = SendGridAPIClient('')
-
-        for user in request["email"]:
+        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
+        
+        num_users = len(request.data["email"])
+        for i in range(num_users):
             message = Mail(
-                from_email='fill  in your email address', 
-                to_emails= user,
-                subject= request["subject"],
-                #html_content='<strong>and easy to do anywhere, even with Python</strong>')
-                html_content = '<strong>' + request["body"] + '</strong>')
+                from_email='naokiokada11@gmail.com', 
+                to_emails= request.data["email"][i],
+                subject= request.data["subject"],
+                html_content = '<strong>' + request.data["body"] + '</strong>')
 
             sg.send(message)
+        
+        return HttpResponse({"success": "Email sent successfully"})
 
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
+
+    @action(detail=False, methods=['PUT'])
+    def edit_job_information(self, request):
+        user = Token.objects.get(key=request.POST["key"]).user
+        job_list = user.job_set.all()
+        print(job_list[0])
+        # serializer = JobSerializer(instance=user, data=request.data, partial=True)
+        # if serializer.is_valid(raise_exception=True):
+        #     user_saved = serializer.save()
+        #     return HttpResponse({"Success": "User information updated successfully"})
+        return HttpResponse({"Success": "User information updated successfully"})
 
 class UnemployedViewSet(viewsets.ModelViewSet):
     queryset = Unemployed.objects.all()
