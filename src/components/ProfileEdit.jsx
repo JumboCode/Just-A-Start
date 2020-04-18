@@ -15,9 +15,41 @@ class ProfileEdit extends React.Component {
       email: "",
       birthdate: ""
     }
+  
+
+  componentDidMount = () => {
+    // key will be in props, not hardcoded.
+    let url = "http://127.0.0.1:8000/api/user/get_user_profile/";
+    let token = "62ec07ce8da1070b4dbca50c5fef45a085945c2e";
+    fetch(url, 
+      {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({"key": str(token)})
+      })
+    .then((response) => {
+
+      this.setState({
+        visibility: false,
+        iteration: 1,
+        name: response.username + " " + response.password,
+        location: "",
+        about: "",
+        phone: "",
+        email: "",
+        birthdate: ""
+
+
+      });
+    })
+    .catch(() => console.log("Failed"));
     
   }
-  setTextAreaFormat() {
+  
+  setTextAreaFormat = () => {
     let lines = [];
     let text = "";
     let maxLines = 4;
@@ -25,7 +57,7 @@ class ProfileEdit extends React.Component {
     let maxTextForLine = width/100;
     text = document.getElementById("textarea").value;
 
-    let lh = 20
+    let lh = 20;
     let fs = 20;
     let dh = Math.round((lh/fs)*100)/100;
     if(text.rows == maxLines){
@@ -33,7 +65,8 @@ class ProfileEdit extends React.Component {
     }
 
   }
-  changeVisibilityOn(name, dob, location, phone, email, about){
+  
+  changeVisibilityOn = (name, dob, location, phone, email, about) => {
     console.log(name)
     this.state.name = name;
     this.state.location = location;
@@ -43,33 +76,33 @@ class ProfileEdit extends React.Component {
     this.state.birthdate = dob;
     this.state.visibility = true;
     this.forceUpdate();
-  };
+  }
   
   changeVisibilityOff = () => {
     this.setState({
       visibility: false
     });
-  };
+  }
   
   handleNameChange = (event) => {
     this.setState({name: event.target.value})
-  };
+  }
   handleBirthdateChange = (event) => {
     this.setState({birthdate: event.target.value})
-  };
+  }
   handleEmailChange = (event) => {
     this.setState({email: event.target.value})
-  };
+  }
   handlePhoneChange = (event) => {
     this.setState({phone: event.target.value})
-  };
+  }
   handleLocationChange = (event) => {
     this.setState({location: event.target.value})
-  };
+  }
   handleAboutChange = (event) => {
     this.setState({about: event.target.value})
-  };
-  render(){
+  }
+  render() {
     return(
       <div>
         {this.state.visibility && 
@@ -92,11 +125,11 @@ class ProfileEdit extends React.Component {
           </div>
           <button onClick = {() => {
                   this.changeVisibilityOff();
-                  this.props.handler(document.getElementById("name_profile_edit").value, document.getElementById("dob_profile_edit").value, document.getElementById("location_profile_edit").value, document.getElementById("phone_profile_edit").value, document.getElementById("email_profile_edit").value, document.getElementById("textarea").value)}} class="confirm">Confirm</button>
+                  this.props.handler(document.getElementById("name_profile_edit").value, document.getElementById("dob_profile_edit").value, document.getElementById("location_profile_edit").value, document.getElementById("phone_profile_edit").value, document.getElementById("email_profile_edit").value, document.getElementById("textarea").value)}} class="confirm">Confirm</button> 
         </div>
         }
       </div>
-    )
+    );
   }
 }
 export default ProfileEdit;

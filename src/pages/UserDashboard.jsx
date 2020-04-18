@@ -16,10 +16,17 @@ class UserDashboard extends React.Component {
       visibilityTwo: false,
       visibilityThree: false,
       vis: [false, false, false],
-      educations: [new Array(5)],
-      programs: [new Array(5)],
-      unemployed: [new Array(2)],
-      userInputData : new Array(13),
+      Education: [new Array(5)],
+      Program: [new Array(5)],
+      Unemployed: [new Array(2)],
+      
+      confirmedEducation: [new Array(5)],
+      confirmedProgram: [new Array(5)],
+      confirmedUnemployed: [new Array(2)],
+      
+      editEducation: [false],
+      editProgram: [false],
+      editUnemployed: [false],
       fieldsOne: [
         {
           'name': 'Name of School/Company',
@@ -51,39 +58,39 @@ class UserDashboard extends React.Component {
         {
           'name': 'Name of Employer',
           'type': 'text',
-          'id':5
+          'id':0
         },
         {
           'name': 'Job Title',
           'type': 'text',
-          'id':6
+          'id':1
         },
         {
           'name': 'Hourly Pay',
           'type': 'text',
-          'id':7
+          'id':2
         },
         {
           'name': '# of Hours per Week',
           'type': 'text',
-          'id':8
+          'id':3
         },
         {
           'name': 'Start Date',
           'type': 'date',
-          'id':9
+          'id':4
         }
       ],
       fieldsThree: [
         {
           'name': 'Desired Job',
           'type': 'text',
-          'id':10
+          'id':0
         },
         {
           'name': 'Degree Level',
           'type': 'text',
-          'id':11
+          'id':1
         }
       ],
       job_data: [
@@ -138,55 +145,138 @@ class UserDashboard extends React.Component {
   }
   
   changeVisiblityOne = () => {
+      for(let x = 0; x < this.state.editEducation.length; x++){
+        this.state.editEducation[x] = false;
+      }
       this.state.vis[0] = ! this.state.vis[0];
       this.forceUpdate();
   }
   
   changeVisiblityTwo = () => {
+      for(let x = 0; x < this.state.editProgram.length; x++){
+        this.state.editProgram[x] = false;
+      }
       this.state.vis[1] = ! this.state.vis[1];
       this.forceUpdate();
   }
   
   changeVisiblityThree = () => {
+      for(let x = 0; x < this.state.editUnemployed.length; x++){
+        this.state.editUnemployed[x] = false;
+      }
       this.state.vis[2] = ! this.state.vis[2];
       this.forceUpdate();
   }
   addEducation = () => {
-    this.state.educations.push(new Array(5));
+    this.state.Education.push(new Array(5));
+    this.state.confirmedEducation.push(new Array(5));
+    this.state.editEducation.push(false);
     this.forceUpdate();
   }
   addProgram = () => {
-    this.state.programs.push(new Array(5));
+    this.state.Program.push(new Array(5));
+    this.state.confirmedProgram.push(new Array(5));
+    this.state.editProgram.push(false);
     this.forceUpdate();
   }
   addUnemployed = () => {
-    this.state.unemployed.push(new Array(2));
+    this.state.Unemployed.push(new Array(2));
+    this.state.confirmedUnemployed.push(new Array(2));
+    this.state.editUnemployed.push(false);
+    this.forceUpdate();
+  }
+  
+  editEducation(num){
+    this.state.editEducation[num] = true;
+    var a = document.getElementById("education"+num.toString()).querySelectorAll("input");
+    for(let x = 0; x < a.length; x++){
+      a[x].removeAttribute("disabled", "disabled");
+    }
+    this.forceUpdate();
+  }
+  
+  confirmEducation(num){
+    this.state.editEducation[num] = false;
+    var a = document.getElementById("education"+num.toString()).querySelectorAll("input");
+    for(let x = 0; x < a.length; x++){
+      a[x].setAttribute("disabled", "disabled");
+    }
+    this.state.confirmedEducation[num] = this.state.Education[num]
+    this.forceUpdate();
+  }
+  
+  editProgram(num){
+    this.state.editProgram[num] = true;
+    var a = document.getElementById("program"+num.toString()).querySelectorAll("input");
+    for(let x = 0; x < a.length; x++){
+      a[x].removeAttribute("disabled", "disabled");
+    }
+    this.forceUpdate();
+  }
+  
+  confirmProgram(num){
+    this.state.editProgram[num] = false;
+    var a = document.getElementById("program"+num.toString()).querySelectorAll("input");
+    for(let x = 0; x < a.length; x++){
+      a[x].setAttribute("disabled", "disabled");
+    }
+    this.state.confirmedProgram[num] = this.state.Program[num]
+    this.forceUpdate();
+  }
+  
+  editUnemployed(num){
+    this.state.editUnemployed[num] = true;
+    var a = document.getElementById("unemployed"+num.toString()).querySelectorAll("input");
+    for(let x = 0; x < a.length; x++){
+      a[x].removeAttribute("disabled", "disabled");
+    }
+    this.forceUpdate();
+  }
+  
+  confirmUnemployed(num){
+    this.state.editUnemployed[num] = false;
+    var a = document.getElementById("unemployed"+num.toString()).querySelectorAll("input");
+    for(let x = 0; x < a.length; x++){
+      a[x].setAttribute("disabled", "disabled");
+    }
+    this.state.confirmedUnemployed[num] = this.state.Unemployed[num]
     this.forceUpdate();
   }
   
   deleteEducation(num){
-    this.state.educations.splice(num,1);
+    this.state.Education.splice(num,1);
+    this.state.confirmedEducation.splice(num,1);
+    this.state.editEducation.splice(num,1);
     this.forceUpdate();
   }
   deleteProgram(num){
-    this.state.programs.splice(num,1);
+    this.state.Program.splice(num,1);
+    this.state.confirmedProgram.splice(num,1);
+    this.state.editProgram.splice(num,1);
     this.forceUpdate();
   }
   deleteUnemployed(num){
-    this.state.unemployed.splice(num,1);
+    this.state.Unemployed.splice(num,1);
+    this.state.confirmedUnemployed.splice(num,1);
+    this.state.editUnemployed.splice(num,1);
     this.forceUpdate();
   }
   
   handleEducationChange(num, id, e){
-      this.state.educations[num][id] = e.target.value;
-      this.forceUpdate();
+      if(this.state.editEducation[num]){
+        this.state.Education[num][id] = e.target.value;
+        this.forceUpdate();
+      }
+      
   }
   handleProgramChange(num, id, e){
-      this.state.programs[num][id] = e.target.value;
+      this.state.Program[num][id] = e.target.value;
       this.forceUpdate();
   }
   handleUnemployedChange(num, id, e){
-      this.state.unemployed[num][id] = e.target.value;
+      console.log(num);
+      console.log(id);
+      this.state.Unemployed[num][id] = e.target.value;
       this.forceUpdate();
   }
 
@@ -244,33 +334,41 @@ class UserDashboard extends React.Component {
                   <p class="experience-titles-text">Education/Training Post-Program Placement</p>
               </div>
               <div className = "flexbox-user-dashboard-big">
-                {this.state.vis[0] && this.state.educations.map((element, index) => <div>
-                                                                                  {this.state.fieldsOne.map(item => <div>
+                {this.state.vis[0] && this.state.Education.map((element, index) => <div id={"education" + index.toString()}>
+                                                                                  {this.state.fieldsOne.map(item => <div >
                                                                                                                       <p id="experience-edit-field">{item.name}</p>
-                                                                                                                      <input value={this.state.educations[index][item.id]} onChange={(e) => this.handleEducationChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input>
+                                                                                                                      <input disabled = "disabled" value={this.state.confirmedEducation[index][item.id]} onChange={(e) => this.handleEducationChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input>
                                                                                                                     </div>)}
-                                                                                  <button class="edit-experiences-button" onClick ={() => this.deleteEducation(index)}>Delete</button>
+                                                                                  <div class="edit-experiences-button-div">
+                                                                                    {!this.state.editEducation[index] && <button class="edit-experiences-button" onClick ={() => this.editEducation(index)}>Edit</button>}
+                                                                                    {this.state.editEducation[index] && <button class="edit-experiences-button" onClick ={() => this.confirmEducation(index)}>Confirm</button>}
+                                                                                    <button class="edit-experiences-button" onClick ={() => this.deleteEducation(index)}>Delete</button>
+                                                                                  </div>
                                                                                   </div>)}
               </div>
-              {this.state.vis[0] && <button onClick={this.addEducation.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
+              {this.state.vis[0] && <button onClick={this.addEducation.bind(this)} class="edit-experiences-button" id = "add-button-experiences">&#9998; Add</button>}
             </div>
             
             <div className = "edit-experiences">
               <div className = "experience-titles">
                   <label id="plus-button" onClick={this.changeVisiblityTwo}>+</label>
                   <p class="experience-titles-text">Employment Post-Program Placement</p>
-                </div>
-                <div className = "flexbox-user-dashboard-big">
-                  {this.state.vis[1] && this.state.programs.map((element, index) => <div>
-                                                                                    {this.state.fieldsTwo.map(item => <div>
-                                                                                                                        <p id="experience-edit-field">{item.name}</p>
-                                                                                                                        <input value={this.state.programs[index][item.id]} onChange={(e) => this.handleProgramChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input>
-                                                                                                                      </div>)}
-                                                                                    <button class="edit-experiences-button" onClick ={() => this.deleteProgram(index)}>Delete</button>
-                                                                                    </div>)}
-                </div>
-                {this.state.vis[1] && <button onClick={this.addProgram.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
               </div>
+              <div className = "flexbox-user-dashboard-big">
+                {this.state.vis[1] && this.state.Program.map((element, index) => <div id={"program" + index.toString()}>
+                                                                                  {this.state.fieldsTwo.map(item => <div >
+                                                                                                                      <p id="experience-edit-field">{item.name}</p>
+                                                                                                                      <input disabled = "disabled" value={this.state.confirmedProgram[index][item.id]} onChange={(e) => this.handleProgramChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input>
+                                                                                                                    </div>)}
+                                                                                  <div class="edit-experiences-button-div">
+                                                                                    {!this.state.editProgram[index] && <button class="edit-experiences-button" onClick ={() => this.editProgram(index)}>Edit</button>}
+                                                                                    {this.state.editProgram[index] && <button class="edit-experiences-button" onClick ={() => this.confirmProgram(index)}>Confirm</button>}
+                                                                                    <button class="edit-experiences-button" onClick ={() => this.deleteProgram(index)}>Delete</button>
+                                                                                  </div>
+                                                                                  </div>)}
+              </div>
+              {this.state.vis[1] && <button onClick={this.addProgram.bind(this)} class="edit-experiences-button" id = "add-button-experiences">&#9998; Add</button>}
+            </div>
             
             <div className = "edit-experiences">
               <div className = "experience-titles">
@@ -278,16 +376,20 @@ class UserDashboard extends React.Component {
                   <p class="experience-titles-text">Unemployed</p>
               </div>
               <div className = "flexbox-user-dashboard-big">
-                {this.state.vis[2] && this.state.unemployed.map((element, index) => <div>
-                                                                                  {this.state.fieldsThree.map(item => <div>
-                                                                                                                      <p id="experience-edit-field">{item.name}</p>
-                                                                                                                      <input value={this.state.unemployed[index][item.id]} onChange={(e) => this.handleUnemployedChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input>
-                                                                                                                    </div>)}
-                                                                                  <button class="edit-experiences-button" onClick ={() => this.deleteUnemployed(index)}>Delete</button>
-                                                                                  </div>)}
+                  {this.state.vis[2] && this.state.Unemployed.map((element, index) => <div id={"unemployed" + index.toString()}>
+                                                                                    {this.state.fieldsThree.map(item => <div >
+                                                                                                                        <p id="experience-edit-field">{item.name}</p>
+                                                                                                                        <input disabled = "disabled" value={this.state.confirmedUnemployed[index][item.id]} onChange={(e) => this.handleUnemployedChange(index, item.id, e)} class="input-experience-edit" type={item.type}></input>
+                                                                                                                      </div>)}
+                                                                                    <div class="edit-experiences-button-div">
+                                                                                      {!this.state.editUnemployed[index] && <button class="edit-experiences-button" onClick ={() => this.editUnemployed(index)}>Edit</button>}
+                                                                                      {this.state.editUnemployed[index] && <button class="edit-experiences-button" onClick ={() => this.confirmUnemployed(index)}>Confirm</button>}
+                                                                                      <button class="edit-experiences-button" onClick ={() => this.deleteUnemployed(index)}>Delete</button>
+                                                                                    </div>
+                                                                                    </div>)}
+                </div>
+                {this.state.vis[2] && <button onClick={this.addUnemployed.bind(this)} class="edit-experiences-button" id = "add-button-experiences">&#9998; Add</button>}
               </div>
-              {this.state.vis[2] && <button onClick={this.addUnemployed.bind(this)} class="edit-experiences-button">&#9998; Add</button>}
-            </div>
             </div>
           </div>
 

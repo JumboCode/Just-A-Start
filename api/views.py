@@ -24,7 +24,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['POST'])
     def get_user_profile(self, request):
-        user = Token.objects.get(key=request.POST["key"]).user
+        user = Token.objects.get(key=request.POST.get('key')).user
         serialized_user = serializers.serialize('json', [user, ])
         return HttpResponse(serialized_user)
     
@@ -40,6 +40,15 @@ class UserViewSet(viewsets.ModelViewSet):
         serialized_experiences = serializers.serialize('json', chained_list)
 
         return HttpResponse(serialized_experiences)
+    
+    @action(detail=False, methods=['PUT'])
+    def edit_user_profile(self, request):
+        user = Token.objects.get(key=request.POST["key"]).user
+        data = request.data.get('user')
+        serializer = UserSerializer(instance=user, data=data, partial=True)
+        if serializer.is_valid(raise_exception=True):
+            user_saved = serializer.save()
+        return HttpResponse({"success": "User updated successfully"})
 
     # Note: account_sid, auth_token, from_  : 
     # you get these values form twilio when you create account
