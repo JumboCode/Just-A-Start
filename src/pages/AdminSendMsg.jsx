@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './AdminSendMsg.css';
+import axios from 'axios';
+
 import AdminNavBar from '../components/AdminNavbar.jsx';
 import SideDashBoard from '../components/SideDashBoard';
 
@@ -9,65 +11,7 @@ class AdminSendMsg extends Component {
     this.state = {
       regexp: RegExp(''),
       displayPopUp: false,
-      users: [
-        {
-          name: "aJohn Smith",
-          checked: false
-        },
-        {
-          name: "bJohn Smith",
-          checked: false
-        },
-        {
-          name: "cJohn Smith",
-          checked: false
-        },
-        {
-          name: "dJohn Smith",
-          checked: false
-        },
-        {
-          name: "eJohn Smith",
-          checked: false
-        },
-        {
-          name: "fJohn Smith",
-          checked: false
-        },
-        {
-          name: "gJohn Smith",
-          checked: false
-        },
-        {
-          name: "aJohn Smith",
-          checked: false
-        },
-        {
-          name: "bJohn Smith",
-          checked: false
-        },
-        {
-          name: "cJohn Smith",
-          checked: false
-        },
-        {
-          name: "dJohn Smith",
-          checked: false
-        },
-        {
-          name: "eJohn Smith",
-          checked: false
-        },
-        {
-          name: "fJohn Smith",
-          checked: false
-        },
-        {
-          name: "gJohn Smith",
-          checked: false
-        }
-        
-      ],
+      users: [],
       selectedUsers: ["hello"],
       message: ''
     };
@@ -75,6 +19,25 @@ class AdminSendMsg extends Component {
   }
 
   componentDidMount() {
+    axios.get('http://localhost:8000/api/user/')
+        .then(response => {
+          console.log(response)
+        });
+    axios.get('/api/user/?format=json')
+        .then(response => {
+          for (let i = 0;i < response.data.length;i++) {
+            this.state.users.push({
+              username: response.data[i].username,
+              name: response.data[i].first_name + " " + response.data[i].last_name,
+              email: response.data[i].email,
+              id: i + 1,
+              checked: false
+            })
+            console.log(response.data[i])
+          }
+          console.log(this.state.data)
+          this.forceUpdate();
+        });
   }
 
 
