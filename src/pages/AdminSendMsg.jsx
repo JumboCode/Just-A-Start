@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './AdminSendMsg.css';
+import axios from 'axios';
+
 import AdminNavBar from '../components/AdminNavbar.jsx';
 import SideDashBoard from '../components/SideDashBoard';
 
@@ -11,70 +13,60 @@ class AdminSendMsg extends Component {
       displayPopUp: false,
       users: [
         {
-          name: "aJohn Smith",
-          checked: false
+          "checked":false,
+          "id":3,
+          "name":"1John Smith",
+          "phone":1111111111,
+          "username":"helllaslfl"
         },
         {
-          name: "bJohn Smith",
-          checked: false
+          "checked":false,
+          "id":3,
+          "name":"2John Smith",
+          "phone":1111111112,
+          "username":"helllaslfl"
         },
         {
-          name: "cJohn Smith",
-          checked: false
+          "checked":false,
+          "id":3,
+          "name":"3John Smith",
+          "phone":1111111113,
+          "username":"helllaslfl"
         },
         {
-          name: "dJohn Smith",
-          checked: false
+          "checked":false,
+          "id":3,
+          "name":"4John Smith",
+          "phone":1111111114,
+          "username":"helllaslfl"
         },
-        {
-          name: "eJohn Smith",
-          checked: false
-        },
-        {
-          name: "fJohn Smith",
-          checked: false
-        },
-        {
-          name: "gJohn Smith",
-          checked: false
-        },
-        {
-          name: "aJohn Smith",
-          checked: false
-        },
-        {
-          name: "bJohn Smith",
-          checked: false
-        },
-        {
-          name: "cJohn Smith",
-          checked: false
-        },
-        {
-          name: "dJohn Smith",
-          checked: false
-        },
-        {
-          name: "eJohn Smith",
-          checked: false
-        },
-        {
-          name: "fJohn Smith",
-          checked: false
-        },
-        {
-          name: "gJohn Smith",
-          checked: false
-        }
-        
       ],
-      selectedUsers: ["hello"],
       message: ''
     };
     this.onMessageChange = this.onMessageChange.bind(this);
   }
 
   componentDidMount() {
+    //im not sure if this should be localhost or 127:blah
+    axios.get('http://127.0.0.1:8000/api/user/')
+        .then(response => {
+          console.log(response)
+        });
+    axios.get('/api/user/?format=json')
+        .then(response => {
+          for (let i = 0;i < response.data.length;i++) {
+            this.state.users.push({
+              username: response.data[i].username,
+              name: response.data[i].first_name + " " + response.data[i].last_name,
+              phone: response.data[i].phone,
+              id: i + 1,
+              checked: false
+            })
+            console.log(response.data[i])
+          }
+          console.log(this.state.data)
+          this.forceUpdate();
+        });
   }
 
 
@@ -105,7 +97,6 @@ class AdminSendMsg extends Component {
   }
 
   checkStateChange(num){
-    console.log("CHANGING")
     this.setState(state => {
       const list = state.users.map((item, j) => {
         if (j === num) {
@@ -121,11 +112,32 @@ class AdminSendMsg extends Component {
       };
     });
   }
+
   togglePopup = () => {
     console.log("HI")
     this.setState({
       displayPopUp: !this.state.displayPopUp
     })
+  }
+
+  sendMessage = e => {
+    e.preventDefault();
+    var phoneNumbers = []
+    this.state.users.map((item, j) => {
+      if (item.checked) {
+        phoneNumbers = [...phoneNumbers, item.phone];
+      }
+    });
+    const requestOptions = {
+      method: 'POST',
+      body: JSON.stringify({ "numbers":phoneNumbers,"message":this.state.message })
+    };
+    console.log(requestOptions)
+    /*fetch('http://127.0.0.1:8000/api/user/send_text/', requestOptions)
+        .then(response => console.log(response.json()))
+        .then(data => console.log(data));*/
+    console.log(phoneNumbers)
+
   }
 
   render() {
@@ -166,9 +178,12 @@ class AdminSendMsg extends Component {
               </div>
               
             </div>
-            <h4>Message</h4>
-            <textarea className="text-area" placeholder="Type a message"></textarea>
-            <button type="button" className="send-button">Send</button>
+            
+            <form onSubmit={this.sendMessage}>
+              <h4>Message</h4>
+              <textarea onChange={this.onMessageChange} className="text-area" placeholder="Type a message" />
+              <input className="send-button" type="submit" value="Send"/>
+            </form>
           </form>
         </div>
       </body>
