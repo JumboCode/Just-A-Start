@@ -30,7 +30,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'https://jasyb.herokuapp.com',
-    'localhost:3000'
+    'http://127.0.0.1/',
+    'http://localhost:8000',
+    'http://localhost:3000',
 ]
 
 # Application definition
@@ -93,8 +95,10 @@ STATICFILES_DIRS = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
+    'https://jasyb.herokuapp.com',
+    'http://127.0.0.1:8000',
     'http://localhost:3000',
-    'https://jasyb.herokuapp.com'
+    'http://localhost:8000',
 ]
 
 # WEBPACK_LOADER = {
