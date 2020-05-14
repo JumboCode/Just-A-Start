@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 import datetime
 
 class User(AbstractUser):
-    email           = models.CharField('email', primary_key=True, unique=True, max_length=20)
+    email           = models.CharField('email', unique=True, max_length=20)
     phone           = models.CharField('phone', max_length=12)
     date_of_birth   = models.DateField('date_of_birth', max_length=12, null=True, blank=True)
     updated_time    = models.DateTimeField('updated_time',auto_now=True)

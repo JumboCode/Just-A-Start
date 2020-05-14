@@ -9,140 +9,161 @@ import { withRouter } from 'react-router-dom';
 import './Login.css';
 
 class Login extends Component {
-    state = {
+  constructor(props) {
+    super(props);
+    this.state = {
       username: "",
       password: "",
       isClicked: false,
       forgotPassword: false,
       keepLoggedIn: false,
+      error:""
     };
+  }
 
-    didCheckBox = () => {
-      this.setState((prevState, props) =>
-        ({keepLoggedIn: (prevState.keepLoggedIn === true) ? false : true}));
+  didCheckBox = () => {
+    this.setState((prevState, props) =>
+      ({keepLoggedIn: (prevState.keepLoggedIn === true) ? false : true}));
+  }
+
+  didForgetPassword = () => {
+    this.setState((prevState, props) =>
+      ({forgotPassword: true}));
+  }
+
+  retrieveUserInfo = (u, p) => {
+    this.setState({username: u, password: p});
+  }
+
+  handleClick = () => {
+    const { username, password } = this.state;
+    const { setAuthToken } = this.props;
+    this.setState((prevState, props) =>
+      ({isClicked: prevState.isClicked === false ? true : false}));
+
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({username, password}),
     }
 
-    didForgetPassword = () => {
-      this.setState((prevState, props) =>
-        ({forgotPassword: true}));
-    }
+    fetch('http://localhost:8000/api/rest-auth/login/', fetchOptions)
+      .then(res => res.ok ? res : Error)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        setAuthToken(res['key']);
+        const key = res['key']
 
-    retrieveUserInfo = (u, p) => {
-      this.setState({username: u, password: p});
-    }
+        const fetchOptions2 = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': `Token ${key}`
+          },
+        }
 
-    handleClick = () => {
-      const { username, password } = this.state;
-      const { setAuthToken } = this.props;
-      this.setState((prevState, props) =>
-        ({isClicked: prevState.isClicked === false ? true : false}));
-
-      const fetchOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({username, password}),
-      }
-
-      fetch('http://localhost:8000/api/rest-auth/login/', fetchOptions)
-        .then(res => {       
-          if (res.status === 200) {
-            const userType = {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(res['key']),
+        console.log("Hello")
+  
+        fetch(`http://127.0.0.1:8000/api/user/get_user_profile/?key=${key}`, fetchOptions2)
+          .then(res => res.json())
+          .then(res => {
+            console.log(res[0]['fields'])
+            console.log(res[0]['fields']['admin'])
+            const status = res[0]['fields']['admin']
+            if (status === true) {
+              this.setState({
+                isAdmin: true,
+              })
+              this.props.history.push('/admin-userlist')
+            } else {
+              this.setState({
+                isAdmin: false,
+              })
+              this.props.history.push('/user-dashboard')
             }
+          }).catch(err => {
+            console.log(err);
+          })
+      })
+      .catch(err => {
+        this.setState({
+          error: 
+            "Looks like there's a problem logging in. Please check your credentials."});
+      })
+  }
 
-            setAuthToken(res['key']);
-            // Store token in cookie
-            fetch('http://localhost:8000/api/get_user_profile', userType)
-            .then(res2 => {
-              console.log(res2)
-              console.log(res2.data)
-            })
-            this.props.history.push('/user-dashboard');
-          } else {
-            // Error message
-          }
-        })
-        .catch(err => {
-          console.error(err);
-        })
+  setFields = () => {
+    this.setState({username: this._un.value, password: this._ps.value});
+  }
 
-    }
+  changeUsernameHandler = (event) => {
+    this.setState({username: event.target.value});
+  }
+  changePasswordHandler = (event) => {
+    this.setState({password: event.target.value});
 
-    setFields = () => {
-      this.setState({username: this._un.value, password: this._ps.value});
-    }
+  }
 
-    changeUsernameHandler = (event) => {
-      this.setState({username: event.target.value});
-    }
-    changePasswordHandler = (event) => {
-      this.setState({password: event.target.value});
+  render() {
+    const { error } = this.state;
+      return (
+        <div>
+          <Navbar/>
+          <div id="background-login">
+            <img className= "left-shift" src={jas_man} alt="icon" />
+            <img className= "right-shift" src={jas_woman} alt="icon" />
+            <img className= "bottom-shift" src={jas_ground} alt="icon" />
+            <div id="wrapper-login">
+              <div id="loginText">
+              Login
+              </div>
+              <div id="form-login">
+                <form>
+                  <div>
+                    <input
+                      className="loginInput"
+                      ref={(el) => this._un = el}
+                      type="text"
+                      value={this.state.username}
+                      onChange={this.changeUsernameHandler}
+                      placeholder="Username/Email address">
+                    </input>
+                  </div>
 
-    }
-
-    render() {
-      const { isAuthenticated } = this.state;
-        return (
-          <div>
-            <Navbar/>
-            <div id="background-login">
-              <img className= "left-shift" src={jas_man} alt="icon" />
-              <img className= "right-shift" src={jas_woman} alt="icon" />
-              <img className= "bottom-shift" src={jas_ground} alt="icon" />
-              <div id="wrapper-login">
-                <div id="loginText">
-                Login
-                </div>
-                <div id="form-login">
-                  <form>
-                    <div>
-                      <input
-                        className="loginInput"
-                        ref={(el) => this._un = el}
-                        type="text"
-                        value={this.state.username}
-                        onChange={this.changeUsernameHandler}
-                        placeholder="Username/Email address">
-                      </input>
-                    </div>
-
-                    <div>
-                      <input
-                      className="loginInput" ref={(el) => this._ps = el}
-                      type="password"
-                      value={this.state.password}
-                      onChange={this.changePasswordHandler}
-                      placeholder="Password">
-                      </input>
-                    </div>
-                    <div>
-                      <span
-                        id="forgotPass"
-                        onClick={() => this.props.forgotPassword()}>
-                      Forgot Password? </span>
-                    </div>
-                  </form>
-                </div>
-                <div id="loginButton-login">
-                  <LoginButton
-                    loginClick={this.handleClick}
-                    isClicked={this.state.isClicked}/>
-                </div>
-                <div id="checkbox-login">
-                  <CheckBox checked={this.didCheckBox}/>
-                </div>
-
+                  <div>
+                    <input
+                    className="loginInput" ref={(el) => this._ps = el}
+                    type="password"
+                    value={this.state.password}
+                    onChange={this.changePasswordHandler}
+                    placeholder="Password">
+                    </input>
+                  </div>
+                  <div>
+                    <span
+                      id="forgotPass"
+                      onClick={() => this.props.forgotPassword()}>
+                    Forgot Password? </span>
+                  </div>
+                </form>
+                {error !== '' && (<p>{error}</p>)}
+              </div>
+              <div id="loginButton-login">
+                <LoginButton
+                  loginClick={this.handleClick}
+                  isClicked={this.state.isClicked}/>
+              </div>
+              <div id="checkbox-login">
+                <CheckBox checked={this.didCheckBox}/>
               </div>
             </div>
           </div>
-        );
-    }
+        </div>
+      );
+  }
 }
 
 export default withRouter(Login);

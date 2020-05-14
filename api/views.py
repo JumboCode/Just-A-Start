@@ -21,11 +21,13 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    @action(detail=False, methods=['POST'])
+    @action(detail=False, methods=['GET'])
     def get_user_profile(self, request):
-        user = Token.objects.get(key=request.POST.get('key')).user
+        print(request.GET.get('key',''))
+        user = Token.objects.get(key=request.GET['key']).user
         serialized_user = serializers.serialize('json', [user, ])
-        return HttpResponse(serialized_user)
+        return HttpResponse(serialized_user, content_type='application/json')
+        # return HttpResponse("soon")
 
     @action(detail=False, methods=['GET'])
     def get_user_by_email(self, request):
