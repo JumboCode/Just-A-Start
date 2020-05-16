@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import './ProfileEdit.css';
+import React from 'react';
+import './styles.css';
 
 class ProfileEdit extends React.Component {
   constructor(props){

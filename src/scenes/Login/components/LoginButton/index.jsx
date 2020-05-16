@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
 class LoginButton extends Component {
     state = {
@@ -20,10 +19,6 @@ class LoginButton extends Component {
     hoverColor = (color) => {
       this.setState({buttonStyle: {...this.state.buttonStyle, backgroundColor: color}});
     }
-
-
-
-
 }
 
 export default LoginButton;

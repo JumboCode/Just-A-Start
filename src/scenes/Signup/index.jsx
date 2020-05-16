@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
-import Navbar from '../components/Navbar.jsx';
-import SignUpButton from '../components/SignUpButton.jsx';
-import SignUpForm from '../components/SignUpForm.jsx';
-import CheckBox from '../components/Checkbox.jsx';
-import jas_man from '../assets/jas.man.png';
-import jas_woman from '../assets/jas.woman.png';
-import jas_ground from '../assets/jas.ground.png';
-import './SignUp.css';
+import Navbar from '../../components/Navbar/index';
+import SignUpButton from './components/SignupButton/index';
+import SignUpForm from './components/SignupForm/index';
+// import CheckBox from '../../components/Checkbox.jsx';
+import jas_man from '../../assets/jas.man.png';
+import jas_woman from '../../assets/jas.woman.png';
+import jas_ground from '../../assets/jas.ground.png';
+import './styles.css';
 
 class SignUp extends Component {
     state = {

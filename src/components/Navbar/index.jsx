@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
-import magnifying_glass from '../assets/magnifying_glass.png';
-import profile_picture from '../assets/profile_picture.png'
-import arrow from '../assets/arrow.png';
-import './AdminNavbar.css';
+import magnifying_glass from '../../assets/magnifying_glass.png';
+import profile_picture from '../../assets/profile_picture.png'
+import arrow from '../../assets/arrow.png';
+import './styles.css';
 
 class Navbar extends Component {
     constructor(props) {

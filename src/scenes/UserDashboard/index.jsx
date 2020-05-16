@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import './UserDashboard.css';
-import JobEntry from '../components/JobEntry.jsx';
-import AdminNavbar from '../components/AdminNavbar.jsx';
-import ProfileEdit from '../components/ProfileEdit.jsx';
+import React from 'react';
+
+import Navbar from '../../components/Navbar/index';
+import ProfileEdit from './components/ProfileEdit/index';
+import './styles.css';
 
 class UserDashboard extends React.Component {
   constructor(props) {
@@ -126,13 +125,14 @@ class UserDashboard extends React.Component {
         email: "Jacksonsmith@gmail.com",
         birthdate: "01/12/1991"
       }
-
     }
   }
+  
   profileEditClicked = () => {
       //this.setState({ profile_edit: "true" });
       this.profileEditElement.current.changeVisibilityOn(this.state.profile_data.name, this.state.profile_data.birthdate, this.state.profile_data.location, this.state.profile_data.phone, this.state.profile_data.email, this.state.profile_data.about);
   };
+  
   handler(name, dob, location, phone, email, about){
     console.log(this.state.profile_data.name);
     this.state.profile_data.name = name;
@@ -293,7 +293,7 @@ class UserDashboard extends React.Component {
 
     return(
       <body>
-        <AdminNavbar/>
+        <Navbar/>
         <div style = {background}>
           <ProfileEdit handler = {this.handler} ref={this.profileEditElement}/>
           <div id="allthestuff">

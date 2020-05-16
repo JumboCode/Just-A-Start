@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './Form.css';
-import './Checkbox.css';
+import './styles.css';
 
 class CheckBox extends Component {
     state = {
