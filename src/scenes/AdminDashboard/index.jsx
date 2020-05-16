@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
-import './AdminUserList.css';
-import UsersEntry from '../components/UsersEntry.jsx';
-import AdminDashboardDropdown from '../components/AdminDashboardDropdown.jsx'
-import AdminNavBar from '../components/AdminNavbar.jsx';
-import SideDashBoard from '../components/SideDashBoard';
+import './styles.css';
+import UserEntry from './components/UserEntry/index';
+import AdminDashboardDropdown from './components/Dropdown/index';
+import NavBar from '../../components/Navbar/index';
+import SideDashBoard from '../../components/AdminSideBar/index';
 
 class UsersBody extends Component {
-
-  
   constructor(props) {
     super(props);
     this.state = {
@@ -37,11 +34,20 @@ class UsersBody extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://127.0.0.1:8000/api/alumni/get_example/')
-        .then(response => {
-          console.log(response)
-        });
-    axios.get('/api/user/?format=json')
+    // axios.get('http://127.0.0.1:8000/api/alumni/get_example/')
+    //     .then(response => {
+    //       console.log(response)
+    //     });
+    const authToken = 0
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${authToken}`,
+      },
+    }
+
+    axios.get('http://127.0.0.1:8000/api/alumni/api/user/', fetchOptions)
         .then(response => {
           for (let i = 0;i < response.data.length;i++) {
             this.state.data.push({
@@ -68,7 +74,7 @@ class UsersBody extends Component {
       <body>
         <div class="bars">
           <SideDashBoard />
-          <AdminNavBar />
+          <NavBar />
         </div>
         
         <div class = "dashboard">
@@ -99,7 +105,7 @@ class UsersBody extends Component {
             <li id="item_title">Phone</li>
             <li id="item_title">Last Login</li>
           </ul>
-          {data.map(item => (<UsersEntry data={item} key={item.id}/>))}
+          {data.map(item => (<UserEntry data={item} key={item.id}/>))}
         </div>
       </body>
     )

@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import './UsersEntry.css';
-import ProfilePic from '../assets/profilepic.png'
+import React from 'react';
+import './styles.css';
+import ProfilePic from '../../../../assets/profilepic.png'
 import PropTypes from 'prop-types';
 
 class UserActivityEntry extends React.Component {

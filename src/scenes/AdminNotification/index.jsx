@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './AdminSendMsg.css';
+
 import axios from 'axios';
 
-import AdminNavBar from '../components/AdminNavbar.jsx';
-import SideDashBoard from '../components/SideDashBoard';
+import NavBar from '../../components/Navbar/index';
+import SideDashBoard from '../../components/AdminSideBar/index';
+import './styles.css';
 
 class AdminSendMsg extends Component {
   constructor(props) {
@@ -145,7 +146,7 @@ class AdminSendMsg extends Component {
       <body>
         <div class="bars">
           <SideDashBoard />
-          <AdminNavBar />
+          <NavBar />
         </div>
         {this.state.displayPopUp && <div class = "check-users-popup">
           <div class="close-check-popup-div">

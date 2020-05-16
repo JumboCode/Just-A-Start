@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Navbar from '../components/Navbar.jsx';
-import LoginButton from '../components/LoginButton.jsx';
-import CheckBox from '../components/Checkbox.jsx';
-import jas_man from '../assets/jas.man.png';
-import jas_woman from '../assets/jas.woman.png';
-import jas_ground from '../assets/jas.ground.png';
+import Navbar from '../../components/LoginNavbar/index';
+import LoginButton from './components/LoginButton/index';
+import CheckBox from './components/CheckBox/index';
+import jas_man from '../../assets/jas.man.png';
+import jas_woman from '../../assets/jas.woman.png';
+import jas_ground from '../../assets/jas.ground.png';
 import { withRouter } from 'react-router-dom';
-import './Login.css';
+import './styles.css';
 
 class Login extends Component {
   constructor(props) {
@@ -64,25 +64,21 @@ class Login extends Component {
             'Authorization': `Token ${key}`
           },
         }
-
-        console.log("Hello")
   
         fetch(`http://127.0.0.1:8000/api/user/get_user_profile/?key=${key}`, fetchOptions2)
           .then(res => res.json())
           .then(res => {
-            console.log(res[0]['fields'])
-            console.log(res[0]['fields']['admin'])
             const status = res[0]['fields']['admin']
             if (status === true) {
               this.setState({
                 isAdmin: true,
               })
-              this.props.history.push('/admin-userlist')
+              this.props.history.push('/admindashboard')
             } else {
               this.setState({
                 isAdmin: false,
               })
-              this.props.history.push('/user-dashboard')
+              this.props.history.push('/userdashboard')
             }
           }).catch(err => {
             console.log(err);
