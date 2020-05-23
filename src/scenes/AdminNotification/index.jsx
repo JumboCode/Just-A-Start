@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import {
+  withRouter
+} from "react-router-dom";
 
 import axios from 'axios';
-
 import NavBar from '../../components/Navbar/index';
 import SideDashBoard from '../../components/AdminSideBar/index';
 import './styles.css';
@@ -192,4 +194,4 @@ class AdminSendMsg extends Component {
   }
 }
 
-export default AdminSendMsg;
+export default withRouter(AdminSendMsg);

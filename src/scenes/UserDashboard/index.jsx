@@ -1,10 +1,12 @@
-import React from 'react';
-
+import React, { Component } from 'react';
+import {
+  withRouter
+} from "react-router-dom";
 import Navbar from '../../components/Navbar/index';
 import ProfileEdit from './components/ProfileEdit/index';
 import './styles.css';
 
-class UserDashboard extends React.Component {
+class UserDashboard extends Component {
   constructor(props) {
     super(props);
     this.handler = this.handler.bind(this);
@@ -145,27 +147,27 @@ class UserDashboard extends React.Component {
   }
   
   changeVisiblityOne = () => {
-      for(let x = 0; x < this.state.editEducation.length; x++){
-        this.state.editEducation[x] = false;
-      }
-      this.state.vis[0] = ! this.state.vis[0];
-      this.forceUpdate();
+    for(let x = 0; x < this.state.editEducation.length; x++){
+      this.state.editEducation[x] = false;
+    }
+    this.state.vis[0] = ! this.state.vis[0];
+    this.forceUpdate();
   }
   
   changeVisiblityTwo = () => {
-      for(let x = 0; x < this.state.editProgram.length; x++){
-        this.state.editProgram[x] = false;
-      }
-      this.state.vis[1] = ! this.state.vis[1];
-      this.forceUpdate();
+    for(let x = 0; x < this.state.editProgram.length; x++){
+      this.state.editProgram[x] = false;
+    }
+    this.state.vis[1] = ! this.state.vis[1];
+    this.forceUpdate();
   }
   
   changeVisiblityThree = () => {
-      for(let x = 0; x < this.state.editUnemployed.length; x++){
-        this.state.editUnemployed[x] = false;
-      }
-      this.state.vis[2] = ! this.state.vis[2];
-      this.forceUpdate();
+    for(let x = 0; x < this.state.editUnemployed.length; x++){
+      this.state.editUnemployed[x] = false;
+    }
+    this.state.vis[2] = ! this.state.vis[2];
+    this.forceUpdate();
   }
   addEducation = () => {
     this.state.Education.push(new Array(5));
@@ -263,21 +265,24 @@ class UserDashboard extends React.Component {
   }
   
   handleEducationChange(num, id, e){
-      if(this.state.editEducation[num]){
-        this.state.Education[num][id] = e.target.value;
-        this.forceUpdate();
-      }
-      
-  }
-  handleProgramChange(num, id, e){
-      this.state.Program[num][id] = e.target.value;
+    if(this.state.editEducation[num]){
+      this.state.Education[num][id] = e.target.value;
       this.forceUpdate();
+    }
+  }
+
+  handleProgramChange(num, id, e){
+    this.state.Program[num][id] = e.target.value;
+    this.forceUpdate();
   }
   handleUnemployedChange(num, id, e){
-      console.log(num);
-      console.log(id);
-      this.state.Unemployed[num][id] = e.target.value;
-      this.forceUpdate();
+    console.log(num);
+    console.log(id);
+    this.state.Unemployed[num][id] = e.target.value;
+    this.forceUpdate();
+  }
+
+  componentDidMount() {
   }
 
   render(){
@@ -290,6 +295,8 @@ class UserDashboard extends React.Component {
     }
 
     //const { profile_data } = this.state;
+
+    console.log("I'm in userdashboard")
 
     return(
       <body>
@@ -399,4 +406,4 @@ class UserDashboard extends React.Component {
   }
 }
 
-export default UserDashboard;
+export default withRouter(UserDashboard);

@@ -4,11 +4,11 @@ import {
   BrowserRouter,
   Route,
   Switch,
-  // Redirect,
+  Redirect,
 } from "react-router-dom";
 
-import PrivateRouteAdmin from "./components/PrivateRouteUser/index";
-import PrivateRouteUser from "./components/PrivateRouteAdmin/index";
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin/index";
+import PrivateRouteUser from "./components/PrivateRouteUser/index";
 // import PublicRoute from "./components/PublicRoute/index";
 import Login from "./scenes/Login/index";
 import SignUp from "./scenes/Signup/index"
@@ -26,7 +26,8 @@ class App extends Component {
       authToken: "",
       pk: "",
     }
-    this.setAuthToken = this.setAuthToken.bind(this);
+    this.setAuthToken = this.setAuthToken.bind(this)
+    this.setIsAdmin = this.setIsAdmin.bind(this)
   }
 
   setAuthToken(token) {
@@ -34,6 +35,12 @@ class App extends Component {
     this.setState({
       authToken: token,
       isAuthenticated: true,
+    });
+  }
+
+  setIsAdmin(status) {
+    this.setState({
+      isAdmin: status,
     });
   }
 
@@ -86,20 +93,21 @@ class App extends Component {
   }    
 
   render() {
-    // const { isAuthenticated, isAdmin } = this.state;
     console.log(this.state);
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={() => <Login setAuthToken={this.setAuthToken} />} />
+          <Route exact path="/" component={() => <Login setAuthToken={this.setAuthToken} setIsAdmin={this.setIsAdmin}/>} />
           <Route exact path="/sign-up" component={SignUp} />
           <PrivateRouteAdmin authToken={this.state.authToken} isAdmin={this.state.isAdmin} exact path="/admindashboard" component={AdminDashboard} />
           <PrivateRouteAdmin authToken={this.state.authToken} isAdmin={this.state.isAdmin} exact path="/adminnotification" component={AdminNotification} />
-          <PrivateRouteUser authToken={this.state.authToken} isAdmin={this.state.isAdmin} exact path="/userdashboard" component={UserDashboard}/>
+          <PrivateRouteUser authToken={this.state.authToken} isAdmin={this.state.isAdmin} exact path="/userdashboard" component={UserDashboard} />
           {/* <Route exact path="/userdashboard" component={UserDashboard} /> */}
           <Route component={NotFoundPage}></Route>
         </Switch>
+        {/* {isAuthenticated && !isAdmin && <Redirect to="/userdashboard" />} */}
       </BrowserRouter>
+      
     )
   }
 }

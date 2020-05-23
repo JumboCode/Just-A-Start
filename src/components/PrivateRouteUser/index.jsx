@@ -5,7 +5,7 @@ import {
   withRouter
 } from "react-router-dom";
 
-const PrivateRoute = ({ component: Component, authToken, isAdmin, pk, ...rest}) => {
+const PrivateRouteUser = ({ component: Component, authToken, isAdmin, pk, ...rest}) => {
   const key = window.localStorage.getItem('jaysbautht')
   var authenticated = false
   if (key === authToken) {
@@ -17,10 +17,8 @@ const PrivateRoute = ({ component: Component, authToken, isAdmin, pk, ...rest}) 
       {...rest} 
       render = { props => {
         if (authenticated === true && isAdmin === false) {
-          // return <Component authToken={authToken} pk={pk} {...props} />
-          return <Component authToken={authToken}/>
-        }
-        else if (authenticated === true) {
+          return <Component authToken={authToken} pk={pk} {...props}/>
+        } else if (authenticated === true) {
           return <Redirect to="/admindashboard"/>
         } else {
           return <Redirect to="/"/>
@@ -30,4 +28,4 @@ const PrivateRoute = ({ component: Component, authToken, isAdmin, pk, ...rest}) 
   )
 }
 
-export default withRouter(PrivateRoute);
+export default withRouter(PrivateRouteUser);

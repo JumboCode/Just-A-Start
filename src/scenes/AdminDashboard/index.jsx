@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import {
+  withRouter
+} from "react-router-dom";
 
+import axios from 'axios';
 import './styles.css';
 import UserEntry from './components/UserEntry/index';
 import AdminDashboardDropdown from './components/Dropdown/index';
@@ -112,4 +115,4 @@ class UsersBody extends Component {
   }
 }
 
-export default UsersBody;
+export default withRouter(UsersBody);

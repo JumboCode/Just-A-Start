@@ -15,6 +15,7 @@ class Login extends Component {
       username: "",
       password: "",
       isClicked: false,
+      isAdmin: false,
       forgotPassword: false,
       keepLoggedIn: false,
       error:""
@@ -37,7 +38,7 @@ class Login extends Component {
 
   handleClick = () => {
     const { username, password } = this.state;
-    const { setAuthToken } = this.props;
+    const { setAuthToken, setIsAdmin } = this.props;
     this.setState((prevState, props) =>
       ({isClicked: prevState.isClicked === false ? true : false}));
 
@@ -70,14 +71,10 @@ class Login extends Component {
           .then(res => {
             const status = res[0]['fields']['admin']
             if (status === true) {
-              this.setState({
-                isAdmin: true,
-              })
-              this.props.history.push('/admindashboard')
+              setIsAdmin(true)
+              this.props.history.push("/admindashboard")
             } else {
-              this.setState({
-                isAdmin: false,
-              })
+              setIsAdmin(false)
               this.props.history.push('/userdashboard')
             }
           }).catch(err => {
