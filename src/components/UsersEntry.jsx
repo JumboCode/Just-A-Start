@@ -17,7 +17,7 @@ class UserActivityEntry extends React.Component {
               <img id = "profilepic" src={ProfilePic} />
             </div>
             <div class = "item_users_entry">
-              <p id = "regular_users_entry">{data.username}</p>
+              <p id = "regular_users_entry"><a href={data.profile}>{data.username}</a></p>
             </div>
             <div class = "item_users_entry">
               <p id = "regular_users_entry">{data.name_first}</p>

@@ -37,28 +37,36 @@ class UsersBody extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://127.0.0.1:8000/api/alumni/get_example/')
-        .then(response => {
-          console.log(response)
-        });
-    axios.get('/api/user/?format=json')
-        .then(response => {
-          for (let i = 0;i < response.data.length;i++) {
-            this.state.data.push({
-              img_url: "../assets/profilepic.png",
-              username: response.data[i].username,
-              name_first: response.data[i].first_name,
-              name_last: response.data[i].last_name,
-              email: response.data[i].email,
-              phone: response.data[i].phone,
-              last_login: response.data[i].updated_time,
-              id: i + 1
-            })
-            console.log(response.data[i])
-          }
-          console.log(this.state.data)
-          this.forceUpdate();
-        });
+
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Token 81628b1e856f5d822053571e024571a888e8139e',
+      }
+    }
+
+    fetch('http://127.0.0.1:8000/api/user/', options)
+      .then(res => res.json())
+      .then(res => {
+        var count = 1;
+        for (let user of res) {
+          this.state.data.push({
+            img_url: "../assets/profilepic.png",
+            username: user.username,
+            name_first: user.first_name,
+            name_last: user.last_name,
+            email: user.email,
+            phone: user.phone,
+            last_login: "some date",
+            profile: `admin-userview/?email=${user.email}`,
+            id: count
+          })
+          console.log(user);
+          count += 1
+        }
+        this.forceUpdate();
+      })
     
   }
 

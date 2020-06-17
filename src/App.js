@@ -13,6 +13,7 @@ import AdminUserList from './pages/AdminUserList';
 import UserDashboard from './pages/UserDashboard';
 import NotFoundPage from "./pages/404";
 import SignUp from "./pages/SignUp"
+import AdminUserView from './pages/AdminUserView';
 
 class App extends Component {
   constructor(props) {
@@ -92,6 +93,9 @@ class App extends Component {
           <Route path="/user-dashboard" component={UserDashboard} />
           <Route path="/admin-notification" component={AdminNotification} />
           <Route path="/admin-userlist" component={AdminUserList} />
+          <Route path="/admin-userview" 
+            render={(props) => <AdminUserView {...props} birthdate={"asda"} />}
+          />
           <Route path="/sign-up" component={SignUp} />
           <Route component={NotFoundPage}></Route>
         </Switch>
