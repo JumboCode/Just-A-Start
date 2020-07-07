@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import {
+  withRouter
+} from "react-router-dom";
 
+import axios from 'axios';
 import './styles.css';
 import UserEntry from './components/UserEntry/index';
 import AdminDashboardDropdown from './components/Dropdown/index';
@@ -34,10 +37,6 @@ class UsersBody extends Component {
   }
 
   componentDidMount() {
-    // axios.get('http://127.0.0.1:8000/api/alumni/get_example/')
-    //     .then(response => {
-    //       console.log(response)
-    //     });
     const authToken = 0
     const fetchOptions = {
       method: 'GET',
@@ -112,4 +111,4 @@ class UsersBody extends Component {
   }
 }
 
-export default UsersBody;
+export default withRouter(UsersBody);

@@ -7,8 +7,8 @@ import {
   // Redirect,
 } from "react-router-dom";
 
-import PrivateRouteAdmin from "./components/PrivateRouteUser/index";
-import PrivateRouteUser from "./components/PrivateRouteAdmin/index";
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin/index";
+import PrivateRouteUser from "./components/PrivateRouteUser/index";
 // import PublicRoute from "./components/PublicRoute/index";
 import Login from "./scenes/Login/index";
 import SignUp from "./scenes/Signup/index"
@@ -26,7 +26,8 @@ class App extends Component {
       authToken: "",
       pk: "",
     }
-    this.setAuthToken = this.setAuthToken.bind(this);
+    this.setAuthToken = this.setAuthToken.bind(this)
+    this.setIsAdmin = this.setIsAdmin.bind(this)
   }
 
   setAuthToken(token) {
@@ -37,45 +38,77 @@ class App extends Component {
     });
   }
 
+  setIsAdmin(status) {
+    this.setState({
+      isAdmin: status,
+    });
+  }
+
   componentDidMount() {
-    // window.localStorage.removeItem('jaysbautht');
     const key = window.localStorage.getItem('jaysbautht');
 
-    if (key) {
-      this.setState({
-        isAuthenticated: true,
-        authToken: key
-      });
+    console.log(key)
+
+    if (key != null) {
+      const fetchOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `Token ${key}`
+        },
+      }
+  
+      fetch(`http://127.0.0.1:8000/api/user/get_user_profile/?key=${key}`, fetchOptions)
+          .then(res => res.json())
+          .then(res => {
+            const status = res[0]['fields']['admin']
+            if (status === true) {
+              this.setState({
+                isAdmin: true,
+                isAuthenticated: true,
+                authToken: key,
+              })
+            } else {
+              this.setState({
+                isAdmin: false,
+                isAuthenticated: true,
+                authToken: key,
+              })
+            }
+          }).catch(err => {
+            console.log(err);
+          })
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { isAuthenticated, authToken} = this.state;
-    // var {isUser, isAdmin} = this.state;
+    const key = window.localStorage.getItem('jaysbautht');
 
     if ((prevState.isAuthenticated !== isAuthenticated) && isAuthenticated && authToken !== '') {
       const fetchOptions = {
         method: 'GET',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Authorization': `Token ${authToken}`
+          'Authorization': `Token ${key}`
         },
-        // params: {'key': '5909dcfffb5c09d2a35e2db838e0af0a3c5e75b4'}
       }
 
-      console.log(authToken)
-
-      fetch(`http://127.0.0.1:8000/api/user/get_user_profile/?key=${authToken}`, fetchOptions)
+      fetch(`http://127.0.0.1:8000/api/user/get_user_profile/?key=${key}`, fetchOptions)
         .then(res => res.json())
         .then(res => {
           const status = res[0]['fields']['admin']
           if (status === true) {
             this.setState({
               isAdmin: true,
+              isAuthenticated: true,
+              authToken: key,
             })
           } else {
             this.setState({
               isAdmin: false,
+              isAuthenticated: true,
+              authToken: key,
             })
           }
           
@@ -86,20 +119,32 @@ class App extends Component {
   }    
 
   render() {
-    // const { isAuthenticated, isAdmin } = this.state;
-    console.log(this.state);
+    console.log(this.state)
+    const {authToken, isAuthenticated, isAdmin} = this.state
+
+    if (!this.state.isAuthenticated) {
+      return (
+          <BrowserRouter>
+            <Switch>
+              <Route exact path="/" component={() => <Login setAuthToken={this.setAuthToken} setIsAdmin={this.setIsAdmin}/>} />
+              {/* <Route component={NotFoundPage}></Route> */}
+            </Switch>
+            </BrowserRouter>
+      )
+    }
+
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={() => <Login setAuthToken={this.setAuthToken} />} />
+          <Route exact path="/" component={() => <Login setAuthToken={this.setAuthToken} setIsAdmin={this.setIsAdmin}/>} />
           <Route exact path="/sign-up" component={SignUp} />
-          <PrivateRouteAdmin authToken={this.state.authToken} isAdmin={this.state.isAdmin} exact path="/admindashboard" component={AdminDashboard} />
-          <PrivateRouteAdmin authToken={this.state.authToken} isAdmin={this.state.isAdmin} exact path="/adminnotification" component={AdminNotification} />
-          <PrivateRouteUser authToken={this.state.authToken} isAdmin={this.state.isAdmin} exact path="/userdashboard" component={UserDashboard}/>
-          {/* <Route exact path="/userdashboard" component={UserDashboard} /> */}
+          <PrivateRouteAdmin authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/admindashboard" component={AdminDashboard} />
+          <PrivateRouteAdmin authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/adminnotification" component={AdminNotification} />
+          <PrivateRouteUser authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/userdashboard" component={UserDashboard} />
           <Route component={NotFoundPage}></Route>
         </Switch>
       </BrowserRouter>
+      
     )
   }
 }

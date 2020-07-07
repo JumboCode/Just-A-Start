@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/LoginNavbar/index';
 import LoginButton from './components/LoginButton/index';
-import CheckBox from './components/CheckBox/index';
 import jas_man from '../../assets/jas.man.png';
 import jas_woman from '../../assets/jas.woman.png';
 import jas_ground from '../../assets/jas.ground.png';
@@ -15,15 +14,10 @@ class Login extends Component {
       username: "",
       password: "",
       isClicked: false,
+      isAdmin: false,
       forgotPassword: false,
-      keepLoggedIn: false,
       error:""
     };
-  }
-
-  didCheckBox = () => {
-    this.setState((prevState, props) =>
-      ({keepLoggedIn: (prevState.keepLoggedIn === true) ? false : true}));
   }
 
   didForgetPassword = () => {
@@ -37,7 +31,7 @@ class Login extends Component {
 
   handleClick = () => {
     const { username, password } = this.state;
-    const { setAuthToken } = this.props;
+    const { setAuthToken, setIsAdmin } = this.props;
     this.setState((prevState, props) =>
       ({isClicked: prevState.isClicked === false ? true : false}));
 
@@ -70,14 +64,10 @@ class Login extends Component {
           .then(res => {
             const status = res[0]['fields']['admin']
             if (status === true) {
-              this.setState({
-                isAdmin: true,
-              })
-              this.props.history.push('/admindashboard')
+              setIsAdmin(true)
+              this.props.history.push("/admindashboard")
             } else {
-              this.setState({
-                isAdmin: false,
-              })
+              setIsAdmin(false)
               this.props.history.push('/userdashboard')
             }
           }).catch(err => {
@@ -125,7 +115,7 @@ class Login extends Component {
                       type="text"
                       value={this.state.username}
                       onChange={this.changeUsernameHandler}
-                      placeholder="Username/Email address">
+                      placeholder="Username">
                     </input>
                   </div>
 
@@ -151,9 +141,6 @@ class Login extends Component {
                 <LoginButton
                   loginClick={this.handleClick}
                   isClicked={this.state.isClicked}/>
-              </div>
-              <div id="checkbox-login">
-                <CheckBox checked={this.didCheckBox}/>
               </div>
             </div>
           </div>

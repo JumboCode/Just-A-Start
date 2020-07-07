@@ -7,9 +7,9 @@ class ProfileEdit extends React.Component {
     this.state = {
       visibility: false,
       iteration: 1,
-      name: "a",
-      location: "",
-      about: "",
+      name: "",
+      // location: "",
+      // about: "",
       phone: "",
       email: "",
       birthdate: ""
@@ -17,30 +17,30 @@ class ProfileEdit extends React.Component {
     
   }
   setTextAreaFormat() {
-    let lines = [];
+    // let lines = [];
     let text = "";
     let maxLines = 4;
     let width = document.getElementById("textarea").height;
-    let maxTextForLine = width/100;
+    // let maxTextForLine = width/100;
     text = document.getElementById("textarea").value;
 
     let lh = 20
     let fs = 20;
     let dh = Math.round((lh/fs)*100)/100;
-    if(text.rows == maxLines){
+    if(text.rows === maxLines){
         text.style.height = Math.ceil((fs * text.rows * dh)+((fs*200)/300));
     }
-
   }
-  changeVisibilityOn(name, dob, location, phone, email, about){
-    console.log(name)
-    this.state.name = name;
-    this.state.location = location;
-    this.state.about = about;
-    this.state.phone = phone;
-    this.state.email = email;
-    this.state.birthdate = dob;
-    this.state.visibility = true;
+
+  changeVisibilityOn(name, dob, phone, email){
+    // console.log(name)
+    this.setState({
+      name: name,
+      email: email,
+      phone: phone,
+      brithdate: dob,
+      visibility: true
+    })
     this.forceUpdate();
   };
   
@@ -56,18 +56,19 @@ class ProfileEdit extends React.Component {
   handleBirthdateChange = (event) => {
     this.setState({birthdate: event.target.value})
   };
-  handleEmailChange = (event) => {
-    this.setState({email: event.target.value})
-  };
   handlePhoneChange = (event) => {
     this.setState({phone: event.target.value})
   };
-  handleLocationChange = (event) => {
-    this.setState({location: event.target.value})
+  handleEmailChange = (event) => {
+    this.setState({email: event.target.value})
   };
-  handleAboutChange = (event) => {
-    this.setState({about: event.target.value})
-  };
+  
+  // handleLocationChange = (event) => {
+  //   this.setState({location: event.target.value})
+  // };
+  // handleAboutChange = (event) => {
+  //   this.setState({about: event.target.value})
+  // };
   render(){
     return(
       <div>
@@ -76,22 +77,23 @@ class ProfileEdit extends React.Component {
           <div class="flex_profile_edit" id="left_profile_edit">
             <p class = "left_text">Name</p>
             <p class = "left_text">Date of Birth</p>
-            <p class = "left_text">Location</p>
+            {/* <p class = "left_text">Location</p> */}
             <p class = "left_text">Phone</p>
             <p class = "left_text">Email</p>
-            <p class = "left_text">About</p>
+            {/* <p class = "left_text">About</p> */}
           </div>
           <div class="flex_profile_edit" id="right_profile_edit">
             <input id="name_profile_edit" class="input_profile_edit" value ={this.state.name} onChange={this.handleNameChange}/>
             <input id="dob_profile_edit" class="input_profile_edit" value ={this.state.birthdate} onChange={this.handleBirthdateChange}/>
-            <input id="location_profile_edit" class="input_profile_edit" value ={this.state.location} onChange={this.handleLocationChange}/>
+            {/* <input id="location_profile_edit" class="input_profile_edit" value ={this.state.location} onChange={this.handleLocationChange}/> */}
             <input id="phone_profile_edit" class="input_profile_edit" value ={this.state.phone} onChange={this.handlePhoneChange}/>
             <input id="email_profile_edit" class="input_profile_edit" value ={this.state.email} onChange={this.handleEmailChange}/>
-            <textarea id="textarea" onKeyPress={this.setTextAreaFormat} value={this.state.about} onChange={this.handleAboutChange}/>
+            {/* <textarea id="textarea" onKeyPress={this.setTextAreaFormat} value={this.state.about} onChange={this.handleAboutChange}/> */}
           </div>
           <button onClick = {() => {
                   this.changeVisibilityOff();
-                  this.props.handler(document.getElementById("name_profile_edit").value, document.getElementById("dob_profile_edit").value, document.getElementById("location_profile_edit").value, document.getElementById("phone_profile_edit").value, document.getElementById("email_profile_edit").value, document.getElementById("textarea").value)}} class="confirm">Confirm</button>
+                  // this.props.handler(document.getElementById("name_profile_edit").value, document.getElementById("dob_profile_edit").value, document.getElementById("location_profile_edit").value, document.getElementById("phone_profile_edit").value, document.getElementById("email_profile_edit").value, document.getElementById("textarea").value)}} class="confirm">Confirm</button>
+                  this.props.handler(document.getElementById("name_profile_edit").value, document.getElementById("dob_profile_edit").value, document.getElementById("phone_profile_edit").value, document.getElementById("email_profile_edit").value)}} class="confirm">Confirm</button>
         </div>
         }
       </div>
