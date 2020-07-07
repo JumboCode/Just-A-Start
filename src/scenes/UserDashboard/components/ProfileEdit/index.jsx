@@ -17,17 +17,17 @@ class ProfileEdit extends React.Component {
     
   }
   setTextAreaFormat() {
-    let lines = [];
+    // let lines = [];
     let text = "";
     let maxLines = 4;
     let width = document.getElementById("textarea").height;
-    let maxTextForLine = width/100;
+    // let maxTextForLine = width/100;
     text = document.getElementById("textarea").value;
 
     let lh = 20
     let fs = 20;
     let dh = Math.round((lh/fs)*100)/100;
-    if(text.rows == maxLines){
+    if(text.rows === maxLines){
         text.style.height = Math.ceil((fs * text.rows * dh)+((fs*200)/300));
     }
   }

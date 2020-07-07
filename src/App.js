@@ -4,7 +4,7 @@ import {
   BrowserRouter,
   Route,
   Switch,
-  Redirect,
+  // Redirect,
 } from "react-router-dom";
 
 import PrivateRouteAdmin from "./components/PrivateRouteAdmin/index";
@@ -45,7 +45,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // window.localStorage.removeItem('jaysbautht');
     const key = window.localStorage.getItem('jaysbautht');
 
     console.log(key)

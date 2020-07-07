@@ -18,11 +18,6 @@ class SignUp extends Component {
       keepLoggedIn: false
     };
 
-
-    constructor() {
-        super();
-    }
-
     render() {
         return (
           <div>
@@ -50,20 +45,20 @@ class SignUp extends Component {
 
 
     componentDidUpdate = (prevProps, prevState) => {
-      if (prevState.username != this.state.username) {
+      if (prevState.username !== this.state.username) {
         this.printFields();
       }
-      if (prevState.forgotPassword != this.state.forgotPassword) {
+      if (prevState.forgotPassword !== this.state.forgotPassword) {
         console.log(this.state.forgotPassword);
       }
-      if (prevState.keepLoggedIn != this.state.keepLoggedIn) {
+      if (prevState.keepLoggedIn !== this.state.keepLoggedIn) {
         console.log(this.state.keepLoggedIn);
       }
     }
 
     didCheckBox = () => {
       this.setState((prevState, props) =>
-        ({keepLoggedIn: (prevState.keepLoggedIn == true) ? false : true}));
+        ({keepLoggedIn: (prevState.keepLoggedIn === true) ? false : true}));
     }
 
     didForgetPassword = () => {
@@ -78,7 +73,7 @@ class SignUp extends Component {
     handleClick = () => {
       console.log("Clicked");
       this.setState((prevState, props) =>
-        ({isClicked: prevState.isClicked == false ? true : false}));
+        ({isClicked: prevState.isClicked === false ? true : false}));
       setTimeout(10, this.printFields);
       this.printFields();
     }

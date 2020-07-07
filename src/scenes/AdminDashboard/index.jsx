@@ -37,10 +37,6 @@ class UsersBody extends Component {
   }
 
   componentDidMount() {
-    // axios.get('http://127.0.0.1:8000/api/alumni/get_example/')
-    //     .then(response => {
-    //       console.log(response)
-    //     });
     const authToken = 0
     const fetchOptions = {
       method: 'GET',

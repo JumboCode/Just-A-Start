@@ -37,11 +37,10 @@ class UserViewSet(viewsets.ModelViewSet):
     
     @action(detail=False, methods=['GET'])
     def get_user_experiences(self, request):
-        user = Token.objects.get(key=request.GET["key"]).user
+        user = Token.objects.get(key=request.GET.get("key", "")).user
 
         job_list = user.job_set.all()
         education_list = user.education_set.all()
-        # unemployed_list = user.unemployed_set.all()
         chained_list = chain(job_list, education_list)
         serialized_experiences = serializers.serialize('json', chained_list)
         return HttpResponse(serialized_experiences)

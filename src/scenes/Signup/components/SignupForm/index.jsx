@@ -12,7 +12,7 @@ class SignUpForm extends Component {
     };
 
     componentDidUpdate = (prevProps, prevState) => {
-      if (prevProps.isClicked != this.props.isClicked) {
+      if (prevProps.isClicked !== this.props.isClicked) {
         console.log(this.state.username);
         
         console.log(this.state.email);

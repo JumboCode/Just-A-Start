@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../../components/LoginNavbar/index';
 import LoginButton from './components/LoginButton/index';
-import CheckBox from './components/CheckBox/index';
 import jas_man from '../../assets/jas.man.png';
 import jas_woman from '../../assets/jas.woman.png';
 import jas_ground from '../../assets/jas.ground.png';
@@ -17,14 +16,8 @@ class Login extends Component {
       isClicked: false,
       isAdmin: false,
       forgotPassword: false,
-      keepLoggedIn: false,
       error:""
     };
-  }
-
-  didCheckBox = () => {
-    this.setState((prevState, props) =>
-      ({keepLoggedIn: (prevState.keepLoggedIn === true) ? false : true}));
   }
 
   didForgetPassword = () => {
@@ -122,7 +115,7 @@ class Login extends Component {
                       type="text"
                       value={this.state.username}
                       onChange={this.changeUsernameHandler}
-                      placeholder="Username/Email address">
+                      placeholder="Username">
                     </input>
                   </div>
 
@@ -148,9 +141,6 @@ class Login extends Component {
                 <LoginButton
                   loginClick={this.handleClick}
                   isClicked={this.state.isClicked}/>
-              </div>
-              <div id="checkbox-login">
-                <CheckBox checked={this.didCheckBox}/>
               </div>
             </div>
           </div>
