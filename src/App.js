@@ -4,7 +4,6 @@ import {
   BrowserRouter,
   Route,
   Switch,
-  // Redirect,
 } from "react-router-dom";
 
 import PrivateRouteAdmin from "./components/PrivateRouteAdmin/index";

@@ -27,9 +27,9 @@ class Navbar extends Component {
                     </div>
 
                     <img className= "arrow-size" src={arrow} alt="arrow" />
-                  <div class="dropdown-content">
-                    <a id = "logout" onClick={this.onLogoutClick}> Logout</a>
-                  </div>
+                    <div class="dropdown-content">
+                        <a id = "logout" onClick={this.onLogoutClick}> Logout</a>
+                    </div>
                 </div>
             </div>
         );

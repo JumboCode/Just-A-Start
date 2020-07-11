@@ -99,14 +99,13 @@ class Login extends Component {
         <div>
           <Navbar/>
           <div id="background-login">
-            <img className= "left-shift" src={jas_man} alt="icon" />
-            <img className= "right-shift" src={jas_woman} alt="icon" />
-            <img className= "bottom-shift" src={jas_ground} alt="icon" />
+            <img id= "left-shift" src={jas_man} alt="icon" />
             <div id="wrapper-login">
               <div id="loginText">
               Login
               </div>
-              <div id="form-login">
+
+              <div>
                 <form>
                   <div>
                     <input
@@ -131,7 +130,7 @@ class Login extends Component {
                   <div>
                     <span
                       id="forgotPass"
-                      onClick={() => this.props.forgotPassword()}>
+                      onClick={() => this.didForgetPassword()}>
                     Forgot Password? </span>
                   </div>
                 </form>
@@ -143,7 +142,10 @@ class Login extends Component {
                   isClicked={this.state.isClicked}/>
               </div>
             </div>
+
+            <img className= "right-shift" src={jas_woman} alt="icon" />
           </div>
+          <img className= "bottom-shift" src={jas_ground} alt="icon" />
         </div>
       );
   }
