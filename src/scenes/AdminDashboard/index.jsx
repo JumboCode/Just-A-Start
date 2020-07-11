@@ -37,7 +37,7 @@ class UsersBody extends Component {
   }
 
   componentDidMount() {
-    const authToken = 0
+    const authToken = this.props.authToken
     const fetchOptions = {
       method: 'GET',
       headers: {
@@ -46,11 +46,10 @@ class UsersBody extends Component {
       },
     }
 
-    axios.get('http://127.0.0.1:8000/api/alumni/api/user/', fetchOptions)
+    axios.get('http://127.0.0.1:8000/api/user/', fetchOptions)
         .then(response => {
           for (let i = 0;i < response.data.length;i++) {
             this.state.data.push({
-              img_url: "../assets/profilepic.png",
               username: response.data[i].username,
               name_first: response.data[i].first_name,
               name_last: response.data[i].last_name,
@@ -70,7 +69,7 @@ class UsersBody extends Component {
   render(){
     const { data } = this.state;
     return(
-      <body>
+      <div>
         <div class="bars">
           <SideDashBoard />
           <NavBar />
@@ -106,7 +105,7 @@ class UsersBody extends Component {
           </ul>
           {data.map(item => (<UserEntry data={item} key={item.id}/>))}
         </div>
-      </body>
+      </div>
     )
   }
 }

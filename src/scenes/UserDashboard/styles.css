@@ -1,4 +1,4 @@
-h1{
+h1 {
   font-size: 25px;
   font-weight:600;
 }
@@ -37,26 +37,28 @@ h1{
 }
 
 .job_list{
-  display:flex;
+  display: flex;
   flex-direction: column;
   flex-flow: row wrap;
+  float: right;
+  width: 70%;
   margin-top: 40px;
-  background-color: white;
   margin-right: 9%;
+  background-color: white;
   box-shadow: 5px 5px 8px #c6d8e5;
-  width: 50%;
-  float:right;
 }
 
 .profile{
-  display:flex;
+  display: flex;
   flex-direction: column;
-  margin-top: 40px;
-  background-color: white;
-  margin-left: 9%;
-  box-shadow: 5px 5px 8px #c6d8e5;
-  width: 29%;
   float: left;
+  margin-top: 40px;
+  margin-left: 9%;
+  margin-right: 9%;
+  height: 300px;
+  width: 30%;
+  background-color: white;
+  box-shadow: 5px 5px 8px #c6d8e5;
 }
 
 .add{
@@ -87,6 +89,7 @@ h1{
   justify-content: center;
   align-items: center;
 }
+
 /*THIS IS THE JOB ENTRY CSS*/
 #large{
   font-size: 20px;
@@ -136,15 +139,13 @@ li{
 }
 
 #allthestuff{
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 0;
+  display: flex;
+  width: 100%;
 }
+
 #profile_edit_overlay{
   display: none;
 }
-
 
 .experience-titles{
   display: flex;
