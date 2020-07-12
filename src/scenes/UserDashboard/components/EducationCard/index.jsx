@@ -67,47 +67,47 @@ class JobCard extends Component {
         <div>
           <p id="experience-edit-field">Name of School/Company</p>
           {editingJob && <input value={this.state.institution_name} 
-                  onChange={this.changeInstitutionNameHandler} class="input-experience-edit" type="text"></input>}
+                  onChange={this.changeInstitutionNameHandler} className="input-experience-edit" type="text"></input>}
           {!editingJob && <input disabled="disabled" value={this.state.institution_name} 
-                  onChange={this.changeInstitutionNameHandler} class="input-experience-edit" type="text"></input>}
+                  onChange={this.changeInstitutionNameHandler} className="input-experience-edit" type="text"></input>}
         </div>
 
         <div>
           <p id="experience-edit-field">Type of Degree/Certificate</p>
           {editingJob && <input value={this.state.degree} 
-                  onChange={this.changeDegreeHandler} class="input-experience-edit" type="text"></input>}
+                  onChange={this.changeDegreeHandler} className="input-experience-edit" type="text"></input>}
           {!editingJob && <input disabled="disabled" value={this.state.degree} 
-                  onChange={this.changeDegreeHandler} class="input-experience-edit" type="text"></input>}
+                  onChange={this.changeDegreeHandler} className="input-experience-edit" type="text"></input>}
         </div>
 
         <div>
           <p id="experience-edit-field">Type of Institution</p>
           {editingJob && <input value={this.state.institution_type} 
-                  onChange={this.changeInstitutionTypeHandler} class="input-experience-edit" type="number"></input>}
+                  onChange={this.changeInstitutionTypeHandler} className="input-experience-edit" type="number"></input>}
           {!editingJob && <input disabled="disabled" value={this.state.institution_type} 
-                  onChange={this.changeInstitutionTypeHandler} class="input-experience-edit" type="number"></input>}
+                  onChange={this.changeInstitutionTypeHandler} className="input-experience-edit" type="number"></input>}
         </div>
         
         <div>
           <p id="experience-edit-field">Program/Major</p>
           {editingJob && <input value={this.state.program} 
-                  onChange={this.changeProgramHandler} class="input-experience-edit" type="text"></input>}
+                  onChange={this.changeProgramHandler} className="input-experience-edit" type="text"></input>}
           {!editingJob && <input disabled = "disabled" value={this.state.program} 
-                  onChange={this.changeProgramHandler} class="input-experience-edit" type="text"></input>}
+                  onChange={this.changeProgramHandler} className="input-experience-edit" type="text"></input>}
         </div>
 
         <div>
           <p id="experience-edit-field">Start Date</p>
           {editingJob && <input value={this.state.startDate} 
-                  onChange={this.changeStartDateHandler} class="input-experience-edit" type="text"></input>}
+                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="text"></input>}
           {!editingJob && <input disabled = "disabled" value={this.state.startDate} 
-                  onChange={this.changeStartDateHandler} class="input-experience-edit" type="text"></input>}
+                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="text"></input>}
         </div>
 
-        <div class="edit-experiences-button-div">
-          {!this.state.editingJob && <button class="edit-experiences-button" onClick ={this.editEducation}>Edit</button>}
-          {this.state.editingJob && <button class="edit-experiences-button" onClick ={this.confirmEducation}>Confirm</button>}
-          <button class="edit-experiences-button" onClick={() => this.props.deleteEducation(this.props.item)}>Delete</button>
+        <div className="edit-experiences-button-div">
+          {!this.state.editingJob && <button className="edit-experiences-button" onClick ={this.editEducation}>Edit</button>}
+          {this.state.editingJob && <button className="edit-experiences-button" onClick ={this.confirmEducation}>Confirm</button>}
+          <button className="edit-experiences-button" onClick={() => this.props.deleteEducation(this.props.item)}>Delete</button>
         </div>
       </div>
     )

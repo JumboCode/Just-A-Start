@@ -19,16 +19,15 @@ class Navbar extends Component {
     render() {
         return (
             <div className = "container_a">
-
                 <div className = "top-right-thingy">
                     <div className = "vertically-align-thingy">
-                       <h2 className = "space-between-headers">Name</h2>
-                       <h3 className = "space-between-headers">Role</h3>
+                    <h2 className = "space-between-headers">{this.props.name}</h2>
+                       <h3 className = "space-between-headers">{this.props.type}</h3>
                     </div>
 
                     <img className= "arrow-size" src={arrow} alt="arrow" />
-                    <div class="dropdown-content">
-                        <a id = "logout" onClick={this.onLogoutClick}> Logout</a>
+                    <div className="dropdown-content">
+                        <p id = "logout" onClick={this.onLogoutClick}> Logout</p>
                     </div>
                 </div>
             </div>

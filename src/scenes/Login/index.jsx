@@ -81,6 +81,12 @@ class Login extends Component {
       })
   }
 
+  onKeyPress = (e) => {
+    if(e.which === 13) {
+      this.handleClick();
+    }
+  }
+
   setFields = () => {
     this.setState({username: this._un.value, password: this._ps.value});
   }
@@ -88,9 +94,9 @@ class Login extends Component {
   changeUsernameHandler = (event) => {
     this.setState({username: event.target.value});
   }
+  
   changePasswordHandler = (event) => {
     this.setState({password: event.target.value});
-
   }
 
   render() {
@@ -114,17 +120,19 @@ class Login extends Component {
                       type="text"
                       value={this.state.username}
                       onChange={this.changeUsernameHandler}
+                      onKeyPress={this.onKeyPress}
                       placeholder="Username">
                     </input>
                   </div>
 
                   <div>
                     <input
-                    className="loginInput" ref={(el) => this._ps = el}
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.changePasswordHandler}
-                    placeholder="Password">
+                      className="loginInput" ref={(el) => this._ps = el}
+                      type="password"
+                      value={this.state.password}
+                      onChange={this.changePasswordHandler}
+                      onKeyPress={this.onKeyPress}
+                      placeholder="Password">
                     </input>
                   </div>
                   <div>

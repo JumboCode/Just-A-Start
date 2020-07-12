@@ -75,14 +75,14 @@ class UserDashboard extends Component {
 
     return(
       <div>
-        <Navbar/>
+        <Navbar name={this.state.profile_data.name} type="Alumnus"/>
         <div style = {background}>
           <ProfileEdit handler = {this.handler} ref={this.profileEditElement}/>
           <div id="allthestuff">
             <div className = "profile">
               <div className = "top_text">
                 <h1 className = "title">Profile</h1>
-                <button onClick={this.profileEditClicked} className = "add" id = "edit">&#9998;</button>
+                <button onClick={this.profileEditClicked} className="add" id ="edit">&#9998;</button>
               </div>
               <h1 className = "centered">{this.state.profile_data.name}</h1>
               <div className = "flex_container_two">

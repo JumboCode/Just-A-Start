@@ -6,7 +6,6 @@ import {
 import axios from 'axios';
 import './styles.css';
 import UserEntry from './components/UserEntry/index';
-import AdminDashboardDropdown from './components/Dropdown/index';
 import NavBar from '../../components/Navbar/index';
 import SideDashBoard from '../../components/AdminSideBar/index';
 
@@ -14,26 +13,11 @@ class UsersBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [
-        {
-          img_url: "../assets/profilepic.png",
-          username: "kbrown01",
-          name_first: 'Kate',
-          name_last: 'Brown',
-          email: "katebrown@gmail.com",
-          phone: "+1(617)-283-1837",
-          last_login: "1 hour ago",
-          id: 1
-        },
-      ]
+      data: [],
+      filteredData: [],
+      filtered: false,
+      query: ""
     }
-    
-    
-    this.state = {
-      data: [
-      ]
-    }
-    
   }
 
   componentDidMount() {
@@ -47,54 +31,63 @@ class UsersBody extends Component {
     }
 
     axios.get('http://127.0.0.1:8000/api/user/', fetchOptions)
-        .then(response => {
-          for (let i = 0;i < response.data.length;i++) {
-            this.state.data.push({
-              username: response.data[i].username,
-              name_first: response.data[i].first_name,
-              name_last: response.data[i].last_name,
-              email: response.data[i].email,
-              phone: response.data[i].phone,
-              last_login: response.data[i].updated_time,
-              id: i + 1
-            })
-            console.log(response.data[i])
-          }
-          console.log(this.state.data)
-          this.forceUpdate();
-        });
-    
+      .then(response => {
+        for (let i = 0;i < response.data.length;i++) {
+          this.state.data.push({
+            username: response.data[i].username,
+            name_first: response.data[i].first_name,
+            name_last: response.data[i].last_name,
+            email: response.data[i].email,
+            phone: response.data[i].phone,
+            last_login: response.data[i].updated_time,
+            id: i + 1
+          })
+          // console.log(response.data[i])
+        }
+        // console.log(this.state.data)
+        this.forceUpdate();
+      });
+  }
+
+  changeQueryHandler = (event) => {
+    this.setState({query: event.target.value});
+  }
+
+  filterData = () => {
+    var filteredData = this.state.data.filter(person => (person.name_first).includes(this.state.query))
+    this.setState({
+      filtedData: filteredData,
+      filtered: true,
+    })
   }
 
   render(){
-    const { data } = this.state;
+    var data = []
+    if (this.state.filtered === false) {
+      data = this.state.data
+    } else {
+      data = this.state.filteredData
+    }
+
     return(
       <div>
-        <div class="bars">
-          <SideDashBoard />
+        <div className="bars">
+          <SideDashBoard id={1}/>
           <NavBar />
         </div>
         
-        <div class = "dashboard">
-          <div class = "top_content">
+        <div className = "dashboard">
+          <div className = "top_content">
             <h1>Users</h1>
-            <input type="text" class = "big_search" placholder = "Search"/>
-            <div class = "container">
+            <input type="text" className = "big_search" value={this.state.query} onChange={this.changeQueryHandler} placeholder = "Search"/>
+            <div className = "container">
               <div id = "flex_container_two">
-                <AdminDashboardDropdown name = "All Users"/>
-                <button id = "filter" type="button">Filter</button>
-                <button id = "filter" type="button">Add User</button>
-              </div>
-              <div id = "flex_container_three">
-                <button class = "arrow" id = "left" type="button"> ></button>
-                <input type="text" class = "page_search" />
-                <p id="page_text"> of 5</p>
-                <button class = "arrow" type="button"> ></button>
+                <button id = "filter" type="button" onClick={this.filterData}>Filter</button>
               </div>
             </div>
           </div>
-          <ul class = "flex_container_user_entries">
-            <div id = "special_item_title" class>
+          <ul className = "flex_container_user_entries">
+            <div id = "special_item_title">
             </div>
             <li id="item_title">Username</li>
             <li id="item_title">First</li>

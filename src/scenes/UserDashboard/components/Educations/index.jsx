@@ -106,13 +106,13 @@ class Educations extends Component {
         <div className = "edit-experiences">
           <div className = "experience-titles">
             <label id="plus-button" onClick={this.changeVisiblity}>+</label>
-            <p class="experience-titles-text">Employment Post-Program Placement</p>
+            <p className="experience-titles-text">Employment Post-Program Placement</p>
           </div>
 
           <div className = "flexbox-user-dashboard-big">
             {show && educations.map((element) => <EducationCard deleteEducation={this.deleteEducation} item={element} educationData={element['education']} key={element['id']} id={element['id']}/>)}
           </div>
-          {this.state.vis && <button onClick={this.addEducation} class="edit-experiences-button" id = "add-button-experiences">&#9998; Add</button>}
+          {this.state.vis && <button onClick={this.addEducation} className="edit-experiences-button" id = "add-button-experiences">&#9998; Add</button>}
         </div>
     )
   }
