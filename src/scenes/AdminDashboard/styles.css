@@ -31,9 +31,9 @@
   width: 30%;
   display: flex;
   flex-direction: row;
-  justify-content:space-between;
-
+  justify-content: flex-start;
 }
+
 #flex_container_three{
   display: flex;
   flex-direction: row;

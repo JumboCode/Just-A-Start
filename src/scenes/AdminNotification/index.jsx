@@ -14,64 +14,38 @@ class AdminSendMsg extends Component {
     this.state = {
       regexp: RegExp(''),
       displayPopUp: false,
-      users: [
-        {
-          "checked":false,
-          "id":3,
-          "name":"1John Smith",
-          "phone":1111111111,
-          "username":"helllaslfl"
-        },
-        {
-          "checked":false,
-          "id":3,
-          "name":"2John Smith",
-          "phone":1111111112,
-          "username":"helllaslfl"
-        },
-        {
-          "checked":false,
-          "id":3,
-          "name":"3John Smith",
-          "phone":1111111113,
-          "username":"helllaslfl"
-        },
-        {
-          "checked":false,
-          "id":3,
-          "name":"4John Smith",
-          "phone":1111111114,
-          "username":"helllaslfl"
-        },
-      ],
+      users: [],
       message: ''
     };
     this.onMessageChange = this.onMessageChange.bind(this);
   }
 
   componentDidMount() {
-    //im not sure if this should be localhost or 127:blah
-    axios.get('http://127.0.0.1:8000/api/user/')
-        .then(response => {
-          console.log(response)
-        });
-    axios.get('/api/user/?format=json')
-        .then(response => {
-          for (let i = 0;i < response.data.length;i++) {
-            this.state.users.push({
-              username: response.data[i].username,
-              name: response.data[i].first_name + " " + response.data[i].last_name,
-              phone: response.data[i].phone,
-              id: i + 1,
-              checked: false
-            })
-            console.log(response.data[i])
-          }
-          console.log(this.state.data)
-          this.forceUpdate();
-        });
-  }
+    const authToken = this.props.authToken
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${authToken}`,
+      },
+    }
 
+    axios.get('http://127.0.0.1:8000/api/user/', fetchOptions)
+      .then(response => {
+        for (let i = 0; i < response.data.length; i++) {
+          this.state.users.push({
+            username: response.data[i].username,
+            name: response.data[i].first_name + " " + response.data[i].last_name,
+            phone: response.data[i].phone,
+            id: i + 1,
+            checked: false
+          })
+          console.log(response.data[i])
+        }
+        console.log(this.state.data)
+        this.forceUpdate();
+      });
+  }
 
   onMessageChange(e) {
     this.setState({
@@ -117,7 +91,6 @@ class AdminSendMsg extends Component {
   }
 
   togglePopup = () => {
-    console.log("HI")
     this.setState({
       displayPopUp: !this.state.displayPopUp
     })
@@ -129,38 +102,40 @@ class AdminSendMsg extends Component {
     this.state.users.map((item, j) => {
       if (item.checked) {
         phoneNumbers = [...phoneNumbers, item.phone];
-      }
+      } 
+      return 1
     });
     const requestOptions = {
       method: 'POST',
       body: JSON.stringify({ "numbers":phoneNumbers,"message":this.state.message })
     };
-    console.log(requestOptions)
+    
     /*fetch('http://127.0.0.1:8000/api/user/send_text/', requestOptions)
         .then(response => console.log(response.json()))
         .then(data => console.log(data));*/
-    console.log(phoneNumbers)
 
+    console.log(requestOptions)
+    console.log(phoneNumbers)
   }
 
   render() {
     return (
-      <body>
-        <div class="bars">
-          <SideDashBoard />
-          <NavBar />
+      <div>
+        <div className="bars">
+          <SideDashBoard id={2}/>
+          <NavBar type="Admin"/>
         </div>
         {this.state.displayPopUp && <div class = "check-users-popup">
-          <div class="close-check-popup-div">
+          <div className="close-check-popup-div">
             <button onClick={this.togglePopup} class="close-check-popup">&#10005;</button>
           </div>
           <div>
-            <p class="check-users-title">Selected Recipient(s)</p>
+            <p className="check-users-title">Selected Recipient(s)</p>
             <input onChange={this.handleInputChange} class="check-users-input"></input>
-            <div class = "check-users-list" >
-              {this.state.users.map((e, index) => (this.state.regexp == null || this.state.regexp.test(e.name.toUpperCase())) && <div class="check-users-user-div">
+            <div className="check-users-list" >
+              {this.state.users.map((e, index) => (this.state.regexp == null || this.state.regexp.test(e.name.toUpperCase())) && <div className="check-users-user-div">
                                                                         <input onChange={() => this.handleCheck(index)} defaultChecked={e.checked} id={"checkbox"+index.toString()} type="checkbox" />
-                                                                        <p class="check-users-name">{e.name}</p>
+                                                                        <p className="check-users-name">{e.name}</p>
                                                                       </div>)}
             </div>
           </div>
@@ -170,26 +145,26 @@ class AdminSendMsg extends Component {
             <h1>Notification</h1>
             <h4>Recipients</h4>
             <div className = "side-by-side">
-              <div class="div-of-chosen-users">
+              <div className="div-of-chosen-users">
                 {this.state.users.map((e, index) => e.checked && <div class="selected-user">
                                                 <p>{e.name}</p>
-                                                <input type="button" onClick={() => this.checkStateChange(index)} value = "&#10005;"class="delete-selected-user"></input>
+                                                <input type="button" onClick={() => this.checkStateChange(index)} value = "&#10005;"className="delete-selected-user"></input>
                                               </div>)}
               </div>
-              <div class ="toggle-popup">
+              <div className="toggle-popup">
                 <button type="button" onClick={this.togglePopup} className="plus-button">+</button>
               </div>
               
             </div>
+          </form>
             
-            <form onSubmit={this.sendMessage}>
-              <h4>Message</h4>
-              <textarea onChange={this.onMessageChange} className="text-area" placeholder="Type a message" />
-              <input className="send-button" type="submit" value="Send"/>
-            </form>
+          <form onSubmit={this.sendMessage}>
+            <h4>Message</h4>
+            <textarea onChange={this.onMessageChange} className="text-area" placeholder="Type a message" />
+            <input className="send-button" type="submit" value="Send"/>
           </form>
         </div>
-      </body>
+      </div>
     );
   }
 }

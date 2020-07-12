@@ -1,41 +1,35 @@
 import React from 'react';
 import './styles.css';
-import ProfilePic from '../../../../assets/profilepic.png'
 import PropTypes from 'prop-types';
 
 class UserActivityEntry extends React.Component {
   render(){
     const { data } = this.props;
     return(
-      <body>
-        <div>
-          <hr noshade></hr>
-          
-          <div class = "flex_container_users_entry">
-            <div id = "special_item_users_entry" class = "item_users_entry">
-              <img id = "profilepic" src={ProfilePic} />
-            </div>
-            <div class = "item_users_entry">
-              <p id = "regular_users_entry">{data.username}</p>
-            </div>
-            <div class = "item_users_entry">
-              <p id = "regular_users_entry">{data.name_first}</p>
-            </div>
-            <div class = "item_users_entry">
-              <p id = "regular_users_entry">{data.name_last}</p>
-            </div>
-            <div class = "item_users_entry">
-              <p id = "small_margin">{data.email}</p>
-            </div>
-            <div class = "item_users_entry">
-              <p id = "regular_users_entry">{data.phone}</p>
-            </div>
-            <div class = "item_users_entry">
-              <p id = "regular_users_entry">{data.last_login}</p>
-            </div>
+      <div>
+        <hr></hr>
+        
+        <div className="flex_container_users_entry">
+          <div className="item_users_entry">
+            <p id = "regular_users_entry">{data.username}</p>
+          </div>
+          <div className="item_users_entry">
+            <p id = "regular_users_entry">{data.name_first}</p>
+          </div>
+          <div className="item_users_entry">
+            <p id = "regular_users_entry">{data.name_last}</p>
+          </div>
+          <div className="item_users_entry">
+            <p id = "small_margin">{data.email}</p>
+          </div>
+          <div className="item_users_entry">
+            <p id = "regular_users_entry">{data.phone}</p>
+          </div>
+          <div className="item_users_entry">
+            <p id = "regular_users_entry">{data.last_login}</p>
           </div>
         </div>
-      </body>
+      </div>
     )
   }
 }
