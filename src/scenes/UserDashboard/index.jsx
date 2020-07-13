@@ -14,8 +14,6 @@ class UserDashboard extends Component {
     this.handler = this.handler.bind(this);
     this.profileEditElement = React.createRef();
     this.state = {
-      profile_data: {
-      }
     }
   }
 
@@ -36,12 +34,11 @@ class UserDashboard extends Component {
       .then(res => {
         // console.log(res)
         this.setState({
-          profile_data: {
-            name: res[0]['fields']['first_name'] + " " + res[0]['fields']['last_name'],
-            email: res[0]['fields']['email'],
-            phone: res[0]['fields']['phone'],
-            birthdate: res[0]['fields']['date_of_birth']
-          }
+          first_name: res[0]['fields']['first_name'],
+          last_name: res[0]['fields']['last_name'],
+          email: res[0]['fields']['email'],
+          phone: res[0]['fields']['phone'],
+          birthdate: res[0]['fields']['date_of_birth']
         });
       })
       .catch(err => {
@@ -50,19 +47,20 @@ class UserDashboard extends Component {
   }
   
   profileEditClicked = () => {
-      this.profileEditElement.current.changeVisibilityOn(this.state.profile_data.name, 
-        this.state.profile_data.birthdate, this.state.profile_data.phone, this.state.profile_data.email);
+    console.log(this.state)
+    this.profileEditElement.current.changeVisibilityOn(this.state.first_name, 
+    this.state.last_name, this.state.birthdate, 
+    this.state.phone, this.state.email);
   };
   
-  handler(name, dob, phone, email){
-    console.log(this.state.profile_data.name);
+  handler(first_name, last_name, birthdate, phone, email){
     this.setState({
-      name: name,
+      first_name: first_name,
+      last_name: last_name,
       phone: phone,
       email: email,
-      birthdate: dob,
+      birthdate: birthdate,
     })
-    this.forceUpdate();
   }
 
   render(){
@@ -73,29 +71,31 @@ class UserDashboard extends Component {
       position: "absolute"
     }
 
+    const full_name = this.state.first_name + " " + this.state.last_name
+
     return(
       <div>
-        <Navbar name={this.state.profile_data.name} type="Alumnus"/>
-        <div style = {background}>
-          <ProfileEdit handler = {this.handler} ref={this.profileEditElement}/>
+        <Navbar name={full_name} type="Alumnus"/>
+        <div style={background}>
+          <ProfileEdit handler={this.handler} ref={this.profileEditElement}/>
           <div id="allthestuff">
             <div className = "profile">
               <div className = "top_text">
                 <h1 className = "title">Profile</h1>
                 <button onClick={this.profileEditClicked} className="add" id ="edit">&#9998;</button>
               </div>
-              <h1 className = "centered">{this.state.profile_data.name}</h1>
+              <h1 className = "centered">{this.state.first_name} {this.state.last_name}</h1>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">Phone</p>
-                <p className = "right_text_profile">{this.state.profile_data.phone}</p>
+                <p className = "right_text_profile">{this.state.phone}</p>
               </div>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">Email</p>
-                <p className = "right_text_profile">{this.state.profile_data.email}</p>
+                <p className = "right_text_profile">{this.state.email}</p>
               </div>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">Date Of Birth</p>
-                <p className = "right_text_profile">{this.state.profile_data.birthdate}</p>
+                <p className = "right_text_profile">{this.state.birthdate}</p>
               </div>
             </div>
 

@@ -39,11 +39,13 @@ class JobCard extends Component {
   }
 
   changePayRateHandler = (event) => {
-    this.setState({payRate: event.target.value});
+    var num = Number.parseFloat(event.target.value).toFixed(1);
+    this.setState({payRate: num});
   }
 
   changeHoursWeekHandler = (event) => {
-    this.setState({hoursWeek: event.target.value});
+    var num = Number.parseFloat(event.target.value).toFixed(1);
+    this.setState({hoursWeek: num});
   }
 
   changeStartDateHandler = (event) => {
@@ -84,25 +86,25 @@ class JobCard extends Component {
         <div>
           <p id="experience-edit-field">Hourly Pay</p>
           {editingJob && <input value={this.state.payRate} 
-                  onChange={this.changePayRateHandler} className="input-experience-edit" type="number"></input>}
+                  onChange={this.changePayRateHandler} className="input-experience-edit" type="number" step="0.1"></input>}
           {!editingJob && <input disabled="disabled" value={this.state.payRate} 
-                  onChange={this.changePayRateHandler} className="input-experience-edit" type="number"></input>}
+                  onChange={this.changePayRateHandler} className="input-experience-edit" type="number" step="0.1"></input>}
         </div>
         
         <div>
           <p id="experience-edit-field">Number of Hours per Week</p>
           {editingJob && <input value={this.state.hoursWeek} 
-                  onChange={this.changeHoursWeekHandler} className="input-experience-edit" type="text"></input>}
+                  onChange={this.changeHoursWeekHandler} className="input-experience-edit" type="number" step="0.1"></input>}
           {!editingJob && <input disabled = "disabled" value={this.state.hoursWeek} 
-                  onChange={this.changeHoursWeekHandler} className="input-experience-edit" type="text"></input>}
+                  onChange={this.changeHoursWeekHandler} className="input-experience-edit" type="number" step="0.1"></input>}
         </div>
 
         <div>
           <p id="experience-edit-field">Start Date</p>
           {editingJob && <input value={this.state.startDate} 
-                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="text"></input>}
+                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="date"></input>}
           {!editingJob && <input disabled = "disabled" value={this.state.startDate} 
-                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="text"></input>}
+                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="date"></input>}
         </div>
 
         <div className="edit-experiences-button-div">

@@ -95,7 +95,7 @@ class Educations extends Component {
     
   render() {
     const educations = this.state.educationData;
-    console.log(educations)
+    // console.log(educations)
     var show = false;
 
     if (this.state.vis === true && educations !== undefined) {

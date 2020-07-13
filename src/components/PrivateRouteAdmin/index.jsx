@@ -5,20 +5,14 @@ import {
   withRouter
 } from "react-router-dom";
 
-const PrivateRouteAdmin = ({ component: Component, authToken, isAdmin, pk, ...rest}) => {
-  const key = window.localStorage.getItem('jaysbautht')
-  var authenticated = false
-  if (key === authToken) {
-    authenticated = true
-  }
-
+const PrivateRouteAdmin = ({ component: Component, authToken, isAuthenticated, isAdmin, pk, ...rest}) => {
   return (
     <Route 
       {...rest} 
       render = { props => {
-        if (authenticated === true && isAdmin === true) {
+        if (isAuthenticated === true && isAdmin === true) {
           return <Component authToken={authToken} pk={pk} {...props} />
-        } else if (authenticated === true){
+        } else if (isAuthenticated === true){
           return <Redirect to="/userdashboard"/>
         } else {
           return <Redirect to="/"/>

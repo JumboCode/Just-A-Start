@@ -99,7 +99,7 @@ class Jobs extends Component {
     
   render() {
     const jobs = this.state.jobData;
-    console.log(jobs)
+    // console.log(jobs)
     var show = false;
 
     if (this.state.vis === true && jobs !== undefined) {

@@ -8,13 +8,14 @@ import {
 
 import PrivateRouteAdmin from "./components/PrivateRouteAdmin/index";
 import PrivateRouteUser from "./components/PrivateRouteUser/index";
-// import PublicRoute from "./components/PublicRoute/index";
+import PublicRoute from "./components/PublicRoute/index";
 import Login from "./scenes/Login/index";
 import SignUp from "./scenes/Signup/index"
 import AdminDashboard from './scenes/AdminDashboard/index';
 import AdminNotification from './scenes/AdminNotification/index';
 import UserDashboard from './scenes/UserDashboard/index';
 import NotFoundPage from "./scenes/NotFound/index";
+import NotAuthenticated from "./scenes/NotAuthenticated/index";
 
 class App extends Component {
   constructor(props) {
@@ -126,7 +127,11 @@ class App extends Component {
           <BrowserRouter>
             <Switch>
               <Route exact path="/" component={() => <Login setAuthToken={this.setAuthToken} setIsAdmin={this.setIsAdmin}/>} />
-              {/* <Route component={NotFoundPage}></Route> */}
+              <Route exact path="/sign-up" component={SignUp} />
+              <Route exact path="/admindashboard" component={NotAuthenticated} />
+              <Route exact path="/adminnotification" component={NotAuthenticated} />
+              <Route exact path="/userdashboard" component={NotAuthenticated} />
+              <Route component={NotFoundPage}></Route>
             </Switch>
             </BrowserRouter>
       )
@@ -135,15 +140,17 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          {/* <PublicRoute exact path="/" component={() => <Login setAuthToken={this.setAuthToken} setIsAdmin={this.setIsAdmin}/>} /> */}
           <Route exact path="/" component={() => <Login setAuthToken={this.setAuthToken} setIsAdmin={this.setIsAdmin}/>} />
-          <Route exact path="/sign-up" component={SignUp} />
           <PrivateRouteAdmin authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/admindashboard" component={AdminDashboard} />
           <PrivateRouteAdmin authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/adminnotification" component={AdminNotification} />
+          {/* <Route path="/admin-userview" 
+            render={(props) => <AdminUserView {...props} birthdate={"asda"} />}
+          /> */}
           <PrivateRouteUser authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/userdashboard" component={UserDashboard} />
           <Route component={NotFoundPage}></Route>
         </Switch>
       </BrowserRouter>
-      
     )
   }
 }
