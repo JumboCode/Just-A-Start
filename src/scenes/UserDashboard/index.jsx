@@ -29,16 +29,30 @@ class UserDashboard extends Component {
       },
     };
 
-    fetch(`http://127.0.0.1:8000/api/user/get_user_profile/?key=${key}`, options)
+    fetch(`http://127.0.0.1:8000/users/`, options)
       .then(res => res.json())
       .then(res => {
-        // console.log(res)
         this.setState({
-          first_name: res[0]['fields']['first_name'],
-          last_name: res[0]['fields']['last_name'],
-          email: res[0]['fields']['email'],
-          phone: res[0]['fields']['phone'],
-          birthdate: res[0]['fields']['date_of_birth']
+          username: res['results'][0]['username'],
+          first_name: res['results'][0]['first_name'],
+          last_name: res['results'][0]['last_name'],
+          email: res['results'][0]['email'],
+          phone: res['results'][0]['phone'],
+          birthdate: res['results'][0]['date_of_birth'],
+          user_id: res['results'][0]['id'],
+        });
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
+    
+    fetch(`http://127.0.0.1:8000/alumnus/`, options)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          phone: res['results'][0]['phone_number'],
+          birthdate: res['results'][0]['date_of_birth'],
+          alumnus_id: res['results'][0]['id']
         });
       })
       .catch(err => {
@@ -61,6 +75,51 @@ class UserDashboard extends Component {
       email: email,
       birthdate: birthdate,
     })
+
+    // Send data back to server
+    const key = this.props.authToken
+    const user_model = {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${key}`
+      },
+      body: JSON.stringify({
+        "first_name": first_name,
+        "last_name": last_name,
+        "email": email
+      })
+    };
+
+    fetch(`http://127.0.0.1:8000/users/${this.state.user_id}/`, user_model)
+      .then(res => res.json())
+      .then(res => {
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
+
+    const alumnus_model = {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${key}`
+      },
+      body: JSON.stringify({
+        "date_of_birth": birthdate,
+        "phone_number": phone
+      })
+    };
+
+    fetch(`http://127.0.0.1:8000/alumnus/${this.state.alumnus_id}/`, alumnus_model)
+      .then(res => res.json())
+      .then(res => {
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
   }
 
   render(){
@@ -86,6 +145,10 @@ class UserDashboard extends Component {
               </div>
               <h1 className = "centered">{this.state.first_name} {this.state.last_name}</h1>
               <div className = "flex_container_two">
+                <p className = "left_text_profile">Username</p>
+                <p className = "right_text_profile">{this.state.username}</p>
+              </div>
+              <div className = "flex_container_two">
                 <p className = "left_text_profile">Phone</p>
                 <p className = "right_text_profile">{this.state.phone}</p>
               </div>
@@ -99,7 +162,7 @@ class UserDashboard extends Component {
               </div>
             </div>
 
-            <div className = "job_list">
+            <div className = "experiences">
               <div className = "top_text">
                 <h1 className = "title">Experiences</h1>
               </div>

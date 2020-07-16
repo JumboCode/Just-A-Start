@@ -54,11 +54,11 @@ class JobCard extends Component {
 
   componentDidMount = () => {
     this.setState({
-      employer: this.props.jobData['fields']["employer_org"],
-      jobTitle: this.props.jobData['fields']["job_title"],
-      payRate: this.props.jobData['fields']["pay_rate"],
-      hoursWeek: this.props.jobData['fields']["hours_week"],
-      startDate: this.props.jobData['fields']["start_date"],
+      employer: this.props.jobData["employer_org"],
+      jobTitle: this.props.jobData["job_title"],
+      payRate: this.props.jobData["pay_rate"],
+      hoursWeek: this.props.jobData["hours_week"],
+      startDate: this.props.jobData["start_date"],
     })
   }
   

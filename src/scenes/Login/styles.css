@@ -42,10 +42,6 @@
   width: 400px;
 }
 
-#forgotPass {
-  font-size: 12px;
-}
-
 .loginInput {
   height: 20px;
   width: 150px;
@@ -56,7 +52,7 @@
   margin-top: 2%;
 }
 
-.right-shift{
+#right-shift{
   display: flex;
   border-radius:0px;
   height: 305px;
@@ -64,7 +60,7 @@
   top: 18%;
 }
 
-.bottom-shift{
+#bottom-shift{
   position: absolute;
   height: 20%;
   width: 100%;

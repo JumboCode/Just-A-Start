@@ -14,18 +14,6 @@ class ProfileEdit extends React.Component {
     }
   }
 
-  // setTextAreaFormat() {
-  //   let text = "";
-  //   let maxLines = 4;
-  //   text = document.getElementById("textarea").value;
-  //   let lh = 20
-  //   let fs = 20;
-  //   let dh = Math.round((lh/fs)*100)/100;
-  //   if(text.rows === maxLines){
-  //       text.style.height = Math.ceil((fs * text.rows * dh)+((fs*200)/300));
-  //   }
-  // }
-
   changeVisibilityOn(first_name, last_name, birthdate, phone, email){
     this.setState({
       first_name: first_name,
@@ -81,9 +69,6 @@ class ProfileEdit extends React.Component {
           </div>
           <button onClick = {() => {
             this.changeVisibilityOff()
-            // this.props.handler(document.getElementById("first_name_profile_edit").value, document.getElementById("last_name_profile_edit").value, 
-            //                    document.getElementById("dob_profile_edit").value, document.getElementById("phone_profile_edit").value, 
-            //                    document.getElementById("email_profile_edit").value)
             this.props.handler(this.state.first_name, this.state.last_name, this.state.birthdate, this.state.phone, this.state.email)}} 
             className="confirm">Confirm
           </button>

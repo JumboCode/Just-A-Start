@@ -1,84 +1,77 @@
-/*
 :root {
-    --bg: #16629f;
+	--bg: #16629f;
 }
   
-#loginButton-login, #checkbox-login {
-position: relative;
-left: 30%;
-top: 33%;
-}
-
-#checkbox-login {
-position: relative;
-left: 30%;
-}
-
-#loginText {
-position: relative;
-font-family: arial;
-font-size: 27px;
-font-weight: bold;
-top: 15%;
-left: 37%;
-}
-
-#form-login {
-position: relative;
-left: 14%;
-top: 24%;
-}
-
-*/
-
-/*
-#background-sign-up{
-position: absolute;
-background-color: var(--bg);
-width: 100%;
-height: 86vh;
-top: 14vh;
+#background-signup{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	background-color: white;	
+	width: 100%;
+	margin-top: 2%;
 }
 
 @media screen and (max-width: 600px) {
-    #background-login {
-        position: relative;
-    }
+  #background-login {
+    position: relative;
+  }
 }
 
-#wrapper-sign-up {
-position: relative;
-height: 400px;
-max-width: 350px;
-background-color: white;
-left: 38%;
-top: 65px;
+#left-shift{
+  display: flex;
+  border-radius: 0px;
+  height: 305px;
+  width: auto;
+  top: 18%;
+  left: 12%;
 }
 
-.left-shift{
-	border-radius:0px;
-	height: 305px;
-	width: auto;
-	position: absolute;
-	top:18%;
-	left: 12%;
+#signUpText {
+  font-family: arial;
+  font-size: 27px;
+  font-weight: bold;
+  margin-bottom: 3%;
 }
 
-.right-shift{
-	border-radius:0px;
-	height: 305px;
-	width: auto;
-	position: absolute;
-	top:18%;
-	right: 12%;
+#wrapper-login {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  text-align: center;
+  height: 400px;
+  width: 400px;
 }
 
-.bottom-shift{
-	border-radius:0px;
-	height: 37.5%;
-	width: auto;
-	position: absolute;
-	bottom: 0px;
-	margin-left: 0px;
+#forgotPass {
+  font-size: 12px;
 }
-*/
+
+#signup {
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.loginInput {
+  height: 20px;
+  width: 150px;
+  margin-bottom: 1%;
+}
+
+#loginButton-login {
+  margin-top: 2%;
+}
+
+#right-shift{
+  display: flex;
+  border-radius:0px;
+  height: 305px;
+  width: auto;
+  top: 18%;
+}
+
+#bottom-shift{
+  position: absolute;
+  height: 20%;
+  width: 100%;
+  bottom: 0px;
+}

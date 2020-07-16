@@ -1,73 +1,41 @@
-from django.shortcuts import render
-from django.http import Http404, HttpResponse, JsonResponse
-from rest_framework import viewsets, status
-from rest_framework.response import Response
+from api.models import Alumnus, Education, Job
+from api.serializers import AlumnusSerializer
+from api.serializers import UserSerializer
+from api.serializers import EducationSerializer
+from api.serializers import JobSerializer
+
+from django.contrib.auth.models import User
+from django.core.mail import BadHeaderError, send_mail
+from django.http import HttpResponse
+
+from rest_framework import mixins, viewsets
 from rest_framework.decorators import action
-from rest_framework.authtoken.models import Token
-from twilio.rest import Client
-from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
-from api.models import User, Experience, Job, Unemployed, Education
-from api.serializers import UserSerializer, JobSerializer, UnemployedSerializer, EducationSerializer
-from django.core import serializers
-from itertools import chain
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.response import Response
 
-import os
-import json
-# from settings.py import connection
-# from settings import connection
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class AdminMessaging(viewsets.GenericViewSet,):
+    permission_classes = (IsAdminUser,)
 
-    @action(detail=False, methods=['GET'])
-    def get_user_profile(self, request):
-        print(request.GET.get('key',''))
-        user = Token.objects.get(key=request.GET['key']).user
-        serialized_user = serializers.serialize('json', [user, ])
-        return HttpResponse(serialized_user, content_type='application/json')
-        # return HttpResponse("soon")
+    @action(detail=False, methods=['POST'])
+    def send_email(self, request):
+        subject = request.POST.get("subject", "")
+        message = request.POST.get("message", "")
+        from_email = request.POST.get("from_email", "")
+        to_ids = request.POST.get("to_ids", "")
+        for user_id in to_ids:
+            user = User.objects.get(id=user_id)
+            to_email = user["email"]
+            if subject and message and from_email and to_email:
+                try:
+                    send_mail(subject, message, from_email, to_email)
+                except BadHeaderError:
+                    return HttpResponse("Invalid header found.")
+            else:
+                return HttpResponse("Make sure all fields are valid.")
+        return HttpResponse({"Success": "Email sent successfully"})
 
-    @action(detail=False, methods=['GET'])
-    def get_user_by_email(self, request):
-        user = User.objects.get(email=request.GET.get('email'))
-        serialized_user = serializers.serialize('json', [user, ])
-        return HttpResponse(serialized_user)
-    
-    @action(detail=False, methods=['GET'])
-    def get_user_experiences(self, request):
-        user = Token.objects.get(key=request.GET.get("key", "")).user
-
-        job_list = user.job_set.all()
-        education_list = user.education_set.all()
-        chained_list = chain(job_list, education_list)
-        serialized_experiences = serializers.serialize('json', chained_list)
-        return HttpResponse(serialized_experiences)
-    
-    @action(detail=False, methods=['PUT'])
-    def edit_user_profile(self, request):
-        user = Token.objects.get(key=request.POST["key"]).user
-        serializer = UserSerializer(instance=user, data=request.data, partial=True)
-        if serializer.is_valid(raise_exception=True):
-            user_saved = serializer.save()
-            return HttpResponse({"Success": "User information updated successfully"})
-        return HttpResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    @action(detail=False, methods=['PUT'])
-    def edit_user_experiences(self, request):
-        user = Token.objects.get(key=request.POST["key"]).user
-        serializer = UserSerializer(instance=user, data=request.data, partial=True)
-        if serializer.is_valid(raise_exception=True):
-            user_saved = serializer.save()
-        return HttpResponse({"success": "User experience information updated successfully"})
-    
-    # NEEDS WORK
-    @action(detail=False, methods=['delete'])
-    def delete_user_profile(self, request):
-        return HttpResponse({"success": "User profile deleted successfully"})
-
-    # Note: account_sid, auth_token, from_  : 
+    # Note: account_sid, auth_token, from_  :
     # you get these values form twilio when you create account
     # expects a dictionary that has two keys, numbers and message
     @action(detail=False, methods=['POST'])
@@ -83,55 +51,87 @@ class UserViewSet(viewsets.ModelViewSet):
             message = client.messages.create(
                 # Phone number associated to your account from twilio
                 # Twilio generates this number
-                from_="+12055370058", 
+                from_="+12055370058",
                 body= request.data["message"],
                 to = request.data["numbers"][i])
 
         return HttpResponse({"success": "Message sent successfully"})
 
-    # Parameters: request is a dictionary that contains 3 fields;
-    #  Field 1: email: a key corresponding to a list of email addresses
-    #  Field 2: subject: a key corresponding to a string value to be subject of the email to be send
-    #  Field 3: body:  a key correspondig to string value for the body of the email
-    @action(detail=False, methods=['POST'])
-    def send_email(self, request):
-        # using SendGrid's Python Library
-        # you need to set up a variable environment. follow the link for more details
-        # https://github.com/sendgrid/sendgrid-python
 
-        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        
-        num_users = len(request.data["email"])
-        for i in range(num_users):
-            message = Mail(
-                from_email='naokiokada11@gmail.com', 
-                to_emails= request.data["email"][i],
-                subject= request.data["subject"],
-                html_content = '<strong>' + request.data["body"] + '</strong>')
+class AlumnusViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = AlumnusSerializer
 
-            sg.send(message)
-        
-        return HttpResponse({"success": "Email sent successfully"})
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
-class JobViewSet(viewsets.ModelViewSet):
-    queryset = Job.objects.all()
-    serializer_class = JobSerializer
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
 
-    @action(detail=False, methods=['PUT'])
-    def edit_job_information(self, request):
-        user = Token.objects.get(key=request.POST["key"]).user
-        job_list = user.job_set.all()
-        print(job_list[0])
-        # serializer = JobSerializer(instance=user, data=request.data, partial=True)
-        # if serializer.is_valid(raise_exception=True):
-        #     user_saved = serializer.save()
-        #     return HttpResponse({"Success": "User information updated successfully"})
-        return HttpResponse({"Success": "User information updated successfully"})
+    def get_queryset(self):
+        return Alumnus.objects.filter(user=self.request.user)
 
-class UnemployedViewSet(viewsets.ModelViewSet):
-    queryset = Unemployed.objects.all()
-    serializer_class = UnemployedSerializer
 
 class EducationViewSet(viewsets.ModelViewSet):
-    queryset = Education.objects.all()
+    permission_classes = (IsAuthenticated,)
     serializer_class = EducationSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        return Education.objects.filter(user=self.request.user)
+
+
+class JobViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = JobSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        return Job.objects.filter(user=self.request.user)
+
+
+class Registration(
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet,
+):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserViewSet(
+    mixins.DestroyModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
+    serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        return User.objects.filter(id=self.request.user.id)
+
+class AdminUserViewset(viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+    permission_classes = (IsAdminUser,)
+    queryset = User.objects.all()
+
+class AdminJobViewset(viewsets.ModelViewSet):
+    serializer_class = JobSerializer
+    permission_classes = (IsAdminUser,)
+    queryset = Job.objects.all()
+
+class AdminEducationViewset(viewsets.ModelViewSet):
+    serializer_class = EducationSerializer
+    permission_classes = (IsAdminUser,)
+    queryset = Education.objects.all()

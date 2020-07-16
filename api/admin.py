@@ -1,24 +1,30 @@
+from api.models import Job, Education, Alumnus
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib import admin
-from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
-from api.models import Job, Unemployed, Education, User
-from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import User
-# from api.models import Alumni
+from django.db import models
 
-admin.site.register(Job)
-admin.site.register(Unemployed)
-admin.site.register(Education)
 
-class CustomUserAdmin(UserAdmin):
-    add_form = CustomUserCreationForm
-    form = CustomUserChangeForm
-    fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('phone','date_of_birth','admin')}),
-    )
+class AlumnusInline(admin.StackedInline):
+    model = Alumnus
+    can_delete = False
+    verbose_name_plural = 'alumnus'
 
-    model = User
-    list_display = ['username', 'email', 'last_name', 'first_name', 'phone', 'date_of_birth', 'admin']
-    
-admin.site.register(User, CustomUserAdmin)
-# admin.site.register(UserAdmin)
+
+class JobInline(admin.StackedInline):
+    model = Job
+    verbose_name_plural = 'job'
+
+
+class EducationInline(admin.TabularInline):
+    model = Education
+    verbose_name_plural = 'education'
+
+
+class UserAdmin(BaseUserAdmin):
+    list_display = ('email', 'first_name', 'last_name', 'is_staff')
+    inlines = (AlumnusInline, EducationInline, JobInline)
+
+# Re-register UserAdmin
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
