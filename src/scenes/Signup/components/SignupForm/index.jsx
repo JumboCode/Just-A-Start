@@ -1,95 +1,99 @@
 import React, { Component } from 'react';
+import SignUpButton from '../../components/SignupButton/index';
 import './styles.css';
 
 class SignUpForm extends Component {
-    state = {
-      username: "",
-      password1: "",
-      password2: "",
-      email: "",
-      url: "http://127.0.0.1:8000/api/rest-auth/registration/"
+  state = {
+    first_name: "",
+    last_name: "",
+    username: "",
+    email: "",
+    password: "",
+    url: "http://127.0.0.1:8000/registration/"
+  };
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevProps.isClicked !== this.props.isClicked) {
+      this.sendRegisterRequest(this.state.username, this.state.password1, this.state.password2, this.state.email);
+    }
+  }
+
+  handleClick = () => {
+    let user = {
+      'username': this.state.username,
+      'first_name': this.state.first_name,
+      'last_name': this.state.last_name,
+      'email': this.state.email,
+      'password': this.state.password,
     };
 
-    componentDidUpdate = (prevProps, prevState) => {
-      if (prevProps.isClicked !== this.props.isClicked) {
-        console.log(this.state.username);
-        
-        console.log(this.state.email);
-        //this.props.getUserInfo(this.state.username, this.state.password);
-        this.sendRegisterRequest(this.state.username, this.state.password1, this.state.password2, this.state.email);
-      }
-
-
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
     }
 
-    sendRegisterRequest = (u, p1, p2, e) => {
-        // Will do later
-        let obj = {
-            'username': u,
-            'email': e,
-            'password1': p1,
-            'password2': p2
-        };
-        console.log(JSON.stringify(obj));
-        fetch(this.state.url, 
-          {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            }, 
-            body: JSON.stringify(obj)
-          })
-        .then((response) => response.json)
-        .catch(() => console.log("Failed"));
+    fetch(this.state.url, fetchOptions)
+      .then((response) => response.json)
+      .catch(() => console.log("Failed"));
+  }
 
-    }
+  changeFirstNameHandler = (event) => {
+    this.setState({first_name: event.target.value});
+  }
 
-    setFields = () => {
-      this.setState({username: this._un.value, password: this._ps.value});
-    }
+  changeLastNameHandler = (event) => {
+    this.setState({last_name: event.target.value});
+  }
 
-    changeUsernameHandler = (event) => {
-      this.setState({username: event.target.value});
-    }
-    changePasswordHandler1 = (event) => {
-      this.setState({password1: event.target.value});
-    }
-    changePasswordHandler2 = (event) => {
-      this.setState({password2: event.target.value});
-    }
-    changeEmailHandler = (event) => {
-      this.setState({email: event.target.value});
-  
-    }
+  changeUsernameHandler = (event) => {
+    this.setState({username: event.target.value});
+  }
 
-    render() {
-        return (
-          <div>
-            <span id="sign_up_label"> Sign Up </span>
-            <div>
-              <input className="sign_up_fields" ref={(el) => this._un = el} type="text" value={this.state.username}
-              onChange={this.changeUsernameHandler} placeholder="Username">
-              </input>
-            </div>
-            <div>
-              <input className="sign_up_fields" ref={(el) => this._ps = el} type="password" value={this.state.password1}
-              onChange={this.changePasswordHandler1} placeholder="Password" >
-              </input>
-            </div>
-            <div>
-              <input className="sign_up_fields" ref={(el) => this._ps = el} type="password" value={this.state.password2}
-              onChange={this.changePasswordHandler2} placeholder="Confirm Password" >
-              </input>
-            </div>
-            <div>
-              <input className="sign_up_fields" type="text" value={this.state.email} onChange={this.changeEmailHandler}
-              placeholder="Email"/>
-            </div>
-          </div>
-        );
-    }
+  changeEmailHandler = (event) => {
+    this.setState({email: event.target.value});
+  }
+
+  changePasswordHandler = (event) => {
+    this.setState({password: event.target.value});
+  }
+
+  render() {
+    return (
+      <div>
+        <div>
+          <input className="sign_up_fields" type="text" value={this.state.first_name} onChange={this.changeFirstNameHandler}
+          placeholder="First Name">
+          </input>
+        </div>
+        <div>
+          <input className="sign_up_fields" type="text" value={this.state.last_name} onChange={this.changeLastNameHandler}
+          placeholder="Last Name">
+          </input>
+        </div>
+        <div>
+          <input className="sign_up_fields" type="text" value={this.state.username} onChange={this.changeUsernameHandler}
+          placeholder="Username">
+          </input>
+        </div>
+        <div>
+          <input className="sign_up_fields" type="text" value={this.state.email} onChange={this.changeEmailHandler}
+          placeholder="Email"/>
+        </div>
+        <div>
+          <input className="sign_up_fields" type="password" value={this.state.password} onChange={this.changePasswordHandler} 
+          placeholder="Password" >
+          </input>
+        </div>
+        <div id="signUpButton">
+          <SignUpButton signUpClick={this.handleClick}/>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default SignUpForm;

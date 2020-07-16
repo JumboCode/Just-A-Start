@@ -25,6 +25,10 @@ class Login extends Component {
       ({forgotPassword: true}));
   }
 
+  clickSignUp = () => {
+    this.props.history.push("/signup")
+  }
+
   retrieveUserInfo = (u, p) => {
     this.setState({username: u, password: p});
   }
@@ -43,13 +47,13 @@ class Login extends Component {
       body: JSON.stringify({username, password}),
     }
 
-    fetch('http://localhost:8000/api/rest-auth/login/', fetchOptions)
+    fetch('http://localhost:8000/api-token-auth/', fetchOptions)
       .then(res => res.ok ? res : Error)
       .then(res => res.json())
       .then(res => {
         console.log(res);
-        setAuthToken(res['key']);
-        const key = res['key']
+        setAuthToken(res['token']);
+        const key = res['token']
 
         const fetchOptions2 = {
           method: 'GET',
@@ -59,10 +63,10 @@ class Login extends Component {
           },
         }
   
-        fetch(`http://127.0.0.1:8000/api/user/get_user_profile/?key=${key}`, fetchOptions2)
+        fetch(`http://127.0.0.1:8000/users/`, fetchOptions2)
           .then(res => res.json())
           .then(res => {
-            const status = res[0]['fields']['admin']
+            const status = res['results'][0]['is_staff']
             if (status === true) {
               setIsAdmin(true)
               this.props.history.push("/admindashboard")
@@ -105,7 +109,7 @@ class Login extends Component {
         <div>
           <Navbar/>
           <div id="background-login">
-            <img id= "left-shift" src={jas_man} alt="icon" />
+            <img id="left-shift" src={jas_man} alt="icon" />
             <div id="wrapper-login">
               <div id="loginText">
               Login
@@ -139,21 +143,28 @@ class Login extends Component {
                     <span
                       id="forgotPass"
                       onClick={() => this.didForgetPassword()}>
-                    Forgot Password? </span>
+                    Forgot Password? 
+                    </span>
                   </div>
                 </form>
                 {error !== '' && (<p>{error}</p>)}
               </div>
               <div id="loginButton-login">
                 <LoginButton
-                  loginClick={this.handleClick}
-                  isClicked={this.state.isClicked}/>
+                  loginClick={this.handleClick}/>
+              </div>
+              <div id="loginButton-login">
+                <span
+                  id="signup"
+                  onClick={this.clickSignUp}>
+                Sign up
+                </span>
               </div>
             </div>
 
-            <img className= "right-shift" src={jas_woman} alt="icon" />
+            <img id="right-shift" src={jas_woman} alt="icon" />
           </div>
-          <img className= "bottom-shift" src={jas_ground} alt="icon" />
+          <img id="bottom-shift" src={jas_ground} alt="icon" />
         </div>
       );
   }

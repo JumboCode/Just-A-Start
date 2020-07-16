@@ -14,8 +14,6 @@ class UserDashboard extends Component {
     this.handler = this.handler.bind(this);
     this.profileEditElement = React.createRef();
     this.state = {
-      profile_data: {
-      }
     }
   }
 
@@ -31,17 +29,30 @@ class UserDashboard extends Component {
       },
     };
 
-    fetch(`http://127.0.0.1:8000/api/user/get_user_profile/?key=${key}`, options)
+    fetch(`http://127.0.0.1:8000/users/`, options)
       .then(res => res.json())
       .then(res => {
-        // console.log(res)
         this.setState({
-          profile_data: {
-            name: res[0]['fields']['first_name'] + " " + res[0]['fields']['last_name'],
-            email: res[0]['fields']['email'],
-            phone: res[0]['fields']['phone'],
-            birthdate: res[0]['fields']['date_of_birth']
-          }
+          username: res['results'][0]['username'],
+          first_name: res['results'][0]['first_name'],
+          last_name: res['results'][0]['last_name'],
+          email: res['results'][0]['email'],
+          phone: res['results'][0]['phone'],
+          birthdate: res['results'][0]['date_of_birth'],
+          user_id: res['results'][0]['id'],
+        });
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
+    
+    fetch(`http://127.0.0.1:8000/alumnus/`, options)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          phone: res['results'][0]['phone_number'],
+          birthdate: res['results'][0]['date_of_birth'],
+          alumnus_id: res['results'][0]['id']
         });
       })
       .catch(err => {
@@ -50,19 +61,65 @@ class UserDashboard extends Component {
   }
   
   profileEditClicked = () => {
-      this.profileEditElement.current.changeVisibilityOn(this.state.profile_data.name, 
-        this.state.profile_data.birthdate, this.state.profile_data.phone, this.state.profile_data.email);
+    console.log(this.state)
+    this.profileEditElement.current.changeVisibilityOn(this.state.first_name, 
+    this.state.last_name, this.state.birthdate, 
+    this.state.phone, this.state.email);
   };
   
-  handler(name, dob, phone, email){
-    console.log(this.state.profile_data.name);
+  handler(first_name, last_name, birthdate, phone, email){
     this.setState({
-      name: name,
+      first_name: first_name,
+      last_name: last_name,
       phone: phone,
       email: email,
-      birthdate: dob,
+      birthdate: birthdate,
     })
-    this.forceUpdate();
+
+    // Send data back to server
+    const key = this.props.authToken
+    const user_model = {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${key}`
+      },
+      body: JSON.stringify({
+        "first_name": first_name,
+        "last_name": last_name,
+        "email": email
+      })
+    };
+
+    fetch(`http://127.0.0.1:8000/users/${this.state.user_id}/`, user_model)
+      .then(res => res.json())
+      .then(res => {
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
+
+    const alumnus_model = {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${key}`
+      },
+      body: JSON.stringify({
+        "date_of_birth": birthdate,
+        "phone_number": phone
+      })
+    };
+
+    fetch(`http://127.0.0.1:8000/alumnus/${this.state.alumnus_id}/`, alumnus_model)
+      .then(res => res.json())
+      .then(res => {
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
   }
 
   render(){
@@ -73,33 +130,39 @@ class UserDashboard extends Component {
       position: "absolute"
     }
 
+    const full_name = this.state.first_name + " " + this.state.last_name
+
     return(
       <div>
-        <Navbar name={this.state.profile_data.name} type="Alumnus"/>
-        <div style = {background}>
-          <ProfileEdit handler = {this.handler} ref={this.profileEditElement}/>
+        <Navbar name={full_name} type="Alumnus"/>
+        <div style={background}>
+          <ProfileEdit handler={this.handler} ref={this.profileEditElement}/>
           <div id="allthestuff">
             <div className = "profile">
               <div className = "top_text">
                 <h1 className = "title">Profile</h1>
                 <button onClick={this.profileEditClicked} className="add" id ="edit">&#9998;</button>
               </div>
-              <h1 className = "centered">{this.state.profile_data.name}</h1>
+              <h1 className = "centered">{this.state.first_name} {this.state.last_name}</h1>
+              <div className = "flex_container_two">
+                <p className = "left_text_profile">Username</p>
+                <p className = "right_text_profile">{this.state.username}</p>
+              </div>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">Phone</p>
-                <p className = "right_text_profile">{this.state.profile_data.phone}</p>
+                <p className = "right_text_profile">{this.state.phone}</p>
               </div>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">Email</p>
-                <p className = "right_text_profile">{this.state.profile_data.email}</p>
+                <p className = "right_text_profile">{this.state.email}</p>
               </div>
               <div className = "flex_container_two">
                 <p className = "left_text_profile">Date Of Birth</p>
-                <p className = "right_text_profile">{this.state.profile_data.birthdate}</p>
+                <p className = "right_text_profile">{this.state.birthdate}</p>
               </div>
             </div>
 
-            <div className = "job_list">
+            <div className = "experiences">
               <div className = "top_text">
                 <h1 className = "title">Experiences</h1>
               </div>

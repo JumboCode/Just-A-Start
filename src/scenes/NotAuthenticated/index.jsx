@@ -4,7 +4,7 @@ const MainPage = () => {
     
     return (
         <div>
-            <h1>Page not found. Please double check the url.</h1>
+            <h1>Please log in.</h1>
         </div>
     );
 }

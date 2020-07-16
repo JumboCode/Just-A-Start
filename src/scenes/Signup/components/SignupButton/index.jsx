@@ -19,10 +19,6 @@ class SignUpButton extends Component {
     hoverColor = (color) => {
       this.setState({buttonStyle: {...this.state.buttonStyle, backgroundColor: color}});
     }
-
-
-
-
 }
 
 export default SignUpButton;

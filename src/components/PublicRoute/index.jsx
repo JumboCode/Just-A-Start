@@ -5,25 +5,20 @@ import {
     Redirect
 } from "react-router-dom";
 
-const PublicRoute = ({ component: Component, authToken, ...rest}) => {
-    const key = window.localStorage.getItem('jaysbautht')
-    var authenticated = false
-    if (key) {
-        authenticated = true
-    }
-    return (
-        <Route 
-            {...rest} 
-            render = { props => {
-                if (authenticated === true) {
-                    return <Redirect to="/search"/>
-                }
-                else {
-                    return <Component {...props}/>
-                }
-            }
-        } />
-    )
+const PublicRoute = ({ component: Component, authToken, isAdmin, ...rest}) => {
+  return (
+    <Route 
+      {...rest} 
+      render = { props => {
+        if (isAdmin === true) {
+            return <Redirect to="/admindashboard"/>
+        }
+        else {
+            return <Redirect to="/userdashboard"/>
+        }
+      }
+    } />
+  )
 }
 
 export default withRouter(PublicRoute);

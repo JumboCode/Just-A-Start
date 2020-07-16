@@ -99,9 +99,9 @@ class JobCard extends Component {
         <div>
           <p id="experience-edit-field">Start Date</p>
           {editingJob && <input value={this.state.startDate} 
-                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="text"></input>}
+                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="date"></input>}
           {!editingJob && <input disabled = "disabled" value={this.state.startDate} 
-                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="text"></input>}
+                  onChange={this.changeStartDateHandler} className="input-experience-edit" type="date"></input>}
         </div>
 
         <div className="edit-experiences-button-div">

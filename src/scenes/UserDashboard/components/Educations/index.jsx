@@ -68,25 +68,23 @@ class Educations extends Component {
       },
     };
 
-    fetch(`http://127.0.0.1:8000/api/user/get_user_experiences/?key=${key}`, options)
+    fetch(`http://127.0.0.1:8000/educations/`, options)
       .then(res => res.json())
       .then(res => {
-        var item
-        var edusTemp = []
-        var id = this.state.id
+        // var item
+        // var edusTemp = []
+        // var id = this.state.id
+        // var data = res['results']
         
-        for (item of res) {
-          if (item['model'] === "api.education") {
-            edusTemp.push({education: item, id: id})
-            id += 1
-          }
-        }
+        // for (item of data) {
+        //   edusTemp.push({education: item, id: id})
+        //   id += 1
+        // }
 
-        this.setState({
-            educationData: edusTemp,
-          id: id,
-        })
-
+        // this.setState({
+        //   educationData: edusTemp,
+        //   id: id,
+        // })
       })
       .catch(err => {
         console.log("FAIL " + err);
@@ -95,7 +93,7 @@ class Educations extends Component {
     
   render() {
     const educations = this.state.educationData;
-    console.log(educations)
+    // console.log(educations)
     var show = false;
 
     if (this.state.vis === true && educations !== undefined) {
