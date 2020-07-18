@@ -8,40 +8,51 @@ class Jobs extends Component {
     this.state = {
       vis: true,
       jobData: [],
-      id: 0,
     }
     this.deleteJob = this.deleteJob.bind(this)
   }
 
   addJob = () => {
     var newJob = {
-      job: {
-        fields: {
-          employer_org: '',
-          job_title: '',
-          pay_rate: '',
-          hours_week: '',
-          start_date: '',
-        }
-      },
-      id: this.state.id
+      employer_org: 'Untitled',
+      job_title: 'Untitled',
+      pay_rate: '0',
+      hours_week: '0',
+      start_date: '2020-01-01',
     }
 
-    console.log(this.state.jobData)
-    var newJobData = this.state.jobData
-    newJobData.push(newJob)
-    console.log(newJobData)
+    const options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.props.authToken}`
+      },
+      body: JSON.stringify(newJob)
+    };
 
-    // Send a request to backend
-    this.setState({
-      jobData: newJobData,
-      id: this.state.id + 1
-    })
+    // Send request to backend
+    fetch(`http://localhost:8000/jobs/`, options)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        newJob = res
+
+        var newJobData = this.state.jobData
+        newJobData.push(newJob)
+        console.log(newJob)
+
+        this.setState({
+          jobData: newJobData,
+        })
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
   }
 
   deleteJob = (item) => {
     var newJobData = this.state.jobData
-    // var newJobData = this.state.jobData.slice();  
 
     var index = newJobData.indexOf(item)
     if (index !== -1) {
@@ -50,6 +61,21 @@ class Jobs extends Component {
     }
 
     // Send a request to backend
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.props.authToken}`
+      }
+    };
+
+    // Send updates to backend 
+    fetch(`http://localhost:8000/jobs/${item.id}/`, options)
+      .then(res => res.json())
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
   }
 
   changeVisiblity = () => {
@@ -76,29 +102,27 @@ class Jobs extends Component {
       .then(res => {
         var item
         var jobsTemp = []
-        var id = this.state.id
         var data = res['results']
         
         for (item of data) {
-          jobsTemp.push({job: item, id: id})
-          id += 1
+          jobsTemp.push(item)
         }
 
-        // console.log(jobsTemp)
         this.setState({
           jobData: jobsTemp,
-          id: id,
         })
-
       })
       .catch(err => {
         console.log("FAIL " + err);
       });
   }
+
+  componentDidUpdate = () => {
+    
+  }
     
   render() {
     const jobs = this.state.jobData;
-    // console.log(jobs)
     var show = false;
 
     if (this.state.vis === true && jobs !== undefined) {
@@ -112,7 +136,8 @@ class Jobs extends Component {
             <p className="experience-titles-text">Employment Post-Program Placement</p>
         </div>
         <div className = "flexbox-user-dashboard-big">
-          {show && jobs.map((element) => <JobCard deleteJob={this.deleteJob} item={element} jobData={element['job']} key={element['id']} id={element['id']}/>)}
+          {show && jobs.map((element) => <JobCard deleteJob={this.deleteJob} item={element} jobData={element}
+                                                  key={element['id']} id={element['id']} authToken={this.props.authToken}/>)}
         </div>
         {this.state.vis && <button onClick={this.addJob} className="edit-experiences-button" id="add-button-experiences">&#9998; Add</button>}
       </div>

@@ -15,26 +15,41 @@ class Educations extends Component {
 
   addEducation = () => {
     var newEducation = {
-      education: {
-        fields: {
-          employer_org: '',
-          job_title: '',
-          pay_rate: '',
-          hours_week: '',
-          start_date: '',
-        }
-      },
-      id: this.state.id
+      name_of_institution: 'untitled',
+      degree_type: 'associate',
+      program_name: 'untitled',
+      start_date: '2020-01-01',
     }
 
-    var newEducationData = this.state.educationData
-    newEducationData.push(newEducation)
+    const options = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.props.authToken}`
+      },
+      body: JSON.stringify(newEducation)
+    };
 
-    // Send a request to backend
-    this.setState({
-      educationData: newEducationData,
-      id: this.state.id + 1
-    })
+    // Send request to backend
+    fetch(`http://localhost:8000/educations/`, options)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        newEducation = res
+
+        var newEducationData = this.state.educationData
+        newEducationData.push(newEducation)
+        console.log(newEducation)
+
+        // Send a request to backend
+        this.setState({
+          educationData: newEducationData,
+        })
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
   }
 
   deleteEducation = (item) => {
@@ -71,20 +86,17 @@ class Educations extends Component {
     fetch(`http://127.0.0.1:8000/educations/`, options)
       .then(res => res.json())
       .then(res => {
-        // var item
-        // var edusTemp = []
-        // var id = this.state.id
-        // var data = res['results']
+        var item
+        var edusTemp = []
+        var data = res['results']
         
-        // for (item of data) {
-        //   edusTemp.push({education: item, id: id})
-        //   id += 1
-        // }
+        for (item of data) {
+          edusTemp.push(item)
+        }
 
-        // this.setState({
-        //   educationData: edusTemp,
-        //   id: id,
-        // })
+        this.setState({
+          educationData: edusTemp,
+        })
       })
       .catch(err => {
         console.log("FAIL " + err);
@@ -108,7 +120,8 @@ class Educations extends Component {
           </div>
 
           <div className = "flexbox-user-dashboard-big">
-            {show && educations.map((element) => <EducationCard deleteEducation={this.deleteEducation} item={element} educationData={element['education']} key={element['id']} id={element['id']}/>)}
+            {show && educations.map((element) => <EducationCard deleteEducation={this.deleteEducation} item={element} educationData={element} 
+                                                                key={element['id']} id={element['id']} authToken={this.props.authToken}/>)}
           </div>
           {this.state.vis && <button onClick={this.addEducation} className="edit-experiences-button" id = "add-button-experiences">&#9998; Add</button>}
         </div>
