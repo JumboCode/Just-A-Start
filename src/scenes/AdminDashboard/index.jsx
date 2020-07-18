@@ -3,7 +3,6 @@ import {
   withRouter
 } from "react-router-dom";
 
-import axios from 'axios';
 import './styles.css';
 import UserEntry from './components/UserEntry/index';
 import NavBar from '../../components/Navbar/index';
@@ -30,22 +29,43 @@ class UsersBody extends Component {
       },
     }
 
-    axios.get('http://127.0.0.1:8000/api/user/', fetchOptions)
-      .then(response => {
-        for (let i = 0;i < response.data.length;i++) {
-          this.state.data.push({
-            username: response.data[i].username,
-            name_first: response.data[i].first_name,
-            name_last: response.data[i].last_name,
-            email: response.data[i].email,
-            phone: response.data[i].phone,
-            last_login: response.data[i].updated_time,
-            id: i + 1
-          })
-          // console.log(response.data[i])
+    fetch('http://127.0.0.1:8000/admin_user/', fetchOptions)
+      .then(res => res.json())
+      .then(res => {
+        var item
+        var usersTemp = []
+        var data = res['results']
+        
+        for (item of data) {
+          if (item.is_staff === false) {
+            usersTemp.push(item)
+          }  
         }
-        // console.log(this.state.data)
-        this.forceUpdate();
+
+        this.setState({
+          data: usersTemp,
+        })
+      });
+    
+    fetch('http://127.0.0.1:8000/admin_alumnus/', fetchOptions)
+      .then(res => res.json())
+      .then(res => {
+        var item
+        var i = 0
+        var users = this.state.data
+        var tempUsers = []
+        for (item in users) {
+          var temp = item
+          temp['phone_number'] = res['results'][i]['phone_number']
+          temp['date_of_birth'] = res['results'][i]['date_of_birth']
+          tempUsers.push(temp)
+          i++
+        }
+        console.log(users)
+        console.log(tempUsers)
+        this.setState({
+          data: users
+        })
       });
   }
 
@@ -73,7 +93,7 @@ class UsersBody extends Component {
       <div>
         <div className="bars">
           <SideDashBoard id={1}/>
-          <NavBar />
+          <NavBar key={this.props.authToken}/>
         </div>
         
         <div className = "dashboard">

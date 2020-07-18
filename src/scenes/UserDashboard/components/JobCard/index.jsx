@@ -4,9 +4,7 @@ import './styles.css';
 class JobCard extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      vis: [false, false],
       employer: '',
       jobTitle: '',
       payRate: '',
@@ -23,11 +21,39 @@ class JobCard extends Component {
   }
 
   confirmJob = () => {
-    this.setState({
-      editingJob: false,
-    })
-
-    // Send request to backend
+    if (this.state.employer === "" || this.state.jobTitle === "" || this.state.payRate === "" || 
+        this.state.hoursWeek === "" || this.state.startDate === "") {
+      this.setState({error: "Please fill in all fields."})
+    } else {
+      this.setState({
+        editingJob: false,
+      })
+  
+      // Put together parameters for PATCH request
+      const key = this.props.authToken
+      const options = {
+        method: 'PATCH',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${key}`
+        },
+        body: JSON.stringify({
+          "employer_org": this.state.employer,
+          "job_title": this.state.jobTitle,
+          "hours_week": this.state.hoursWeek,
+          "pay_rate": this.state.payRate,
+          "start_date": this.state.startDate,
+        })
+      };
+  
+      // Send updates to backend 
+      fetch(`http://localhost:8000/jobs/${this.props.id}/`, options)
+        .then(res => res.json())
+        .catch(err => {
+          console.log("FAIL " + err);
+        });
+    }
   }
 
   changeEmployerNameHandler = (event) => {
@@ -63,7 +89,6 @@ class JobCard extends Component {
   }
   
   render() {
-    // console.log(this.props)
     const {editingJob} = this.state;
     return(
       <div>
@@ -108,8 +133,8 @@ class JobCard extends Component {
         </div>
 
         <div className="edit-experiences-button-div">
-          {!this.state.editingJob && <button className="edit-experiences-button" onClick ={this.editJob}>Edit</button>}
-          {this.state.editingJob && <button className="edit-experiences-button" onClick ={this.confirmJob}>Confirm</button>}
+          {!this.state.editingJob && <button className="edit-experiences-button" onClick={this.editJob}>Edit</button>}
+          {this.state.editingJob && <button className="edit-experiences-button" onClick={this.confirmJob}>Confirm</button>}
           <button className="edit-experiences-button" onClick={() => this.props.deleteJob(this.props.item)}>Delete</button>
         </div>
       </div>

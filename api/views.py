@@ -8,11 +8,11 @@ from django.contrib.auth.models import User
 from django.core.mail import BadHeaderError, send_mail
 from django.http import HttpResponse
 
-from rest_framework import mixins, viewsets
+from rest_framework import mixins, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
-
+from rest_framework.views import APIView
 
 class AdminMessaging(viewsets.GenericViewSet,):
     permission_classes = (IsAdminUser,)
@@ -126,6 +126,11 @@ class AdminUserViewset(viewsets.ModelViewSet):
     permission_classes = (IsAdminUser,)
     queryset = User.objects.all()
 
+class AdminAlumnusViewset(viewsets.ModelViewSet):
+    serializer_class = AlumnusSerializer
+    permission_classes = (IsAdminUser,)
+    queryset = Alumnus.objects.all()
+
 class AdminJobViewset(viewsets.ModelViewSet):
     serializer_class = JobSerializer
     permission_classes = (IsAdminUser,)
@@ -135,3 +140,11 @@ class AdminEducationViewset(viewsets.ModelViewSet):
     serializer_class = EducationSerializer
     permission_classes = (IsAdminUser,)
     queryset = Education.objects.all()
+
+class Logout(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, format=None):
+        # simply delete the token to force a login
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_200_OK)

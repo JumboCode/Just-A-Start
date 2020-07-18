@@ -94,8 +94,6 @@ class UserDashboard extends Component {
 
     fetch(`http://127.0.0.1:8000/users/${this.state.user_id}/`, user_model)
       .then(res => res.json())
-      .then(res => {
-      })
       .catch(err => {
         console.log("FAIL " + err);
       });
@@ -115,8 +113,6 @@ class UserDashboard extends Component {
 
     fetch(`http://127.0.0.1:8000/alumnus/${this.state.alumnus_id}/`, alumnus_model)
       .then(res => res.json())
-      .then(res => {
-      })
       .catch(err => {
         console.log("FAIL " + err);
       });
@@ -134,7 +130,7 @@ class UserDashboard extends Component {
 
     return(
       <div>
-        <Navbar name={full_name} type="Alumnus"/>
+        <Navbar name={full_name} type="Alumnus" token={this.props.authToken}/>
         <div style={background}>
           <ProfileEdit handler={this.handler} ref={this.profileEditElement}/>
           <div id="allthestuff">

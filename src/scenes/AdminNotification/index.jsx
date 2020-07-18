@@ -123,7 +123,7 @@ class AdminSendMsg extends Component {
       <div>
         <div className="bars">
           <SideDashBoard id={2}/>
-          <NavBar type="Admin"/>
+          <NavBar type="Admin" key={this.props.authToken}/>
         </div>
         {this.state.displayPopUp && <div class = "check-users-popup">
           <div className="close-check-popup-div">
