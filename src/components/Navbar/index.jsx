@@ -34,8 +34,8 @@ class Navbar extends Component {
       <div className = "container_a">
         <div className = "top-right-thingy">
           <div className = "vertically-align-thingy">
-          <h2 className = "space-between-headers">{this.props.name}</h2>
-              <h3 className = "space-between-headers">{this.props.type}</h3>
+            <p className = "space-between-headers">{this.props.name}</p>
+            <p className = "space-between-headers">{this.props.type}</p>
           </div>
 
           <img className= "arrow-size" src={arrow} alt="arrow" />
