@@ -30,6 +30,5 @@ from django.conf.urls import include
 from . import views
 
 urlpatterns = [
-    path("", include("api.urls")),
     url(r'^', views.FrontendAppView.as_view())
 ]
