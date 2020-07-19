@@ -35,7 +35,6 @@ more-itertools==8.3.0
 Naked==0.1.31
 numpy==1.18.1
 oauthlib==3.1.0
-opencv-contrib-python==3.4.2.16
 opencv-python==3.4.2.16
 packaging==20.4
 pluggy==0.13.1
