@@ -12,7 +12,7 @@ class UsersBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      userData: [],
       filteredData: [],
       filtered: false,
       query: ""
@@ -34,37 +34,40 @@ class UsersBody extends Component {
       .then(res => {
         var item
         var usersTemp = []
-        var data = res['results']
+        var userData = res['results']
         
-        for (item of data) {
+        for (item of userData) {
           if (item.is_staff === false) {
             usersTemp.push(item)
           }  
         }
 
         this.setState({
-          data: usersTemp,
+          userData: usersTemp,
         })
       });
     
     fetch('http://127.0.0.1:8000/admin_alumnus/', fetchOptions)
       .then(res => res.json())
       .then(res => {
-        var item
-        var i = 0
-        var users = this.state.data
+        var users = this.state.userData
         var tempUsers = []
-        for (item in users) {
-          var temp = item
+        
+        for (var i = 0; i < users.length; i++) {
+          let temp = {}
+          temp['username'] = users[i]['username']
+          temp['first_name'] = users[i]['first_name']
+          temp['last_name'] = users[i]['last_name']
+          temp['email'] = users[i]['email']
           temp['phone_number'] = res['results'][i]['phone_number']
           temp['date_of_birth'] = res['results'][i]['date_of_birth']
+          temp['email'] = users[i]['email']
+          temp['id'] = res['results'][i]['id']
           tempUsers.push(temp)
-          i++
         }
-        console.log(users)
-        console.log(tempUsers)
+
         this.setState({
-          data: users
+          userData: tempUsers
         })
       });
   }
@@ -74,7 +77,7 @@ class UsersBody extends Component {
   }
 
   filterData = () => {
-    var filteredData = this.state.data.filter(person => (person.name_first).includes(this.state.query))
+    var filteredData = this.state.userData.filter(person => (person.name_first).includes(this.state.query))
     this.setState({
       filtedData: filteredData,
       filtered: true,
@@ -84,7 +87,7 @@ class UsersBody extends Component {
   render(){
     var data = []
     if (this.state.filtered === false) {
-      data = this.state.data
+      data = this.state.userData
     } else {
       data = this.state.filteredData
     }
@@ -93,30 +96,27 @@ class UsersBody extends Component {
       <div>
         <div className="bars">
           <SideDashBoard id={1}/>
-          <NavBar key={this.props.authToken}/>
+          <NavBar name={"Naoki Okada"} type="Admin" key={this.props.authToken}/>
         </div>
         
         <div className = "dashboard">
           <div className = "top_content">
             <h1>Users</h1>
-            <input type="text" className = "big_search" value={this.state.query} onChange={this.changeQueryHandler} placeholder = "Search"/>
+            <input type="text" className="big_search" value={this.state.query} onChange={this.changeQueryHandler} placeholder = "Search"/>
             <div className = "container">
-              <div id = "flex_container_two">
-                <button id = "filter" type="button" onClick={this.filterData}>Filter</button>
+              <div id="flex_container_two">
+                <button id="filter" type="button" onClick={this.filterData}>Filter</button>
               </div>
             </div>
           </div>
           <ul className = "flex_container_user_entries">
-            <div id = "special_item_title">
-            </div>
             <li id="item_title">Username</li>
             <li id="item_title">First</li>
             <li id="item_title">Last</li>
             <li id="item_title">Email</li>
             <li id="item_title">Phone</li>
-            <li id="item_title">Last Login</li>
           </ul>
-          {data.map(item => (<UserEntry data={item} key={item.id}/>))}
+          {data.map((item) => <UserEntry data={item} key={item['id']}/>)}
         </div>
       </div>
     )
