@@ -1,9 +1,8 @@
 .flex_container_users_entry{
-  padding: 0;
   list-style: none;
   display: flex;
-  justify-content: flex-end;
-  width: 90%;
+  justify-content: flex-start;
+  width: 1200px;
   margin-left: 5%;
   flex-flow: row wrap;
 }
@@ -15,13 +14,10 @@
   margin: auto 0;
 }
 
-
 #small_margin{
   margin:0px;
   word-wrap: break-word;
 }
-
-
 
 hr{
   align: center;
@@ -35,17 +31,6 @@ hr{
   margin-bottom: 0;
 }
 
-#profilepic{
-  border-radius: 50%;
-  width: 80%;
-  margin-left: 0px;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-#special_item_users_entry{
-  width: 5%;
-}
 #regular_users_entry{
   text-align: left;
   font-size: 17px;
