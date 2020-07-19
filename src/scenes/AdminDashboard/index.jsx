@@ -6,12 +6,15 @@ import {
 import './styles.css';
 import UserEntry from './components/UserEntry/index';
 import NavBar from '../../components/Navbar/index';
-import SideDashBoard from '../../components/AdminSideBar/index';
+import AdminSideBar from '../../components/AdminSideBar/index';
 
 class UsersBody extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      regexp: RegExp(''),
+      first_name: "",
+      last_name: "",
       userData: [],
       filteredData: [],
       filtered: false,
@@ -29,6 +32,18 @@ class UsersBody extends Component {
       },
     }
 
+    fetch('http://127.0.0.1:8000/users/', fetchOptions)
+      .then(res => res.json())
+      .then(res => {
+        this.setState({
+          first_name: res['results'][0]['first_name'],
+          last_name: res['results'][0]['last_name'],
+        })
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
+
     fetch('http://127.0.0.1:8000/admin_user/', fetchOptions)
       .then(res => res.json())
       .then(res => {
@@ -45,6 +60,9 @@ class UsersBody extends Component {
         this.setState({
           userData: usersTemp,
         })
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
       });
     
     fetch('http://127.0.0.1:8000/admin_alumnus/', fetchOptions)
@@ -56,47 +74,56 @@ class UsersBody extends Component {
         for (var i = 0; i < users.length; i++) {
           let temp = {}
           temp['username'] = users[i]['username']
+          temp['name'] = users[i]['first_name'] + " " + users[i]['last_name']
           temp['first_name'] = users[i]['first_name']
           temp['last_name'] = users[i]['last_name']
           temp['email'] = users[i]['email']
           temp['phone_number'] = res['results'][i]['phone_number']
           temp['date_of_birth'] = res['results'][i]['date_of_birth']
           temp['email'] = users[i]['email']
-          temp['id'] = res['results'][i]['id']
+          temp['id'] = users[i]['id']
           tempUsers.push(temp)
         }
 
         this.setState({
           userData: tempUsers
         })
+      })
+      .catch(err => {
+        console.log("FAIL " + err);
       });
   }
 
   changeQueryHandler = (event) => {
-    this.setState({query: event.target.value});
+    this.setState({
+      query: event.target.value,
+      regexp: RegExp(event.target.value.toUpperCase())
+    })
   }
 
   filterData = () => {
-    var filteredData = this.state.userData.filter(person => (person.name_first).includes(this.state.query))
+    var filteredData = this.state.userData.filter((e, index) => (this.state.regexp == null || this.state.regexp.test(e.name.toUpperCase())))
     this.setState({
-      filtedData: filteredData,
+      filteredData: filteredData,
       filtered: true,
     })
   }
 
   render(){
-    var data = []
+    var data
     if (this.state.filtered === false) {
       data = this.state.userData
     } else {
       data = this.state.filteredData
     }
+    
+    var full_name = this.state.first_name + " " + this.state.last_name
 
     return(
       <div>
         <div className="bars">
-          <SideDashBoard id={1}/>
-          <NavBar name={"Naoki Okada"} type="Admin" key={this.props.authToken}/>
+          <AdminSideBar id={1}/>
+          <NavBar name={full_name} type="Admin" key={this.props.authToken}/>
         </div>
         
         <div className = "dashboard">

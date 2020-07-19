@@ -1,3 +1,4 @@
+import os
 from api.models import Alumnus, Education, Job
 from api.serializers import AlumnusSerializer
 from api.serializers import UserSerializer
@@ -13,6 +14,8 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from twilio.rest import Client
 
 class AdminMessaging(viewsets.GenericViewSet,):
     permission_classes = (IsAdminUser,)
@@ -51,7 +54,7 @@ class AdminMessaging(viewsets.GenericViewSet,):
             message = client.messages.create(
                 # Phone number associated to your account from twilio
                 # Twilio generates this number
-                from_="+12055370058",
+                from_="+13344878242",
                 body= request.data["message"],
                 to = request.data["numbers"][i])
 

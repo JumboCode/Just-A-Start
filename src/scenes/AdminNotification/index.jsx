@@ -3,9 +3,8 @@ import {
   withRouter
 } from "react-router-dom";
 
-import axios from 'axios';
 import NavBar from '../../components/Navbar/index';
-import SideDashBoard from '../../components/AdminSideBar/index';
+import AdminSideBar from '../../components/AdminSideBar/index';
 import './styles.css';
 
 class AdminSendMsg extends Component {
@@ -30,20 +29,61 @@ class AdminSendMsg extends Component {
       },
     }
 
-    axios.get('http://127.0.0.1:8000/api/user/', fetchOptions)
-      .then(response => {
-        for (let i = 0; i < response.data.length; i++) {
-          this.state.users.push({
-            username: response.data[i].username,
-            name: response.data[i].first_name + " " + response.data[i].last_name,
-            phone: response.data[i].phone,
-            id: i + 1,
-            checked: false
-          })
-          console.log(response.data[i])
+    fetch('http://127.0.0.1:8000/users/', fetchOptions)
+    .then(res => res.json())
+    .then(res => {
+      this.setState({
+        first_name: res['results'][0]['first_name'],
+        last_name: res['results'][0]['last_name'],
+      })
+    })
+
+    fetch('http://127.0.0.1:8000/admin_user/', fetchOptions)
+      .then(res => res.json())
+      .then(res => {
+        var item
+        var usersTemp = []
+        var userData = res['results']
+        
+        for (item of userData) {
+          if (item.is_staff === false) {
+            var user = {}
+            user['name'] = item['first_name'] + " " + item['last_name']
+            user['email'] = item['email']
+            usersTemp.push(user)
+          }  
         }
-        console.log(this.state.data)
-        this.forceUpdate();
+
+        this.setState({
+          users: usersTemp,
+        })
+      });
+    
+    console.log(this.state.users)
+    
+    fetch('http://127.0.0.1:8000/admin_alumnus/', fetchOptions)
+      .then(res => res.json())
+      .then(res => {
+        var users = this.state.users
+        var tempUsers = []
+        var length = users.length
+        console.log(length)
+        
+        for (var i = 0; i < length; i++) {
+          console.log(res['results'][i])
+          let temp = {}
+          temp['name'] = users[i]['name']
+          temp['email'] = users[i]['email']
+          temp['phone_number'] = res['results'][i]['phone_number']
+          temp['date_of_birth'] = res['results'][i]['date_of_birth']
+          temp['email'] = users[i]['email']
+          temp['id'] = users[i]['id']
+          tempUsers.push(temp)
+        }
+
+        this.setState({
+          users: tempUsers
+        })
       });
   }
 
@@ -101,60 +141,68 @@ class AdminSendMsg extends Component {
     var phoneNumbers = []
     this.state.users.map((item, j) => {
       if (item.checked) {
-        phoneNumbers = [...phoneNumbers, item.phone];
+        phoneNumbers = [...phoneNumbers, item.phone_number];
       } 
       return 1
     });
     const requestOptions = {
       method: 'POST',
-      body: JSON.stringify({ "numbers":phoneNumbers,"message":this.state.message })
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Token ${this.props.authToken}`,
+      },
+      body: JSON.stringify({"numbers": phoneNumbers, "message": this.state.message}),
+      // body: {"numbers": phoneNumbers, "message": this.state.message}
     };
-    
-    /*fetch('http://127.0.0.1:8000/api/user/send_text/', requestOptions)
-        .then(response => console.log(response.json()))
-        .then(data => console.log(data));*/
 
     console.log(requestOptions)
-    console.log(phoneNumbers)
+    
+    fetch('http://127.0.0.1:8000/messaging/send_text/', requestOptions)
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
   }
 
   render() {
+    var full_name = this.state.first_name + " " + this.state.last_name
+
     return (
       <div>
         <div className="bars">
-          <SideDashBoard id={2}/>
-          <NavBar type="Admin" key={this.props.authToken}/>
+          <AdminSideBar id={2}/>
+          <NavBar name={full_name} type="Admin" key={this.props.authToken}/>
         </div>
-        {this.state.displayPopUp && <div class = "check-users-popup">
-          <div className="close-check-popup-div">
-            <button onClick={this.togglePopup} class="close-check-popup">&#10005;</button>
-          </div>
-          <div>
-            <p className="check-users-title">Selected Recipient(s)</p>
-            <input onChange={this.handleInputChange} class="check-users-input"></input>
-            <div className="check-users-list" >
-              {this.state.users.map((e, index) => (this.state.regexp == null || this.state.regexp.test(e.name.toUpperCase())) && <div className="check-users-user-div">
-                                                                        <input onChange={() => this.handleCheck(index)} defaultChecked={e.checked} id={"checkbox"+index.toString()} type="checkbox" />
-                                                                        <p className="check-users-name">{e.name}</p>
-                                                                      </div>)}
+        {this.state.displayPopUp && 
+          <div className = "check-users-popup">
+            <div className="close-check-popup-div">
+              <button onClick={this.togglePopup} className="close-check-popup">&#10005;</button>
             </div>
-          </div>
-        </div>}
+            <div>
+              <p className="check-users-title">Selected Recipient(s)</p>
+              <input onChange={this.handleInputChange} className="check-users-input"></input>
+              <div className="check-users-list" >
+                {this.state.users.map((e, index) => (this.state.regexp == null || this.state.regexp.test(e.name.toUpperCase())) && 
+                  <div className="check-users-user-div" key={e.id}>
+                    <input onChange={() => this.handleCheck(index)} defaultChecked={e.checked} id={"checkbox"+index.toString()} type="checkbox" />
+                    <p className="check-users-name">{e.name}</p>
+                  </div>)}
+              </div>
+            </div>
+          </div>}
         <div className="admin-dash-container">
           <form>
             <h1>Notification</h1>
             <h4>Recipients</h4>
             <div className = "side-by-side">
               <div className="div-of-chosen-users">
-                {this.state.users.map((e, index) => e.checked && <div class="selected-user">
+                {this.state.users.map((e, index) => e.checked && <div className="selected-user">
                                                 <p>{e.name}</p>
                                                 <input type="button" onClick={() => this.checkStateChange(index)} value = "&#10005;"className="delete-selected-user"></input>
                                               </div>)}
               </div>
               <div className="toggle-popup">
                 <button type="button" onClick={this.togglePopup} className="plus-button">+</button>
-              </div>
-              
+              </div>   
             </div>
           </form>
             

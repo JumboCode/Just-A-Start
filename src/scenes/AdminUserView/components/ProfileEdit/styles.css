@@ -1,0 +1,64 @@
+.box_profile_edit{
+  width: 50%;
+  margin-left:25%;
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  border: 4px solid #3481b8;
+  z-index:1;
+  position: absolute;
+  background-color: white;
+}
+.flex_profile_edit{
+  display:flex;
+  flex-direction: column;
+}
+.input_profile_edit{
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #16629f;
+  height: 23px;
+  padding: 0px;
+  padding-bottom: 2px;
+  margin-top: 20px;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.left_text{
+  font-size: 20px;
+}
+
+#left_profile_edit{
+  margin-left:5%;
+  width: 25%;
+}
+
+#right_profile_edit{
+  width:65%;
+  margin-right:5%;
+}
+textarea{
+  font-size: 20px;
+  height: 205px;
+  outline:none;
+  resize:none;
+  overflow:hidden;
+  border:none;
+  margin-top: 18px;
+  margin-bottom: 10px;
+  border: 2px solid #16629f;
+}
+
+.confirm{
+  background-color: #16629f;
+  border-width: 1px;
+  border-color:#16629f;
+  border-style: solid;
+  border-radius: 8px;
+  font-size: 15px;
+  color: white;
+  width: 20%;
+  height: 25px;
+  margin: 5px auto;
+}

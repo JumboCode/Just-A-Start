@@ -1,9 +1,9 @@
 .container_a {
-    display: flex;
-    flex-wrap: wrap;
-	  width: 100%;
-    background-color: #16629f;
-    height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: #16629f;
+  height: 50px;
 }
 
 .top-right-thingy {
@@ -47,10 +47,9 @@
   font-size: 14px;
 }
 
-.top-right-thingy:hover .dropdown-content {
+.arrow-size:hover + .dropdown-content {
   display: block;
 }
-
 
 #logout{
   color:#16629f;
