@@ -9,14 +9,9 @@
 
 .item_users_entry{
   width: 15.5%;
-  font-size: 12px;
+  font-size: 11px;
   height: 100%;
   margin: auto 0;
-}
-
-#small_margin{
-  margin:0px;
-  word-wrap: break-word;
 }
 
 hr{
@@ -33,5 +28,14 @@ hr{
 
 #regular_users_entry{
   text-align: left;
-  font-size: 17px;
+  font-size: 13px;
+}
+
+a.regular_users_entry {
+  font-size: 13px;
+}
+
+#email {
+  margin: 0px;
+  word-wrap: break-word;
 }

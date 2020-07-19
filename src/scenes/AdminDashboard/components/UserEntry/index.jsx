@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles.css';
 import PropTypes from 'prop-types';
 
@@ -8,10 +9,16 @@ class UserActivityEntry extends React.Component {
     return(
       <div>
         <hr></hr>
-        
         <div className="flex_container_users_entry">
           <div className="item_users_entry">
-            <p id = "regular_users_entry">{data.username}</p>
+            <Link className="regular_users_entry" 
+              to={{
+              pathname: '/adminuserview',
+              state: {
+                id: this.props.data.id
+              }
+            }}>{data.username}
+            </Link>
           </div>
           <div className="item_users_entry">
             <p id = "regular_users_entry">{data.first_name}</p>
@@ -20,7 +27,7 @@ class UserActivityEntry extends React.Component {
             <p id = "regular_users_entry">{data.last_name}</p>
           </div>
           <div className="item_users_entry">
-            <p id = "small_margin">{data.email}</p>
+            <p id = "email">{data.email}</p>
           </div>
           <div className="item_users_entry">
             <p id = "regular_users_entry">{data.phone_number}</p>

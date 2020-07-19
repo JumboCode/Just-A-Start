@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from 'react-router-dom';
 import './styles.css';
 
-class DashBoard extends Component {
+class AdminSideBar extends Component {
   state = {
     dropdownVisible: false,
     isClicked: this.props.id
@@ -70,4 +70,4 @@ class DashBoard extends Component {
   }
 }
 
-export default DashBoard;
+export default AdminSideBar;

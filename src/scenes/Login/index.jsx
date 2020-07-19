@@ -51,7 +51,6 @@ class Login extends Component {
       .then(res => res.ok ? res : Error)
       .then(res => res.json())
       .then(res => {
-        console.log(res);
         setAuthToken(res['token']);
         const key = res['token']
 

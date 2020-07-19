@@ -1,6 +1,7 @@
 #invisible-sdb{
   width:32px;
   background-color: #16629f;
+  z-index: -1;
 }
 
 #dropdown-sdb{

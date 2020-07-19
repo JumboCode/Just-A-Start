@@ -8,14 +8,16 @@ import {
 
 import PrivateRouteAdmin from "./components/PrivateRouteAdmin/index";
 import PrivateRouteUser from "./components/PrivateRouteUser/index";
-// import PublicRoute from "./components/PublicRoute/index";
 import Login from "./scenes/Login/index";
 import SignUp from "./scenes/Signup/index"
 import AdminDashboard from './scenes/AdminDashboard/index';
 import AdminNotification from './scenes/AdminNotification/index';
+import AdminUserView from './scenes/AdminUserView/index';
 import UserDashboard from './scenes/UserDashboard/index';
 import NotFoundPage from "./scenes/NotFound/index";
 import NotAuthenticated from "./scenes/NotAuthenticated/index";
+
+// import PublicRoute from "./components/PublicRoute/index";
 
 class App extends Component {
   constructor(props) {
@@ -78,7 +80,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
     const {authToken, isAuthenticated, isAdmin} = this.state
 
     if (!this.state.isAuthenticated) {
@@ -103,9 +105,7 @@ class App extends Component {
           <Route exact path="/" component={() => <Login setAuthToken={this.setAuthToken} setIsAdmin={this.setIsAdmin}/>} />
           <PrivateRouteAdmin authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/admindashboard" component={AdminDashboard} />
           <PrivateRouteAdmin authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/adminnotification" component={AdminNotification} />
-          {/* <Route path="/admin-userview" 
-            render={(props) => <AdminUserView {...props} />}
-          /> */}
+          <PrivateRouteAdmin authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/adminuserview" component={AdminUserView} />
           <PrivateRouteUser authToken={authToken} isAuthenticated={isAuthenticated} isAdmin={isAdmin} exact path="/userdashboard" component={UserDashboard} />
           <Route component={NotFoundPage}></Route>
         </Switch>
