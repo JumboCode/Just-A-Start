@@ -111,6 +111,8 @@ STATICFILES_DIRS = [
     os.path.join(REACT_APP_DIR, 'build', 'static'),
 ]
 
+CSRF_COOKIE_SECURE = True
+
 CORS_ORIGIN_WHITELIST = [
     'https://jasyb.herokuapp.com',
     'http://127.0.0.1:8000',
@@ -175,21 +177,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTH_PASSWORD_VALIDATORS = [
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-#     },
-#     {
-#         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-#     },
-# ]
-
 # Django Site Settings
 
 SITE_ID=1 
@@ -213,9 +200,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
-django_heroku.settings(locals())
-
 LOGIN_REDIRECT_URL = '/'
 
-# AUTH_USER_MODEL = 'api.User'
+django_heroku.settings(locals())
+# del DATABASES['default']['OPTIONS']['sslmode']
