@@ -4,6 +4,7 @@ import LoginButton from './components/LoginButton/index';
 import jas_man from '../../assets/jas.man.png';
 import jas_woman from '../../assets/jas.woman.png';
 import jas_ground from '../../assets/jas.ground.png';
+import { config } from '../../Constants'
 import { withRouter } from 'react-router-dom';
 import './styles.css';
 
@@ -47,7 +48,7 @@ class Login extends Component {
       body: JSON.stringify({username, password}),
     }
 
-    fetch('http://localhost:8000/api-token-auth/', fetchOptions)
+    fetch(`${config.url.API_URL}/api/api-token-auth/`, fetchOptions)
       .then(res => res.ok ? res : Error)
       .then(res => res.json())
       .then(res => {
@@ -62,7 +63,7 @@ class Login extends Component {
           },
         }
   
-        fetch(`http://127.0.0.1:8000/users/`, fetchOptions2)
+        fetch(`${config.url.API_URL}/api/users/`, fetchOptions2)
           .then(res => res.json())
           .then(res => {
             const status = res['results'][0]['is_staff']

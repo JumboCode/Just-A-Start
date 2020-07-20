@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import JobCard from '../JobCard/index';
+import { config } from '../../../../Constants'
 import './styles.css';
 
 class Jobs extends Component {
@@ -32,7 +33,7 @@ class Jobs extends Component {
     };
 
     // Send request to backend
-    fetch(`http://localhost:8000/jobs/`, options)
+    fetch(`${config.url.API_URL}/api/jobs/`, options)
       .then(res => res.json())
       .then(res => {
         console.log(res)
@@ -71,7 +72,7 @@ class Jobs extends Component {
     };
 
     // Send updates to backend 
-    fetch(`http://localhost:8000/jobs/${item.id}/`, options)
+    fetch(`${config.url.API_URL}/api/jobs/${item.id}/`, options)
       .then(res => res.json())
       .catch(err => {
         console.log("FAIL " + err);
@@ -97,7 +98,7 @@ class Jobs extends Component {
       },
     };
 
-    fetch(`http://127.0.0.1:8000/jobs/`, options)
+    fetch(`${config.url.API_URL}/api/jobs/`, options)
       .then(res => res.json())
       .then(res => {
         var item
@@ -115,10 +116,6 @@ class Jobs extends Component {
       .catch(err => {
         console.log("FAIL " + err);
       });
-  }
-
-  componentDidUpdate = () => {
-    
   }
     
   render() {

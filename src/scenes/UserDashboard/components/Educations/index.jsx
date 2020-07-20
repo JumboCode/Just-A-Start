@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EducationCard from '../EducationCard/index';
+import { config } from '../../../../Constants'
 import './styles.css';
 
 class Educations extends Component {
@@ -32,7 +33,7 @@ class Educations extends Component {
     };
 
     // Send request to backend
-    fetch(`http://localhost:8000/educations/`, options)
+    fetch(`${config.url.API_URL}/api/educations/`, options)
       .then(res => res.json())
       .then(res => {
         console.log(res)
@@ -42,7 +43,6 @@ class Educations extends Component {
         newEducationData.push(newEducation)
         console.log(newEducation)
 
-        // Send a request to backend
         this.setState({
           educationData: newEducationData,
         })
@@ -62,6 +62,22 @@ class Educations extends Component {
     }
 
     // Send a request to backend
+    // Send a request to backend
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Token ${this.props.authToken}`
+      }
+    };
+
+    // Send updates to backend 
+    fetch(`${config.url.API_URL}/api/educations/${item.id}/`, options)
+      .then(res => res.json())
+      .catch(err => {
+        console.log("FAIL " + err);
+      });
   }
 
   changeVisiblity = () => {
@@ -83,7 +99,7 @@ class Educations extends Component {
       },
     };
 
-    fetch(`http://127.0.0.1:8000/educations/`, options)
+    fetch(`${config.url.API_URL}/api/educations/`, options)
       .then(res => res.json())
       .then(res => {
         var item

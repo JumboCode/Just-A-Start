@@ -16,6 +16,7 @@ import AdminUserView from './scenes/AdminUserView/index';
 import UserDashboard from './scenes/UserDashboard/index';
 import NotFoundPage from "./scenes/NotFound/index";
 import NotAuthenticated from "./scenes/NotAuthenticated/index";
+import { config } from './Constants'
 
 // import PublicRoute from "./components/PublicRoute/index";
 
@@ -56,7 +57,7 @@ class App extends Component {
         },
       }
   
-      fetch(`http://127.0.0.1:8000/users/`, fetchOptions)
+      fetch(`${config.url.API_URL}/api/users/`, fetchOptions)
           .then(res => res.json())
           .then(res => {
             const status = res['results'][0]['is_staff']
@@ -80,7 +81,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log(this.state)
     const {authToken, isAuthenticated, isAdmin} = this.state
 
     if (!this.state.isAuthenticated) {

@@ -8,6 +8,7 @@ import AdminSideBar from '../../components/AdminSideBar/index';
 import ProfileEdit from './components/ProfileEdit/index';
 import Jobs from './components/Jobs/index';
 import Educations from './components/Educations/index';
+import { config } from '../../Constants'
 import './styles.css';
 
 class AdminUserView extends Component {
@@ -32,7 +33,7 @@ class AdminUserView extends Component {
       },
     };
 
-    axios(`http://127.0.0.1:8000/admin_user/${this.state.id}/`, options)
+    axios(`${config.url.API_URL}/api/admin_user/${this.state.id}/`, options)
       .then(res => {
         console.log(res)
         this.setState({
@@ -46,7 +47,7 @@ class AdminUserView extends Component {
         console.log("FAIL " + err);
       });
     
-    fetch(`http://127.0.0.1:8000/admin_alumnus/`, options)
+    fetch(`${config.url.API_URL}/api/admin_alumnus/`, options)
       .then(res => res.json())
       .then(res => {
         var item
@@ -99,7 +100,7 @@ class AdminUserView extends Component {
       })
     };
 
-    fetch(`http://127.0.0.1:8000/users/${this.state.user_id}/`, user_model)
+    fetch(`${config.url.API_URL}/api/users/${this.state.user_id}/`, user_model)
       .then(res => res.json())
       .catch(err => {
         console.log("FAIL " + err);
@@ -118,7 +119,7 @@ class AdminUserView extends Component {
       })
     };
 
-    fetch(`http://127.0.0.1:8000/alumnus/${this.state.alumnus_id}/`, alumnus_model)
+    fetch(`${config.url.API_URL}/api/alumnus/${this.state.alumnus_id}/`, alumnus_model)
       .then(res => res.json())
       .catch(err => {
         console.log("FAIL " + err);

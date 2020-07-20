@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SignUpButton from '../../components/SignupButton/index';
+import { config } from '../../../../Constants'
 import './styles.css';
 
 class SignUpForm extends Component {
@@ -9,7 +10,7 @@ class SignUpForm extends Component {
     username: "",
     email: "",
     password: "",
-    url: "http://127.0.0.1:8000/registration/"
+    url: `${config.url.API_URL}/api/registration/`
   };
 
   componentDidUpdate = (prevProps, prevState) => {

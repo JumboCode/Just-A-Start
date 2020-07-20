@@ -5,6 +5,7 @@ import {
 
 import NavBar from '../../components/Navbar/index';
 import AdminSideBar from '../../components/AdminSideBar/index';
+import { config } from '../../Constants'
 import './styles.css';
 
 class AdminSendMsg extends Component {
@@ -29,7 +30,7 @@ class AdminSendMsg extends Component {
       },
     }
 
-    fetch('http://127.0.0.1:8000/users/', fetchOptions)
+    fetch(`${config.url.API_URL}/api/users/`, fetchOptions)
     .then(res => res.json())
     .then(res => {
       this.setState({
@@ -38,7 +39,7 @@ class AdminSendMsg extends Component {
       })
     })
 
-    fetch('http://127.0.0.1:8000/admin_user/', fetchOptions)
+    fetch(`${config.url.API_URL}/api/admin_user/`, fetchOptions)
       .then(res => res.json())
       .then(res => {
         var item
@@ -61,7 +62,7 @@ class AdminSendMsg extends Component {
     
     console.log(this.state.users)
     
-    fetch('http://127.0.0.1:8000/admin_alumnus/', fetchOptions)
+    fetch(`${config.url.API_URL}/api/admin_alumnus/`, fetchOptions)
       .then(res => res.json())
       .then(res => {
         var users = this.state.users
@@ -152,12 +153,11 @@ class AdminSendMsg extends Component {
           'Authorization': `Token ${this.props.authToken}`,
       },
       body: JSON.stringify({"numbers": phoneNumbers, "message": this.state.message}),
-      // body: {"numbers": phoneNumbers, "message": this.state.message}
     };
 
     console.log(requestOptions)
     
-    fetch('http://127.0.0.1:8000/messaging/send_text/', requestOptions)
+    fetch(`${config.url.API_URL}/api/messaging/send_text/`, requestOptions)
       .catch(err => {
         console.log("FAIL " + err);
       });

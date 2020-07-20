@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { config } from '../../../../Constants'
 import './styles.css';
 
 class EducationCard extends Component {
@@ -58,7 +59,7 @@ class EducationCard extends Component {
       };
 
       // Send updates to backend 
-      fetch(`http://localhost:8000/educations/${this.props.id}/`, options)
+      fetch(`${config.url.API_URL}/api/educations/${this.props.id}/`, options)
         .then(res => res.json())
         .catch(err => {
           console.log("FAIL " + err);

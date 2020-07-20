@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EducationCard from '../EducationCard/index';
+import { config } from '../../../../Constants'
 import './styles.css';
 
 class Educations extends Component {
@@ -32,7 +33,7 @@ class Educations extends Component {
     };
 
     // Send request to backend
-    fetch(`http://localhost:8000/educations/`, options)
+    fetch(`${config.url.API_URL}/api/educations/`, options)
       .then(res => res.json())
       .then(res => {
         console.log(res)
@@ -83,7 +84,7 @@ class Educations extends Component {
       },
     };
 
-    fetch(`http://127.0.0.1:8000/admin_education/`, options)
+    fetch(`${config.url.API_URL}/api/admin_education/`, options)
       .then(res => res.json())
       .then(res => {
         var item

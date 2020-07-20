@@ -7,6 +7,7 @@ import './styles.css';
 import UserEntry from './components/UserEntry/index';
 import NavBar from '../../components/Navbar/index';
 import AdminSideBar from '../../components/AdminSideBar/index';
+import { config } from '../../Constants'
 
 class UsersBody extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class UsersBody extends Component {
       },
     }
 
-    fetch('http://127.0.0.1:8000/users/', fetchOptions)
+    fetch(`${config.url.API_URL}/api/users/`, fetchOptions)
       .then(res => res.json())
       .then(res => {
         this.setState({
@@ -44,7 +45,7 @@ class UsersBody extends Component {
         console.log("FAIL " + err);
       });
 
-    fetch('http://127.0.0.1:8000/admin_user/', fetchOptions)
+    fetch(`${config.url.API_URL}/api/admin_user/`, fetchOptions)
       .then(res => res.json())
       .then(res => {
         var item
@@ -65,7 +66,7 @@ class UsersBody extends Component {
         console.log("FAIL " + err);
       });
     
-    fetch('http://127.0.0.1:8000/admin_alumnus/', fetchOptions)
+    fetch(`${config.url.API_URL}/api/admin_alumnus/`, fetchOptions)
       .then(res => res.json())
       .then(res => {
         var users = this.state.userData
