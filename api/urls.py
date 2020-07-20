@@ -26,4 +26,5 @@ urlpatterns = [
     url(r"^api-token-auth/", auth_views.obtain_auth_token, name="obtain_auth_token"),
     url(r"^admin/", admin.site.urls),
     url(r'^logout/', views.Logout.as_view()),
+    url(r'^password_reset/', include('django_rest_passwordreset.urls', namespace='password_reset')),
 ]

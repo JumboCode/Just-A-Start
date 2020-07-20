@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 import arrow from '../../assets/arrow.png';
+import { config } from '../../Constants'
 import './styles.css';
 
 class Navbar extends Component {
@@ -33,7 +34,7 @@ class Navbar extends Component {
       },
     };
 
-    fetch('http://localhost:8000/logout/', options)
+    fetch(`${config.url.API_URL}/logout/`, options)
       .then((res) => {
         this.props.history.push('/');
       })

@@ -17,6 +17,7 @@ django-extensions==2.2.9
 django-filter==2.2.0
 django-heroku==0.3.1
 django-rest-auth==0.9.5
+django-rest-passwordreset==1.1.0
 djangorestframework==3.11.0
 djangorestframework-jwt==1.11.0
 entrypoints==0.3
@@ -35,6 +36,8 @@ more-itertools==8.3.0
 Naked==0.1.31
 numpy==1.18.1
 oauthlib==3.1.0
+opencv-contrib-python==3.4.2.16
+opencv-python==3.4.2.16
 packaging==20.4
 pluggy==0.13.1
 psycopg2==2.8.4
