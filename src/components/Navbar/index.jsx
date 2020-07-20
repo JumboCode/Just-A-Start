@@ -23,7 +23,6 @@ class Navbar extends Component {
   onLogoutClick() {
     window.localStorage.removeItem('jaysbautht');
     const key = this.props.token
-    console.log(key)
 
     const options = {
       method: 'GET',
@@ -41,7 +40,6 @@ class Navbar extends Component {
   }
   
   render() {
-    console.log(this.state)
     return (
       <div className="container_a">
         <div className="top-right-thingy">
