@@ -78,7 +78,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [TEMPLATE_DIR,],
-        # 'DIRS': [os.path.join(BASE_DIR, "templates"), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,24 +114,12 @@ CSRF_COOKIE_SECURE = True
 
 CORS_ORIGIN_WHITELIST = [
     'https://jasyb.herokuapp.com',
-    'http://127.0.0.1:8000',
     'http://localhost:3000',
     'http://localhost:8000',
 ]
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'jasybapp',
-#         'USER': 'jas',
-#         'PASSWORD': 'justastart',
-#         'HOST': 'https://jasyb.herokuapp.com',
-#         'PORT': '5432',
-#     }
-# }
 
 DATABASES = {
     'default': {
@@ -143,7 +130,6 @@ DATABASES = {
 
 db_from_env =dj_database_url.config()
 DATABASES['default'].update(db_from_env)
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 

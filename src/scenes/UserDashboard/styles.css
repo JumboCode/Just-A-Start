@@ -1,6 +1,6 @@
 h1 {
   font-size: 25px;
-  font-weight:600;
+  font-weight: 600;
 }
 
 .flex_container_one{
@@ -44,7 +44,7 @@ h1 {
   margin-left: 9%;
   margin-right: 9%;
   height: 375px;
-  width: 35%;
+  width: 40%;
   background-color: white;
   box-shadow: 5px 5px 8px #c6d8e5;
 }
@@ -54,7 +54,7 @@ h1 {
   flex-direction: column;
   flex-flow: row wrap;
   float: right;
-  width: 65%;
+  width: 60%;
   margin-top: 40px;
   margin-right: 9%;
   background-color: white;
@@ -201,7 +201,6 @@ li{
   font-size: 20px;
   font-weight: bold;
   word-wrap: normal;
-  
 }
 
 .edit-experiences-button{

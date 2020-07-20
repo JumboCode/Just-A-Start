@@ -7,6 +7,16 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.onLogoutClick = this.onLogoutClick.bind(this);
+    this.onDisplayClick = this.onDisplayClick.bind(this);
+    this.state = {
+      dropdownVisible: false,
+    }
+  }
+
+  onDisplayClick() {
+    this.setState({
+      dropdownVisible: !this.state.dropdownVisible
+    });
   }
 
   onLogoutClick() {
@@ -30,18 +40,21 @@ class Navbar extends Component {
   }
   
   render() {
+    console.log(this.state)
     return (
-      <div className = "container_a">
-        <div className = "top-right-thingy">
-          <div className = "vertically-align-thingy">
-            <p className = "space-between-headers">{this.props.name}</p>
-            <p className = "space-between-headers">{this.props.type}</p>
+      <div className="container_a">
+        <div className="top-right-thingy">
+          <div className="vertically-align-thingy">
+            <p className="space-between-headers">{this.props.name}</p>
+            <p className="space-between-headers">{this.props.type}</p>
           </div>
 
-          <img className= "arrow-size" src={arrow} alt="arrow" />
-          <div className="dropdown-content">
-              <p id = "logout" onClick={this.onLogoutClick}> Logout</p>
-          </div>
+          <img className="arrow-size" src={arrow} alt="arrow" onClick={this.onDisplayClick}/>
+            {this.state.dropdownVisible && 
+            <div id="dropdown-content">
+              <p id="logout" onClick={this.onLogoutClick}>Logout</p>
+            </div>
+            }
         </div>
       </div>
     );
