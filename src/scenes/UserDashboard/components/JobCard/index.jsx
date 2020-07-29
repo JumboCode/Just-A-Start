@@ -11,6 +11,7 @@ class JobCard extends Component {
       payRate: '',
       hoursWeek: '',
       startDate: '',
+      endDate: '',
       editingJob: false,
     }
   }
@@ -79,6 +80,10 @@ class JobCard extends Component {
     this.setState({startDate: event.target.value});
   }
 
+  changeEndDateHandler = (event) => {
+    this.setState({endDate: event.target.value});
+  }
+
   componentDidMount = () => {
     this.setState({
       employer: this.props.jobData["employer_org"],
@@ -86,6 +91,7 @@ class JobCard extends Component {
       payRate: this.props.jobData["pay_rate"],
       hoursWeek: this.props.jobData["hours_week"],
       startDate: this.props.jobData["start_date"],
+      endDate: this.props.jobData["end_date"]
     })
   }
   
@@ -131,6 +137,14 @@ class JobCard extends Component {
                   onChange={this.changeStartDateHandler} className="input-experience-edit" type="date"></input>}
           {!editingJob && <input disabled = "disabled" value={this.state.startDate} 
                   onChange={this.changeStartDateHandler} className="input-experience-edit" type="date"></input>}
+        </div>
+
+        <div>
+          <p id="experience-edit-field">End Date</p>
+          {editingJob && <input value={this.state.endDate} 
+                  onChange={this.changeEndDateHandler} className="input-experience-edit" type="date"></input>}
+          {!editingJob && <input disabled = "disabled" value={this.state.endDate} 
+                  onChange={this.changeEndDateHandler} className="input-experience-edit" type="date"></input>}
         </div>
 
         <div className="edit-experiences-button-div">

@@ -26,9 +26,6 @@ class SignUp extends Component {
               <div id="form-login">
                 <SignUpForm isClicked={this.state.isClicked}/>
               </div>
-              {/* <div id="loginButton-login">
-                <SignUpButton signUpClick={this.handleClick} isClicked={this.state.isClicked}/>
-              </div> */}
             </div>
             <img id="right-shift" src={jas_woman} alt="icon" />
           </div>

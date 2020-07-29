@@ -80,8 +80,8 @@ class Login extends Component {
       })
       .catch(err => {
         this.setState({
-          error: 
-            "Looks like there's a problem logging in. Please check your credentials."});
+          error: "Looks like there's a problem logging in. Please check your credentials."
+        });
       })
   }
 
@@ -157,7 +157,7 @@ class Login extends Component {
                 <span
                   id="signup"
                   onClick={this.clickSignUp}>
-                Sign up
+                  Sign up
                 </span>
               </div>
             </div>

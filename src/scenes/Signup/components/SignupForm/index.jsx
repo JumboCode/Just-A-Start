@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import SignUpButton from '../../components/SignupButton/index';
 import { config } from '../../../../Constants'
+import { withRouter } from 'react-router-dom';
 import './styles.css';
 
 class SignUpForm extends Component {
-  state = {
-    first_name: "",
-    last_name: "",
-    username: "",
-    email: "",
-    password: "",
-    url: `${config.url.API_URL}/api/registration/`
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      first_name: "",
+      last_name: "",
+      username: "",
+      email: "",
+      password: "",
+      url: `${config.url.API_URL}/api/registration/`,
+      status: "",
+      accountMade: false,
+    };
+  }
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.isClicked !== this.props.isClicked) {
@@ -38,7 +44,18 @@ class SignUpForm extends Component {
     }
 
     fetch(this.state.url, fetchOptions)
-      .then((response) => response.json)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+        if ("id" in res) {
+          this.setState({
+            status: "Account made successfully!",
+            accountMade: true
+          })
+        } else {
+          this.setState({"status":"Please enter all information correctly."})
+        }
+      })
       .catch(() => console.log("Failed"));
   }
 
@@ -62,7 +79,12 @@ class SignUpForm extends Component {
     this.setState({password: event.target.value});
   }
 
+  clickLogIn = () => {
+    this.props.history.push("/")
+  }
+
   render() {
+    const { status } = this.state;
     return (
       <div>
         <div>
@@ -91,10 +113,17 @@ class SignUpForm extends Component {
         </div>
         <div id="signUpButton">
           <SignUpButton signUpClick={this.handleClick}/>
+          {status !== '' && (<p>{status}</p>)}
+          {this.state.accountMade === true && 
+          (<span
+            id="signup"
+            onClick={this.clickLogIn}>
+            Log in
+          </span>)}
         </div>
       </div>
     );
   }
 }
 
-export default SignUpForm;
+export default withRouter(SignUpForm);

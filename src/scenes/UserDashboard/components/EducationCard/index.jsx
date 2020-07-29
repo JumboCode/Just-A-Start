@@ -10,6 +10,7 @@ class EducationCard extends Component {
       degree: '',
       program: '',
       startDate: '',
+      endDate: '',
       editingEducation: false,
       conversion: {
         'associate':'Associate Degree',
@@ -83,6 +84,10 @@ class EducationCard extends Component {
     this.setState({startDate: event.target.value});
   }
 
+  changeEndDateHandler = (event) => {
+    this.setState({endDate: event.target.value});
+  }
+
   componentDidMount = () => {
     this.setState({
       institution_name: this.props.educationData["name_of_institution"],
@@ -136,6 +141,14 @@ class EducationCard extends Component {
                   onChange={this.changeStartDateHandler} className="input-experience-edit" type="date"></input>}
           {!editingEducation && <input disabled = "disabled" value={this.state.startDate} 
                   onChange={this.changeStartDateHandler} className="input-experience-edit" type="date"></input>}
+        </div>
+
+        <div>
+          <p id="experience-edit-field">End Date</p>
+          {editingEducation && <input value={this.state.endDate} 
+                  onChange={this.changeEndDateHandler} className="input-experience-edit" type="date"></input>}
+          {!editingEducation && <input disabled = "disabled" value={this.state.endDate} 
+                  onChange={this.changeEndDateHandler} className="input-experience-edit" type="date"></input>}
         </div>
 
         <div className="edit-experiences-button-div">

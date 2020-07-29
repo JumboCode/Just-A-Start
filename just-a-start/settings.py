@@ -111,10 +111,11 @@ STATICFILES_DIRS = [
     os.path.join(REACT_APP_DIR, 'build', 'static'),
 ]
 
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False
 
 CORS_ORIGIN_WHITELIST = [
     'https://jasyb.herokuapp.com',
+    'http://127.0.0.1',
     'http://localhost:3000',
     'http://localhost:8000',
 ]
@@ -168,6 +169,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 SITE_ID=1 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "resetjas@gmail.com"
+EMAIL_HOST_PASSWORD = "x_rU_PoLugzMyqYdfK6CXz2i2U3tu4.Q.N6RMZ"
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 
 class LoginButton extends Component {
     state = {
-      buttonStyle: {backgroundColor: '#16629f', height: '42px', width: '120px',
+      buttonStyle: {backgroundColor: '#16629f', height: '35px', width: '110px',
                     position: 'relative', borderRadius: '5px'},
-      textStyle: {fontFamily: 'Arial', color: 'white', fontSize: '20px', fontWeight: 'bold'}
+      textStyle: {fontFamily: 'Arial', color: 'white', fontSize: '18px', fontWeight: 'bold'}
     };
     render() {
         return (
             <button style={this.state.buttonStyle} onMouseOver=
             {() => this.hoverColor('gray')} onMouseLeave=
             {() => this.hoverColor('#16629f')} onClick={this.props.loginClick}>
-              <span style={this.state.textStyle}> Log in </span>
+              <span style={this.state.textStyle}> Continue </span>
             </button>
         );
     }

@@ -122,7 +122,7 @@ class UserDashboard extends Component {
   render(){
     const background = {
       width: "100%",
-      height: 2000,
+      height: "1000px",
       backgroundColor: "#eef6fe",
       position: "absolute"
     }
