@@ -63,7 +63,7 @@ six==1.14.0
 sqlparse==0.3.0
 twilio==6.35.5
 typed-ast==1.4.1
-urllib3==1.25.8
+urllib3==1.26.5
 wcwidth==0.1.9
 whitenoise==5.0.1
 wrapt==1.11.2
