@@ -34,7 +34,7 @@ matplotlib==3.1.2
 mccabe==0.6.1
 more-itertools==8.3.0
 Naked==0.1.31
-numpy==1.18.1
+numpy==1.22.0
 oauthlib==3.1.0
 packaging==20.4
 pluggy==0.13.1
